@@ -45,26 +45,14 @@ Immerse yourself in a revolutionary project that aims to redefine the blockchain
 Empowering the Community for a Secure Future:
 Join us on this transformative journey as we provide a platform that empowers individuals and businesses alike with secure and transparent transactions, data storage, and applications.
 
-
 ## Key Features:
-- Post-quantum cryptographic algorithms
+- Post-quantum cryptography algorithms
+- Zero-knowledge proof
+- Proof-of-work
 - Decentralized network
 - Scalable network
 - Interoperable network
 - Multiple smart contract program language
-  
-
-Join our vibrant community of developers, researchers, and blockchain enthusiasts as we reshape the future of blockchain in the quantum age. Together, we aim to build a decentralized ecosystem that remains impervious to emerging cryptographic threats.
-
-Be part of the forefront of blockchain innovation. Start contributing to SPHINX today!
-
-[Add contact information or links to community channels if applicable.]
-
-Key Features:
-- Quantum-resistant cryptographic algorithms
-- [Other important features of your project]
-
-Join our vibrant community of developers, researchers, and blockchain enthusiasts to shape the future of blockchain in the quantum age. Together, we aim to build a decentralized ecosystem that stands resilient against emerging cryptographic threats.
 
 ## NOTE
 
