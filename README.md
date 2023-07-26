@@ -66,7 +66,7 @@ Join our vibrant community of developers, researchers, and blockchain enthusiast
 Please note that the project is currently under development, and some features may be incomplete or subject to changes. The code in the repository is a part of the SPHINX blockchain algorithm, which is currently in development and not fully integrated or extensively tested for functionality. The purpose of this repository is to provide a framework in the SPHINX blockchain project.
 
 
-## Getting Started
+# Getting Started
 To get started with the SPHINX blockchain project, follow the instructions below:
 
 1. Clone the repository: `git clone https://github.com/ChyKusuma/SPHINX-HUB.git`
@@ -88,8 +88,8 @@ We welcome contributions from the developer community to enhance the SPHINX bloc
 7. Open a pull request against the main repository, describing your changes and the problem it solves.
 8. Insert your information (i.e name, email) in the authors space.
 
-## License
+# License
 Specify the license under which the project is distributed (MIT License).
 
-## Contact
-If you have any questions, suggestions, or feedback regarding the SPHINX blockchain project, feel free to reach out to us at [sphinxfounders@gmail.com](mailto:sphinxfounders@gmail.com).
+# Contact
+If you have any questions, requests, suggestions, or feedback regarding the SPHINX blockchain project, feel free to reach out to us at [sphinxfounders@gmail.com](mailto:sphinxfounders@gmail.com).
