@@ -23,6 +23,14 @@ Furthermore, the post-quantum era presents us with the prospect of fostering inn
 
 In conclusion, the urgency to enter the post-quantum era arises from the potential threats posed by quantum computers to our existing cryptographic systems. By embracing this transition, we fortify our digital infrastructure, protect sensitive information, and lay the foundation for a future where security, innovation, and progress coexist harmoniously. Together, let us seize this opportunity to shape a robust and secure post-quantum era, where technology empowers and safeguards us in equal measure.
 
+# Vision
+
+Unlocking the Power of Post-Quantum Technology:
+Immerse yourself in a revolutionary project that aims to redefine the blockchain landscape. Our mission is to create a decentralized, secure, and transparent network that remains impervious to both classical and quantum computing attacks.
+
+Empowering the Community for a Secure Future:
+Join us on this transformative journey as we provide a platform that empowers individuals and businesses alike with secure and transparent transactions, data storage, and applications.
+
 ## Table of Contents
 
 - [About](#about)
