@@ -39,9 +39,13 @@ Empowering the Community for a Secure Future:
 Join us on this transformative journey as we provide a platform that empowers individuals and businesses alike with secure and transparent transactions, data storage, and applications.
 
 
-Key Features:
-- Cutting-edge post-quantum cryptographic algorithms
-- [Other essential features of your project]
+# Key Features:
+- Post-quantum cryptographic algorithms
+- Decentralized network
+- Scalable network
+- Interoperable network
+- Multiple smart contract program language
+  
 
 Join our vibrant community of developers, researchers, and blockchain enthusiasts as we reshape the future of blockchain in the quantum age. Together, we aim to build a decentralized ecosystem that remains impervious to emerging cryptographic threats.
 
