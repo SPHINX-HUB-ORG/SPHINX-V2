@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# Docker
+.docker
+
+# C extensions
+*.so
+*.exe
+*.lib
+*.a
+*.o
+*.sdf
+
+# Distribution / packaging
+build
+dokcerfiles
+install
+obj
+windows-solutions
+dokcerfiles/*Dockerfile*
+*/Win64-sln/*
+lib/MiraclWin64
+lib/NTL/windows
+lib/OTExtension/Win64-sln
+lib/ScGarbledCircuit
+lib/MiraclCompilation/MiraclWin64
+lib/MiraclCompilation/MiraclTest
+samples/assets/circuits/AESMULT
+.git/objects
+lib/MaliciousOTExtension/MaliciousOTExtension

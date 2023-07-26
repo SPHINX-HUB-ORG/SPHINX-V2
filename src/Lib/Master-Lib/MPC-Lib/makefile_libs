@@ -1,0 +1,173 @@
+export curdir=$(shell pwd)
+export builddir=$(abspath ./build)
+export prefix=$(abspath ./install)
+CXX=g++
+uname_os := $(shell uname)
+uname_arch := $(shell uname -m)
+ARCH := $(shell getconf LONG_BIT)
+export uname_os
+export ARCH
+export includedir=$(prefix)/include
+export libdir=$(prefix)/lib
+
+GCC_STANDARD = c++14
+
+ifeq ($(uname_os), Linux)
+	INC            = -Iinstall/include -Iinstall/include/OTExtensionBristol -Iinstall/include/libOTe \
+	 -Iinstall/include/libOTe/cryptoTools -I$(HOME) -I$(HOME)/OTExtensionBristol
+    LIBRARIES_DIR  = -Linstall/lib
+endif
+ifeq ($(uname_os), Darwin)
+    INC            = -Iinstall/include -Iinstall/include/OTExtensionBristol -Iinstall/include/libOTe \
+    -Iinstall/include/libOTe/cryptoTools
+    LIBRARIES_DIR  = -Linstall/lib
+endif
+
+ifeq ($(uname_arch), x86_64)
+	OUT_DIR        = obj obj/primitives obj/interactive_mid_protocols obj/mid_layer obj/comm obj/infra obj/cryptoInfra \
+	obj/circuits obj/circuits_c obj/tools/scapiNecConverter obj/tools/scapiBristolConverter
+	CPP_OPTIONS   := -g -std=$(GCC_STANDARD) $(INC) -mavx -maes -msse4.1 -mpclmul -Wall \
+	-Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-function -Wno-unused-variable -Wno-unused-result \
+	-Wno-sign-compare -Wno-parentheses -Wno-ignored-attributes -O3 -fPIC
+endif
+ifeq ($(uname_arch), armv7l)
+	OUT_DIR        = obj obj/primitives obj/interactive_mid_protocols obj/mid_layer obj/comm obj/infra obj/cryptoInfra \
+	obj/tools/scapiNecConverter obj/tools/scapiBristolConverter
+	CPP_OPTIONS   := -g -std=$(GCC_STANDARD) $(INC) -mfpu=neon -Wall -Wno-narrowing -Wno-uninitialized \
+	-Wno-unused-but-set-variable -Wno-unused-function -Wno-unused-variable -Wno-unused-result \
+	-Wno-sign-compare -Wno-parentheses -Wno-ignored-attributes -O3 -fPIC
+endif
+ifeq ($(uname_arch), aarch64)
+	OUT_DIR        = obj obj/primitives obj/interactive_mid_protocols obj/mid_layer obj/comm obj/infra obj/cryptoInfra \
+	obj/circuits obj/tools/scapiNecConverter obj/tools/scapiBristolConverter
+	CPP_OPTIONS   := -g -std=$(GCC_STANDARD) $(INC) -Wall -Wno-narrowing -Wno-uninitialized \
+	-Wno-unused-but-set-variable -Wno-unused-function -Wno-unused-variable -Wno-unused-result \
+	-Wno-sign-compare -Wno-parentheses -Wno-ignored-attributes -Wno-return-type \
+	 -O3 -fPIC -march=armv8-a+crypto -flax-vector-conversions
+endif
+
+$(COMPILE.cpp) = g++ -c $(CPP_OPTIONS) -o $@ $<
+
+LD_FLAGS =
+
+all: libs
+
+ifeq ($(GCC_STANDARD), c++11)
+ifeq ($(uname_os), Linux)
+ifeq ($(uname_arch), x86_64)
+    libs: compile-ntl compile-blake compile-otextension-bristol compile-kcp
+endif
+ifeq ($(uname_arch), armv7l)
+    libs:  compile-ntl compile-kcp
+endif
+ifeq ($(uname_arch), aarch64)
+    libs:  compile-ntl compile-kcp
+endif
+endif # Linux c++11
+
+ifeq ($(uname_os), Darwin)
+    libs:  compile-ntl compile-blake compile-kcp
+endif # Darwin c++11
+endif # c++11
+
+##### c++14 #####
+ifeq ($(GCC_STANDARD), c++14)
+ifeq ($(uname_os), Linux)
+ifeq ($(uname_arch), x86_64)
+    libs: compile-ntl compile-blake compile-libote compile-otextension-bristol compile-kcp
+endif
+ifeq ($(uname_arch), aarch64)
+    libs:  compile-ntl compile-kcp
+endif
+endif # Linux c++14
+ifeq ($(uname_os), Darwin)
+    libs:  compile-libote compile-ntl compile-blake
+endif # Darwin c++14
+endif
+
+
+#### libs compilation ####
+compile-ntl:
+	echo "Compiling the NTL library..."
+	mkdir -p $(builddir)/NTL
+	cp -r lib/NTL/. $(builddir)/NTL
+	chmod 777 $(builddir)/NTL/src/configure
+	cd $(builddir)/NTL/src/ && ./configure CXX=$(CXX)
+	$(MAKE) -C $(builddir)/NTL/src/
+	$(MAKE) -C $(builddir)/NTL/src/ PREFIX=$(prefix) install
+	@touch compile-ntl
+
+compile-blake:
+	@echo "Compiling the BLAKE2 library"
+	@mkdir -p $(builddir)/BLAKE2/
+	@cp -r lib/BLAKE2/sse/. $(builddir)/BLAKE2
+	@$(MAKE) -C $(builddir)/BLAKE2
+	@$(MAKE) -C $(builddir)/BLAKE2 BUILDDIR=$(builddir)  install
+	@touch compile-blake
+
+# Support only in c++14
+compile-libote:
+	@echo "Compiling libOTe library..."
+	@cp -r lib/libOTe $(builddir)/libOTe
+ifeq ($(uname_os), Darwin)
+	@cd $(builddir)/libOTe/cryptoTools/thirdparty/miracl/source && bash linux64 && cd ../../../../../../
+endif
+	@cmake $(builddir)/libOTe/CMakeLists.txt -DCMAKE_BUILD_TYPE=Release -DLIBSCAPI_ROOT=$(PWD)
+	@$(MAKE) -C $(builddir)/libOTe/
+	@cp $(builddir)/libOTe/lib/*.a install/lib/
+	@mv install/lib/liblibOTe.a install/lib/libOTe.a
+	$(info$(shell mkdir -p install/include/libOTe))
+	@cd $(builddir)/libOTe/ && find . -name "*.h" -type f |xargs -I {} cp --parents {} $(PWD)/install/include/libOTe
+ifeq ($(uname_os), Linux)
+	@cp -r $(builddir)/libOTe/cryptoTools/cryptoTools/gsl $(PWD)/install/include/libOTe/cryptoTools/cryptoTools
+endif
+ifeq ($(uname_os), Darwin)
+	@cp -R $(builddir)/libOTe/cryptoTools/cryptoTools/gsl $(PWD)/install/include/libOTe/cryptoTools/cryptoTools
+endif
+	@touch compile-libote
+
+compile-otextension-bristol:
+	@echo "Compiling the OtExtension malicious Bristol library..."
+	@cp -r lib/OTExtensionBristol $(builddir)/OTExtensionBristol
+	@$(MAKE) -C $(builddir)/OTExtensionBristol CXX=$(CXX)
+	@$(MAKE) -C $(builddir)/OTExtensionBristol CXX=$(CXX) install
+	@touch compile-otextension-bristol
+
+compile-kcp:
+	@echo "Compiling the KCP library"
+	@mkdir -p $(builddir)/KCP
+	@cp -r lib/KCP/ $(builddir)/
+	@$(MAKE) -C $(builddir)/KCP
+	@mkdir -p install/include/KCP
+	@cp -r $(builddir)/KCP/*.h install/include/KCP
+	@mv $(builddir)/KCP/ikcp.a install/lib
+	@touch compile-kcp
+
+#### cleanning libs ####
+clean-ntl:
+	@echo "Cleaning the ntl build dir..."
+	@rm -rf $(builddir)/NTL
+	@rm -f compile-ntl
+
+clean-blake:
+	@echo "Cleaning blake library"
+	@rm -rf $(builddir)/BLAKE2
+	@rm -f compile-blake
+
+clean-libote:
+	@echo "Cleaning libOTe library"
+	@rm -rf $(builddir)/libOTe/
+	@rm -f compile-libote
+
+clean-otextension-bristol:
+	@echo "Cleaning the otextension malicious bristol build dir..."
+	@rm -rf $(builddir)/OTExtensionBristol
+	@rm -f compile-otextension-bristol
+
+clean-kcp:
+	@echo "Cleaning KCP library"
+	@rm -rf $(builddir)/KCP/
+	@rm -f compile-kcp
+
+clean: clean-ntl clean-blake clean-libote clean-otextension-bristol clean-kcp
+

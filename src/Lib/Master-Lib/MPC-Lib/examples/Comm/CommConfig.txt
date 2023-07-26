@@ -1,0 +1,24 @@
+party_1_ip = 127.0.0.1
+party_2_ip = 127.0.0.1
+party_1_port = 3000
+party_2_port = 3001
+classType = CommPartyTCPSynced
+
+[Windows]
+certificateChainFile = ..\..\..\..\samples\assets\ssl_keys\server.crt
+password = 1234
+privateKeyFile = ..\..\..\..\samples\assets\ssl_keys\server.key
+tmpDHFile = ..\..\..\..\samples\assets\ssl_keys\dh512.pem
+clientVerifyFile = ..\..\..\..\samples\assets\ssl_keys\server.crt
+
+[Linux]
+certificateChainFile = assets/ssl_keys/server.crt
+password = 1234
+privateKeyFile = assets/ssl_keys/server.key
+tmpDHFile = assets/ssl_keys/dh512.pem
+clientVerifyFile = assets/ssl_keys/server.crt
+
+
+
+
+

@@ -1,0 +1,36 @@
+language: cpp
+dist: bionic
+sudo: required
+compiler:
+  - gcc
+  - clang
+os:
+  - linux
+
+before_install:
+  - sudo add-apt-repository ppa:mhier/libboost-latest -y
+  - sudo apt update -q
+  - sudo apt install libboost1.68 libboost1.68-dev -y
+
+addons:
+  apt:
+    sources:
+      - mhier/libboost-latest
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
+      - libssl-dev
+      - build-essential
+      - libssl-dev
+      - libgmp3-dev
+      - cmake
+      - liblog4cpp5-dev
+      - zlib1g-dev
+
+install:
+  - "[ $CXX = g++ ] && export CXX=g++-7 || true"
+  - "[ $CXX = clang++ ] && export CXX=clang++-3.8 || true"
+
+script: make
+
+

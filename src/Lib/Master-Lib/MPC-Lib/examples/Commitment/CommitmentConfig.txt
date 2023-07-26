@@ -1,0 +1,14 @@
+proverIp      = 127.0.0.1
+verifierIp    = 127.0.0.1
+proverPort    = 1222
+verifierPort  = 1223
+#protocolName = Pedersen
+#protocolName = PedersenWithProofs
+#protocolName = PedersenHash
+#protocolName = PedersenTrapdoor
+#protocolName = SimpleHash
+#protocolName = ElGamalOnGroupElement
+#protocolName = ElGamalWithProofs
+#protocolName = ElGamalOnByteArray
+#protocolName = ElGamalHash
+protocolName = Equivocal

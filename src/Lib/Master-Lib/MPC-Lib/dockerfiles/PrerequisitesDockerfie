@@ -1,0 +1,24 @@
+############################################################
+# Dockerfile to build and image with all libscapi prerequisites
+# Based on Ubuntu 18.04
+############################################################
+
+# Set the base image to Ubuntu
+FROM ubuntu:18.04
+
+# Update the repository sources list and Install all required packages
+RUN apt-get clean
+RUN rm -rf /var/cache/apt/*
+RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install -y
+RUN apt-get install wget -y
+RUN apt-get install git -y
+RUN apt-get install build-essential -y
+RUN apt-get install libssl-ocaml-dev -y
+RUN apt-get install libssl-dev -y
+RUN apt-get install libgmp3-dev -y 
+RUN apt-get install vim -y
+RUN apt-get install cmake -y
+RUN apt-get install zlib1g-dev liblog4cpp5-dev -y
+RUN rm -rf /var/lib/apt/lists/*
