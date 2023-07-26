@@ -1,5 +1,12 @@
 # SPHINX-HUB
 
+# Table of Contents
+
+- [About](#about)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [License](#license)
+
 # Introduction
 
 Welcome to our inclusive and dynamic decentralized world, where individuals and institutional from all walks of life are warmly invited to join and support the mission. Here, we believe that everyone has unique skills and passions to offer, and we encourage you to commit your talents towards making a lasting impact in the decentralized realm.
@@ -31,20 +38,6 @@ Immerse yourself in a revolutionary project that aims to redefine the blockchain
 Empowering the Community for a Secure Future:
 Join us on this transformative journey as we provide a platform that empowers individuals and businesses alike with secure and transparent transactions, data storage, and applications.
 
-## Table of Contents
-
-- [About](#about)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
-
-## About
-
-Welcome to SPHINX, the pioneering open-source project for post-quantum blockchain layer 1 development.
-
-Our purpos is to revolutionizing the world of blockchain technology by integrating quantum-resistant principles.
-
-At SPHINX, we are dedicated to establishing a robust and quantum-resistant foundation for blockchain networks. As the quantum era approaches, safeguarding the security and longevity of blockchain infrastructure becomes of paramount importance.
 
 Key Features:
 - Cutting-edge post-quantum cryptographic algorithms
