@@ -1,6 +1,6 @@
 # SPHINX-HUB
 
-# Table of Contents
+## Table of Contents
 
 - [Introduction](#introduction)
 - [Background](#background)
@@ -12,7 +12,7 @@
 - [License](#license)
 - [Contact](#contact)
 
-# Introduction
+## Introduction
 
 Welcome to our inclusive and dynamic decentralized world, where individuals and institutional from all walks of life are warmly invited to join and support the mission. Here, we believe that everyone has unique skills and passions to offer, and we encourage you to commit your talents towards making a lasting impact in the decentralized realm.
 
@@ -23,7 +23,7 @@ Together, we form a united front dedicated to creating the most sustainable and 
 In this era of quantum-computers, we envision a future that is brighter and more promising for the global community. By synergizing our efforts, knowledge, and expertise, we strive to shape an innovative landscape that transcends boundaries and unlocks boundless possibilities.
 
 
-# Background
+## Background
 
 In a world where technology is constantly advancing, it is crucial for us to recognize the pressing need to transition into the post-quantum era. The advent of quantum computers, with their unparalleled computational power and the ability to solve complex problems at an unprecedented scale, has the potential to revolutionize industries and disrupt existing cryptographic systems.
 
@@ -37,7 +37,7 @@ Furthermore, the post-quantum era presents us with the prospect of fostering inn
 
 In conclusion, the urgency to enter the post-quantum era arises from the potential threats posed by quantum computers to our existing cryptographic systems. By embracing this transition, we fortify our digital infrastructure, protect sensitive information, and lay the foundation for a future where security, innovation, and progress coexist harmoniously. Together, let us seize this opportunity to shape a robust and secure post-quantum era, where technology empowers and safeguards us in equal measure.
 
-# Vision
+## Vision
 
 Unlocking the Power of Post-Quantum Technology:
 Immerse yourself in a revolutionary project that aims to redefine the blockchain landscape. Our mission is to create a decentralized, secure, and transparent network that remains impervious to both classical and quantum computing attacks.
@@ -46,7 +46,7 @@ Empowering the Community for a Secure Future:
 Join us on this transformative journey as we provide a platform that empowers individuals and businesses alike with secure and transparent transactions, data storage, and applications.
 
 
-# Key Features:
+## Key Features:
 - Post-quantum cryptographic algorithms
 - Decentralized network
 - Scalable network
@@ -66,12 +66,12 @@ Key Features:
 
 Join our vibrant community of developers, researchers, and blockchain enthusiasts to shape the future of blockchain in the quantum age. Together, we aim to build a decentralized ecosystem that stands resilient against emerging cryptographic threats.
 
-# NOTE
+## NOTE
 
 Please note that the project is currently under development, and some features may be incomplete or subject to changes. The code in the repository is a part of the SPHINX blockchain algorithm, which is currently in development and not fully integrated or extensively tested for functionality. The purpose of this repository is to provide a framework in the SPHINX blockchain project.
 
 
-# Getting Started
+## Getting Started
 To get started with the SPHINX blockchain project, follow the instructions below:
 
 1. Clone the repository: `git clone https://github.com/ChyKusuma/SPHINX-HUB.git`
@@ -80,7 +80,7 @@ To get started with the SPHINX blockchain project, follow the instructions below
 4. Run the project or make modifications as needed.
 
 
-# Contributing
+## Contributing
 
 We welcome contributions from the developer community to enhance the SPHINX blockchain project. If you are interested in contributing, please follow the guidelines below:
 
@@ -93,8 +93,8 @@ We welcome contributions from the developer community to enhance the SPHINX bloc
 7. Open a pull request against the main repository, describing your changes and the problem it solves.
 8. Insert your information (i.e name, email) in the authors space.
 
-# License
+## License
 Specify the license under which the project is distributed (MIT License).
 
-# Contact
+## Contact
 If you have any questions, requests, suggestions, or feedback regarding the SPHINX blockchain project, feel free to reach out to us at [sphinxfounders@gmail.com](mailto:sphinxfounders@gmail.com).
