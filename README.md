@@ -62,8 +62,8 @@ Please note that the project is currently under development, and some features m
 ## Getting Started
 To get started with the SPHINX blockchain project, follow the instructions below:
 
-1. Clone the repository: `git clone https://github.com/ChyKusuma/SPHINX-HUB.git`
-2. Install the necessary dependencies (List the dependencies or provide a link to the installation guide).
+1. Clone the repository.
+2. Install the necessary dependencies.
 3. Explore the codebase to understand the project structure and components.
 4. Run the project or make modifications as needed.
 
