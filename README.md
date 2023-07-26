@@ -2,10 +2,15 @@
 
 # Table of Contents
 
-- [About](#about)
+- [Introduction](#introduction)
+- [Background](#background)
+- [Vision](#vision)
+- [Key Features](#key-features)
+- [NOTE](#note)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
+- [Contact](#contact)
 
 # Introduction
 
