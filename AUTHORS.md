@@ -1,4 +1,4 @@
-// [2023] SPHINX-HUB
+[2023] SPHINX-HUB
 
 This file lists the names of individuals who have made substantial contributions to the project.
 
