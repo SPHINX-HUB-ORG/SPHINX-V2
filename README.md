@@ -11,6 +11,8 @@
 
 Welcome to our inclusive and dynamic decentralized world, where individuals and institutional from all walks of life are warmly invited to join and support the mission. Here, we believe that everyone has unique skills and passions to offer, and we encourage you to commit your talents towards making a lasting impact in the decentralized realm.
 
+This project is dedicated to the world community as an Open-source Post-quantum blockchain layer 1 project, means anyone can join and contribute based on his/ her passion and skills. SPHINX is a blockchain protocol designed to provide secure and scalable solutions in the post-quantum era.
+
 Together, we form a united front dedicated to creating the most sustainable and robust blockchain ecosystem. Our goal is not only to strengthen the existing web3 ecosystem but also to anticipate and navigate the disruptive challenges posed by the imminent arrival of quantum computers.
 
 In this era of quantum-computers, we envision a future that is brighter and more promising for the global community. By synergizing our efforts, knowledge, and expertise, we strive to shape an innovative landscape that transcends boundaries and unlocks boundless possibilities.
@@ -59,13 +61,12 @@ Key Features:
 
 Join our vibrant community of developers, researchers, and blockchain enthusiasts to shape the future of blockchain in the quantum age. Together, we aim to build a decentralized ecosystem that stands resilient against emerging cryptographic threats.
 
-Be a part of the next generation of blockchain innovation. Start contributing to [Project Name] today!
+# NOTE
 
-[Add contact information or links to community channels if applicable.]
+The code in the repository is a part of the SPHINX blockchain algorithm, which is currently in development and not fully integrated or extensively tested for functionality. The purpose of this repository is to provide a framework in the SPHINX blockchain project.
 
 
-
-## Getting Started
+# Getting Started
 
 To get started with [Project Name], follow these steps:
 
@@ -75,24 +76,22 @@ To get started with [Project Name], follow these steps:
 
 Please note that the project is currently under development, and some features may be incomplete or subject to changes.
 
-## Contributing
 
-We welcome contributions from the community! If you'd like to contribute to [Project Name], follow these steps:
+# Contributing
 
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Make your modifications and improvements.
-4. Test your changes thoroughly.
-5. Submit a pull request, detailing the changes you've made.
+We welcome contributions from the developer community to enhance the SPHINX blockchain project. If you are interested in contributing, please follow the guidelines below:
 
-Please ensure your pull request adheres to our guidelines for contributing (link to CONTRIBUTING.md if you have one).
-
-By contributing to [Project Name], you agree to release your contributions under the project's [LICENSE](LICENSE) file.
+1. Fork the repository on GitHub.
+2. Create a new branch for your feature or bug fix: `git checkout -b feature/your-feature-name` or `git checkout -b bugfix/your-bug-fix`.
+3. Make your modifications and ensure the code remains clean and readable.
+4. Write tests to cover the changes you've made, if applicable.
+5. Commit your changes: `git commit -m "Description of your changes"`.
+6. Push the branch to your forked repository: `git push origin your-branch-name`.
+7. Open a pull request against the main repository, describing your changes and the problem it solves.
+8. Insert your information (i.e name, email) in the authors space.
 
 ## License
-
-[Project Name] is licensed under the [License Name]. See the [LICENSE](LICENSE) file for more details.
+Specify the license under which the project is distributed (MIT License).
 
 ## Contact
-
-If you have any questions or need further assistance, feel free to contact us [mention how people can reach you or the community].
+If you have any questions, suggestions, or feedback regarding the SPHINX blockchain project, feel free to reach out to us at [sphinxfounders@gmail.com](mailto:sphinxfounders@gmail.com).
