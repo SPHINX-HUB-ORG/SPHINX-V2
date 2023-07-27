@@ -195,7 +195,7 @@ namespace SPHINXContract {
         }
     };
 
-    cclass SPHINXContract {
+    class SPHINXContract {
     private:
         std::string partyA; // Party A in the contract
         std::string partyB; // Party B in the contract
