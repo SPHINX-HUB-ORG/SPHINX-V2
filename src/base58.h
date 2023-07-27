@@ -1,4 +1,9 @@
-// by Satoshi Nakamoto
+// Copyright (c) [2023] SPHINX-HUB
+// All rights reserved.
+// This software is distributed under the MIT License.
+
+
+// Satoshi Nakamoto
 // Why base-58 instead of standard base-64 encoding?
 // - Don't want 0OIl characters that look the same in some fonts and
 //      could be used to create visually identical looking account numbers.
