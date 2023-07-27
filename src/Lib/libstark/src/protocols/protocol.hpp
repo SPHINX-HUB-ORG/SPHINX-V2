@@ -1,16 +1,6 @@
-/*
- *  Copyright (c) (2023) SPHINX_ORG
- *  Authors:
- *    - (C kusuma) <thekoesoemo@gmail.com>
- *      GitHub: (https://github.com/chykusuma)
- *  Contributors:
- *    - (Contributor 1) <email1@example.com>
- *      Github: (https://github.com/yourgit)
- *    - (Contributor 2) <email2@example.com>
- *      Github: (https://github.com/yourgit)
- */
-
-
+// Copyright (c) [2023] SPHINX-HUB
+// All rights reserved.
+// This software is distributed under the MIT License.
 
 
 #ifndef PROTOCOL_HPP__
