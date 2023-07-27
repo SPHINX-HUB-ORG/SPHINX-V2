@@ -1,4 +1,3 @@
-# SPHINX-HUB
 ![Sphinx Hub Logo](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/asset/Logo2.png)
 
 ## Table of Contents
