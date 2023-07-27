@@ -1,3 +1,8 @@
+// Copyright (c) [2023] SPHINX-HUB
+// All rights reserved.
+// This software is distributed under the MIT License.
+
+
 #ifndef LATTICE_REDUCTION_HPP
 #define LATTICER_EDUCTION_HPP
 
