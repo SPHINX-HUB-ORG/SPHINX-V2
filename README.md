@@ -44,13 +44,14 @@ Empowering the Community for a Secure Future:
 Join us on this transformative journey as we provide a platform that empowers individuals and businesses alike with secure and transparent transactions, data storage, and applications.
 
 ## Key Features:
-- Post-quantum cryptography algorithms
+- Post-quantum cryptography
+- Multi-party computation
+- Homomorphic encryption
 - Zero-knowledge proof
 - Proof-of-work
-- Decentralized network
-- Scalable network
-- Interoperable network
+- Decentralized, scalable, interoperable network
 - Multiple smart contract program language
+
 
 ## NOTE
 
