@@ -104,6 +104,7 @@ namespace SPHINXBlock {
         std::time_t timestamp_;                  // The time when the block was created
         uint32_t nonce_;                         // A random value used in the mining process to find a valid block hash
         uint32_t difficulty_;                    // A measure of how hard it is to find a valid block hash (mining difficulty)
+        uint32_t version_;                       // Add this private member variable to store the version of the block
         std::vector<std::string> transactions_;  // The list of transactions included in the block
         SPHINXChain::Chain* blockchain_;         // A pointer to the blockchain (assuming SPHINXChain::Chain is a class)
         const std::vector<std::string>& checkpointBlocks_; // Reference to the list of checkpoint blocks
@@ -122,9 +123,14 @@ namespace SPHINXBlock {
             timestamp_ = std::time(nullptr); // Set the timestamp to the current time
         }
 
-        Block(const std::string& previousHash, const std::vector<std::string>& checkpointBlocks)
-            : previousHash_(previousHash), checkpointBlocks_(checkpointBlocks), blockHeight_(0), nonce_(0), difficulty_(0) {
+        Block(const std::string& previousHash, uint32_t version)
+            : previousHash_(previousHash), blockHeight_(0), nonce_(0), difficulty_(0), version_(version) {
             timestamp_ = std::time(nullptr); // Set the timestamp to the current time
+        }
+
+        // Getter function to retrieve the block version
+        uint32_t getVersion() const {
+            return version_;
         }
 
         // Function to add a transaction to the block
@@ -301,6 +307,7 @@ namespace SPHINXBlock {
             // Convert the block object to JSON format
             nlohmann::json blockJson;
 
+            blockJson["version"] = version_;               // Store the version in the JSON object
             blockJson["previousHash"] = previousHash_;     // Store the previous hash in the JSON object
             blockJson["merkleRoot"] = merkleRoot_;         // Store the Merkle root in the JSON object
             blockJson["signature"] = signature_;           // Store the signature in the JSON object
@@ -320,6 +327,7 @@ namespace SPHINXBlock {
 
         void fromJson(const nlohmann::json& blockJson) {
             // Parse the JSON object and assign values to the corresponding member variables
+            version_ = blockJson["version"].get<uint32_t>();                  // Retrieve the version from the JSON object
             previousHash_ = blockJson["previousHash"].get<std::string>();     // Retrieve the previous hash from the JSON object
             merkleRoot_ = blockJson["merkleRoot"].get<std::string>();         // Retrieve the Merkle root from the JSON object
             signature_ = blockJson["signature"].get<std::string>();           // Retrieve the signature from the JSON object
