@@ -83,6 +83,7 @@ Explanation for each source file goes here. Click on the file names below to vie
 
 <details>
 <summary>Click to expand</summary>
+<br>
 
 - [Asset.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Asset.cpp)
 
