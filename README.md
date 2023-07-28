@@ -317,8 +317,8 @@ This might include buffers, state variables, or predefined constants used in the
 
 ### 31. [db.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/db.cpp)
 
-
 </details>
+<br>
 
 
 ## NOTE
