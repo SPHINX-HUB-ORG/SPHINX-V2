@@ -49,26 +49,27 @@ namespace SPHINXBlock {
     class Block {
     private:
         // Private member variables
-        std::string previousHash_;               // The hash of the previous block in the blockchain
-        std::string merkleRoot_;                 // The Merkle root hash of the transactions in the block
-        std::string signature_;                  // The signature of the block
-        uint32_t blockHeight_;                   // The position of the block within the blockchain
-        std::time_t timestamp_;                  // The time when the block was created
-        uint32_t nonce_;                         // A random value used in the mining process to find a valid block hash
-        uint32_t difficulty_;                    // A measure of how hard it is to find a valid block hash (mining difficulty)
-        std::vector<std::string> transactions_;  // The list of transactions included in the block
-        SPHINXChain::Chain* blockchain_;         // A pointer to the blockchain (assuming SPHINXChain::Chain is a class)
-        const std::vector<std::string>& checkpointBlocks_; // Reference to the list of checkpoint blocks
+        std::string previousHash_;
+        std::string merkleRoot_;
+        std::string signature_;
+        uint32_t blockHeight_;
+        std::time_t timestamp_;
+        uint32_t nonce_;
+        uint32_t difficulty_;
+        uint32_t version_; // Add this private member variable to store the version of the block
+        std::vector<std::string> transactions_;
+        SPHINXChain::Chain* blockchain_;
+        const std::vector<std::string>& checkpointBlocks_;
 
     public:
-        static const uint32_t MAX_BLOCK_SIZE;       // Maximum allowed block size in number of transactions
-        static const uint32_t MAX_TIMESTAMP_OFFSET; // Maximum allowed timestamp difference from current time
+        static const uint32_t MAX_BLOCK_SIZE;
+        static const uint32_t MAX_TIMESTAMP_OFFSET;
 
         // Constructor without checkpointBlocks parameter
-        Block(const std::string& previousHash);
+        Block(const std::string& previousHash, uint32_t version); // Add the version parameter to the constructor
 
         // Constructor with the addition of checkpointBlocks parameter
-        Block(const std::string& previousHash, const std::vector<std::string>& checkpointBlocks);
+        Block(const std::string& previousHash, uint32_t version, const std::vector<std::string>& checkpointBlocks); // Add the version parameter to the constructor
 
         // Function to calculate the hash of the block
         std::string calculateBlockHash() const;
