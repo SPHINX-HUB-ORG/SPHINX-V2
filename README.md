@@ -273,13 +273,27 @@ Error Handling and Logging:
 - The file could define any necessary data structures or constants used in the hash function's implementation.
 This might include buffers, state variables, or predefined constants used in the SWIFFTX algorithm.
 
-### 10. [Hybrid_key.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Hybrid_Key.cpp)
+### 10.  [Key.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Key.cpp) & [Hybrid_key.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Hybrid_Key.cpp)
 
-### 11. [Key.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Key.cpp)
+In the thrilling era of quantum computers, where we find ourselves in a `Super Position` between classical and quantum realms, the choice of a hybrid key exchange scheme combining curve448 and Kyber1024 holds immense significance. Let's explore why this combination is the perfect fit.
 
-### 12. [Mempool.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Mempool.hpp)
+1. Embracing the Best of Both Worlds: `curve448`, a battle-tested and widely adopted algorithm, provides a solid foundation of proven security and efficient key generation. On the other hand, `Kyber1024` represents the cutting-edge of post-quantum cryptography, designed to resist attacks from powerful quantum computers. By combining these two exceptional algorithms, we enter a "Super Position" where we benefit from the strengths of both classical and quantum-resistant cryptography.
 
-### 13. [Merkleblock.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/MerkleBlock.cpp) & [Sign.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Sign.hpp)
+2. Inspiration from Tech Giants: The widespread adoption of `curve448` and `Kyber1024` by the larger tech community serves as our guiding light and inspiration. These algorithms have garnered trust and confidence from experts and industry leaders, paving the way for their integration into our hybrid scheme. By following in the footsteps of these role models, we embrace a solution that is not only innovative but also aligns with industry best practices.
+
+In this era of immense technological possibilities, the combination of `curve448` and `Kyber1024` in a hybrid key exchange scheme symbolizes our readiness to face the challenges presented by quantum computing. It demonstrates our commitment to leverage the proven track record of `curve448` and the promising resilience of `Kyber1024`. Together, these algorithms empower us to navigate the quantum landscape with confidence, ensuring the security and longevity of our cryptographic systems.
+
+* Description and logic;
+- `Curve448` given 224-bit security level
+- `Kyber-1024` given (equal AES-256) mean 256-bit security level
+If we `merged` them it means we will achieve security level nearly `480-bytes`, this not lightweight but more secured
+
+
+
+
+### 11. [Mempool.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Mempool.hpp)
+
+### 12. [Merkleblock.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/MerkleBlock.cpp) & [Sign.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Sign.hpp)
 
 The `SPHINXSign` and `SPHINXMerkleBlock` namespace leverages the power of Merkle trees based on the state-of-the-art [SPHINCS+](https://sphincs.org/) principle, which emerged as the 4th winner in the "Post-Quantum" cryptography competition held by the National Institute of Standards and Technology ([NIST](https://www.nist.gov/publications/breaking-category-five-sphincs-sha-256)).
 
@@ -380,47 +394,46 @@ verifyMerkleRoot Function
 
 These components work together to provide functionality for constructing and verifying Merkle trees using the SPHINCS+ cryptographic scheme.
 
-The next roadmap is to add additional features to used [Multi-party Computation](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/MPC) in this digital signature scheme, needed to created protocol to interact with the library to provided secure digital signature scheme to ensure long term security guarantee.
+*NOTATION
 
-NOTE: Important to review
+1.  In the provided code for "sign.hpp" and "merkleblock.cpp" the SPHINCS+ implementation appears to be stateless. The functions for `signing` and `verifying` transactions do not rely on any previous state or stored information, and the signing process is done independently for each transaction.
 
-In the provided code for "sign.hpp" and "merkleblock.cpp" the SPHINCS+ implementation appears to be stateless. The functions for `signing` and `verifying` transactions do not rely on any previous state or stored information, and the signing process is done independently for each transaction.
+2. The next roadmap is to add additional features to used [Multi-party Computation](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/MPC) in this digital signature scheme, we needed to created protocol to interact with the library to provided secure digital signature scheme to ensure long term security guarantee.
 
 
+### 13. [Miner.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Miner.cpp)
 
-### 14. [Miner.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Miner.cpp)
+### 14. [Node.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Node.cpp)
 
-### 15. [Node.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Node.cpp)
+### 15. [Params.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Params.cpp)
 
-### 16. [Params.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Params.cpp)
+### 16. [Plotpow.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/PlotPoW.hpp)
 
-### 17. [Plotpow.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/PlotPoW.hpp)
+### 17. [PoW.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/PoW.hpp)
 
-### 18. [PoW.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/PoW.hpp)
+### 18. [Requests.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Requests.hpp)
 
-### 19. [Requests.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Requests.hpp)
+### 19. [Script.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Script.cpp)
 
-### 20. [Script.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Script.cpp)
+### 20. [Server.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Server_http.cpp)
 
-### 21. [Server.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Server_http.cpp)
+### 21. [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp)
 
-### 22. [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp)
+### 22. [Transaction.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Transaction.cpp)
 
-### 23. [Transaction.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Transaction.cpp)
+### 23. [Utils.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Utils.cpp)
 
-### 24. [Utils.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Utils.cpp)
+### 24. [Utxo.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Utxo.cpp)
 
-### 25. [Utxo.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Utxo.cpp)
+### 25. [Verify.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Verify.hpp)
 
-### 26. [Verify.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Verify.hpp)
+### 26. [Wallet.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Wallet.cpp)
 
-### 27. [Wallet.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Wallet.cpp)
+### 27. [Base58.c](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/base58.c)
 
-### 28. [Base58.c](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/base58.c)
+### 28. [Base58check.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/base58check.cpp)
 
-### 29. [Base58check.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/base58check.cpp)
-
-### 30. [db.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/db.cpp)
+### 29. [db.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/db.cpp)
 
 </details>
 <br>
