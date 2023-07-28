@@ -12,6 +12,53 @@
 - [License](#license)
 - [Contact](#contact)
 
+## Directory
+
+# File directory
+
+SPHINX-HUB/
+├── Asset/
+├── Papers/
+├── Src/
+│   ├── Consensus/
+│   ├── Hash/
+│   ├── Lib/
+│   ├── PoW/
+│   └── Backup/
+├── Asset.cpp
+├── Block.cpp
+├── BlockManager.cpp
+├── Chain.cpp
+├── ChainManager.cpp
+├── Checksum.cpp
+├── Common.cpp
+├── Hash.hpp
+├── Hybrid_key.cpp
+├── Key.cpp
+├── Mempool.cpp
+├── Merkleblock.cpp
+├── Miner.cpp
+├── Node.cpp
+├── Params.cpp
+├── Plowpow.cpp
+├── PoW.cpp
+├── Requests.hpp
+├── Script.cpp
+├── Server_http.cpp
+├── Sign.hpp
+├── Tfhe.cpp
+├── Transaction.cpp
+├── Utils.cpp
+├── Utxo.cpp
+├── Verify.hpp
+├── Wallet.cpp
+├── base58.c
+├── base58.h
+├── base58ceck.cpp
+├── clitool.c
+├── db.cpp
+└── json.hh
+
 ## Introduction
 
 Welcome to our inclusive and dynamic decentralized world, where individuals and institutional from all walks of life are warmly invited to join and support the mission. Here, we believe that everyone has unique skills and passions to offer, and we encourage you to commit your talents towards making a lasting impact in the decentralized realm.
