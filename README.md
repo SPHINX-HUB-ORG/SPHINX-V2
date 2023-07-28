@@ -1,4 +1,4 @@
-# SPHINX-HUB Project Overview
+# SPHINX-HUB
 
 ![Sphinx Hub Logo](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/asset/logo3-01.jpg)
 
