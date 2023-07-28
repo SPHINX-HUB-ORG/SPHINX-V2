@@ -1,6 +1,6 @@
 # SPHINX-HUB Project Overview
 
-![Sphinx Hub Logo](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/asset/Logo2.png)
+![Sphinx Hub Logo](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/asset/logo3-01.jpg)
 
 ## Table of Contents
 
