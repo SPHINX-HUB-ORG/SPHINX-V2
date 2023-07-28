@@ -47,7 +47,7 @@ Join us on this transformative journey as we provide a platform that empowers in
 
 ## Key Features:
 - Post-quantum cryptography
-- Homomorphic-Hybrid key scheme
+- Homomorphic-Hybrid key
 - Multi-party computation
 - Zero-knowledge proof
 - Proof-of-work
