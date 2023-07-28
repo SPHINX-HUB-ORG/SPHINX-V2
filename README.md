@@ -183,6 +183,8 @@ Explanation for db.cpp.
 #### 33. json.hh
 Explanation for json.hh.
 
+</details>
+
 
 ## NOTE
 
