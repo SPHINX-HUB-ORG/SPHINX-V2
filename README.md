@@ -56,9 +56,9 @@ Join us on this transformative journey as we provide a platform that empowers in
 
 ## Directories
 
-This repository contains the implementation of the SPHINX-HUB, a decentralized hub for secure and efficient data storage and transfer. The project is divided into several directories, each containing specific functionalities. Below is a brief explanation of each file and directory:
+This repository contains the implementation of the SPHINX-HUB, a decentralized hub for secure and efficient data storage and transfer. The project is divided into several directories, each containing specific functionalities. Below is a brief explanation of each file and directory.
 
-### Source Files
+**Source Files**
 
 Explanation for each source file goes here. Click on the file names below to view the explanations:
 
