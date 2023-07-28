@@ -389,7 +389,7 @@ It provides a member function `toJson()` to convert the transaction data into a 
 
 - Several constants are declared, such as `SPHINCS_N, SPHINCS_H, SPHINCS_D, etc`., which might be used to call function from SPHINCS+ library.
 
- 6.SignedTransaction Structure
+6. SignedTransaction Structure
 
 - The `SignedTransactio`n structure represents a signed transaction and includes `transaction, transactionData, data, signature`, and `publicKey` as its members.
 
