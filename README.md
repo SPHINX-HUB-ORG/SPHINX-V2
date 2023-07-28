@@ -58,25 +58,6 @@ Join us on this transformative journey as we provide a platform that empowers in
 
 This repository contains the implementation of the SPHINX-HUB, a decentralized hub for secure and efficient data storage and transfer. The project is divided into several directories, each containing specific functionalities. Below is a brief explanation of each file and directory:
 
-### 1. Asset
-This directory contains files related to asset management, allowing users to manage and transfer assets securely.
-
-### 2. Papers
-This directory is reserved for storing research papers, documentation, or any relevant literature related to the SPHINX-HUB project.
-
-### 3. Src
-The main source code directory where all the project's source files reside.
-
-- **Consensus:** Contains files related to the consensus mechanism used in the SPHINX-HUB blockchain.
-
-- **Hash:** Contains files related to hashing algorithms and cryptographic hashing functions.
-
-- **Lib:** Contains common libraries and utility functions used throughout the project.
-
-- **PoW:** Contains files related to the Proof-of-Work (PoW) mechanism used in the SPHINX-HUB blockchain.
-
-- **Backup:** Contains backup-related files and scripts.
-
 ### 4. Source Files
 
 Explanation for each source file goes here. Click on the file names below to view the explanations:
