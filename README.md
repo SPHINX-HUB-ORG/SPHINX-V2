@@ -77,7 +77,7 @@ The main source code directory where all the project's source files reside.
 
 - **Backup:** Contains backup-related files and scripts.
 
-## Source Files
+### 4. Source Files
 
 Explanation for each source file goes here. Click on the file names below to view the explanations:
 
@@ -85,22 +85,146 @@ Explanation for each source file goes here. Click on the file names below to vie
 <summary>Click to expand</summary>
 
 - [Asset.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Asset.cpp)
+
+1. Class $SPX - The Crypto Asset:
+- Represents a cryptocurrency asset with properties like id, name, and owner.
+- It has functions to get and set the id, name, and owner.
+- The buy function allows someone to buy this crypto asset by updating the ownership.
+
+2. Class AssetManager - Managing Assets:
+- Handles the management of SPX crypto assets, including issuance, transfers, and ownership changes.
+- It has functions like buySPX, issueSPX, setOwner, and transferSPX.
+
+3. Generating a Unique ID:
+- The generateUniqueId function creates a unique ID for assets using cryptographic key pairs (hybrid keys).
+- The generated ID is based on the asset's public key.
+
+4. Paying Transaction Fee:
+- The payTransactionFee function handles transaction fees for asset operations.
+- It is called after asset-related operations to deduct transaction fees from the payer's account.
+
+5. Finding an Asset:
+- The findAsset function searches for an asset with a given ID in the blockchain data.
+- It returns a pointer to the asset if found, otherwise, it returns nullptr.
+
+6. Halving Block Reward:
+- The halveBlockReward function is called when the halving threshold is reached (e.g., every 210,000 blocks).
+- It reduces the block reward or token issuance rate by halving it.
+
+7. Generating Transaction Data:
+- The generateTransactionData function creates transaction data for storing on the blockchain.
+- It creates a transaction with inputs and outputs and serializes it to JSON format.
+- The transaction is then signed with a private key to generate a signature for verification.
+
+8. Asset Management Parameters:
+The class contains parameters like totalSupply, maxSupply, halvingThreshold, and blockReward.
+These parameters define the total supply of assets, maximum supply (e.g., 50 million), halving threshold, and initial block reward.
   
 - [Block.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Block.cpp)
 
+The "Block.cpp" file represents a critical component of our blockchain system. This file contains the implementation of the "Block" data structure, which serves as a fundamental unit of the SPHINX-HUB blockchain. A block encapsulates a set of transactions and acts as a link in the chain, ensuring the integrity and chronological order of transactions.
+
+In "Block.cpp," you will find the code responsible for creating, validating, and updating blocks. It includes functionalities for calculating the block's hash, managing its transactions, and handling any changes to the block during the mining process. The proper functioning of this file ensures the robustness and security of the entire blockchain network.
+
 - [Blockmanager.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/BlockManager.cpp)
+
+The Block Manager plays a pivotal role in the synchronization, validation, and storage of blocks. It handles incoming blocks from the network, ensures consensus rules are followed, and validates each block's transactions before incorporating them into the blockchain. Additionally, the Block Manager maintains the local copy of the blockchain, tracking the longest valid chain to maintain the network's consensus.
+
+Within "BlockManager.cpp," you will find functions that facilitate block retrieval, storage, and organization. It coordinates with other components, such as the consensus mechanism and network communication, to ensure a coherent and consistent blockchain state across all nodes.
 
 - [Chain.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Chain.cpp)
 
+The Chain module manages the chronological order of blocks, ensuring that transactions are recorded in the correct sequence. It provides functionalities for adding new blocks to the blockchain, validating their integrity, and handling chain reorganization in case of forks or conflicts.
+
+In "Chain.cpp," you will find code for block indexing, chain traversal, and consensus verification. The Chain module is responsible for maintaining the longest valid chain in the network, ensuring the blockchain's consistency across all nodes. It serves as the backbone of the decentralized ledger, where each block's hash is linked to the previous block, establishing an unbroken chain of transactions.
+
+
 - [Chainmanager.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/ChainManager.cpp)
+
+The Chain Manager acts as the central hub for blockchain management, providing functionalities for chain synchronization, conflict resolution, and chain selection. It ensures that all nodes in the network have the most up-to-date and consistent view of the blockchain. When conflicts or forks occur, the Chain Manager applies consensus rules to determine the longest valid chain, resolving any discrepancies and maintaining the blockchain's single source of truth.
+
+In "ChainManager.cpp," you will find code for handling incoming blocks from the network, verifying their validity, and incorporating them into the local blockchain. It coordinates with other components, such as the Block Manager and Consensus Mechanism, to achieve network-wide consensus and ensure the blockchain's security and integrity.
+
+The proper functioning of "ChainManager.cpp" is crucial to the stability and trustworthiness of the SPHINX-HUB blockchain. It plays a pivotal role in maintaining a unified and consistent view of the blockchain across all nodes, supporting the network's decentralization and facilitating secure and transparent transactions.
 
 - [Checksum.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Checksum.cpp)
 
+Checksum function inspiration from bitcoin.
+
+1. Generating address:
+SPHINX addresses are derived from a public key through a series of cryptographic transformations.
+A checksum is added to the address to provide a way of verifying its validity.
+The address includes both the public key and the checksum.
+
+
+2. Address verification:
+- When a user wants to send funds to a SPHINX address, the recipient provides the address to the sender.
+- The sender uses the address to validate the checksum.
+- The checksum is recalculated from the address (excluding the existing checksum), and it should match the original checksum provided by the recipient.
+- If the checksums match, the sender can be confident that the address is valid and funds will be sent to the intended recipient.
+
+3. Error prevention:
+- If the address is mistyped or contains errors, the checksum verification will fail, preventing the sender from sending funds to an incorrect or non-existent address.
+- This helps reduce the risk of funds being lost due to human error.
+
+
 - [Client_http.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Client_http.cpp)
+
+1. Handling HTTP Requests:
+- The file contains functions and classes that handle incoming HTTP requests from clients or other nodes in the network.
+- These functions are responsible for processing the requests and generating appropriate responses.
+
+2. Verifying Requests:
+- The "Client_http.cpp" file might include mechanisms to verify the authenticity and integrity of incoming requests.
+- This could involve checking digital signatures, validating data formats, and ensuring that the requests comply with the protocol's specifications.
+
+3. Sending HTTP Responses:
+- After processing incoming requests, the "Client_http.cpp" file would generate appropriate HTTP responses to be sent back to the requesting clients or nodes.
+- Responses could include data, status codes, or error messages, depending on the nature of the request.
+
+4.Interacting with Other Modules:
+- "Client_http.cpp"interact with other modules within the blockchain system, such as the consensus mechanism, blockchain data storage, or transaction processing components.
+- This interaction ensures that incoming requests are handled appropriately and that the blockchain operates smoothly.
+
+5. Handling Errors and Exception Handling:
+- The file contains error handling and exception management mechanisms to deal with unexpected situations gracefully.
+Proper error handling is crucial to maintaining the stability and security of the blockchain system.
 
 - [Common.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Common.cpp)
 
+1. Utility Functions:
+- Contain utility functions that perform common operations frequently needed across the blockchain system.
+Examples of utility functions might include cryptographic operations, string manipulation, data conversions, and timestamp handling.
+Data Structures:
+
+- Define common data structures or data types that are used in different parts of the codebase.
+These data structures may include objects, data containers, or custom data types tailored to the specific needs of the blockchain.
+Configuration and Constants:
+
+- The file could handle configurations and constants that are used throughout the blockchain system.
+This might include network parameters, consensus rules, default settings, and other constant values.
+Error Handling and Logging:
+
+- Contain error handling mechanisms and logging functionalities to help debug and troubleshoot issues within the blockchain.
+
+2. Cross-Platform Compatibility:
+- If the blockchain project aims for cross-platform compatibility, "Common.cpp" might include code that ensures the system behaves consistently across different platforms and environments.
+
+3. Modularity and Code Reusability:
+- The file contributes to the overall modularity and code reusability of the blockchain project by centralizing commonly used functions and data structures.
+
 - [Hash.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Hash.hpp)
+
+1. Function Declarations:
+- Declaration functions that implement the hash function utilizing SWIFFTX with a 256-bit digest size.
+- Function declarations would specify the input parameters and return type of the hash function.
+
+2. SWIFFTX Algorithm:
+- SWIFFTX is a cryptographic hash function designed to offer security and performance.
+
+3. Data Structures and Constants:
+- The file could define any necessary data structures or constants used in the hash function's implementation.
+This might include buffers, state variables, or predefined constants used in the SWIFFTX algorithm.
 
 - [Hybrid_key.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Hybrid_Key.cpp)
 
@@ -146,64 +270,6 @@ Explanation for each source file goes here. Click on the file names below to vie
 
 - [db.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/db.cpp)
 
-
-
-#### 15. Params.cpp
-Explanation for Params.cpp.
-
-#### 16. Plotpow.cpp
-Explanation for Plowpow.cpp.
-
-#### 17. PoW.cpp
-Explanation for PoW.cpp.
-
-#### 18. Requests.hpp
-Explanation for Requests.hpp.
-
-#### 19. Script.cpp
-Explanation for Script.cpp.
-
-#### 20. Server_http.cpp
-Explanation for Server_http.cpp.
-
-#### 21. Sign.hpp
-Explanation for Sign.hpp.
-
-#### 22. Tfhe.cpp
-Explanation for Tfhe.cpp.
-
-#### 23. Transaction.cpp
-Explanation for Transaction.cpp.
-
-#### 24. Utils.cpp
-Explanation for Utils.cpp.
-
-#### 25. Utxo.cpp
-Explanation for Utxo.cpp.
-
-#### 26. Verify.hpp
-Explanation for Verify.hpp.
-
-#### 27. Wallet.cpp
-Explanation for Wallet.cpp.
-
-#### 28. base58.c
-Explanation for base58.c.
-
-#### 29. base58.h
-Explanation for base58.h.
-
-#### 30. base58ceck.cpp
-Explanation for base58ceck.cpp.
-
-#### 31. clitool.c
-Explanation for clitool.c.
-
-#### 32. db.cpp
-Explanation for db.cpp.
-
-#### 33. json.hh
-Explanation for json.hh.
 
 </details>
 
