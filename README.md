@@ -229,7 +229,7 @@ The address includes both the public key and the checksum.
 - After processing incoming requests, the "Client_http.cpp" file would generate appropriate HTTP responses to be sent back to the requesting clients or nodes.
 - Responses could include data, status codes, or error messages, depending on the nature of the request.
 
-4.Interacting with Other Modules:
+4. Interacting with Other Modules:
 - "Client_http.cpp"interact with other modules within the blockchain system, such as the consensus mechanism, blockchain data storage, or transaction processing components.
 - This interaction ensures that incoming requests are handled appropriately and that the blockchain operates smoothly.
 
