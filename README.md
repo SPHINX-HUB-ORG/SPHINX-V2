@@ -279,7 +279,114 @@ This might include buffers, state variables, or predefined constants used in the
 
 ### 12. [Mempool.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Mempool.hpp)
 
-### 13. [Merkleblock.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/MerkleBlock.cpp)
+### 13. [Merkleblock.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/MerkleBlock.cpp) & [Sign.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Sign.hpp)
+
+The `SPHINXSign` and `SPHINXMerkleBlock` namespace leverages the power of Merkle trees based on the state-of-the-art [SPHINCS+](https://sphincs.org/) principle, which emerged as the 4th winner in the "Post-Quantum" cryptography competition held by the National Institute of Standards and Technology ([NIST](https://www.nist.gov/publications/breaking-category-five-sphincs-sha-256)).
+
+SPHINCS+ (Stateless PHotonic Isogeny-based Signature Scheme) is a groundbreaking hybrid signature scheme that combines robust hash-based, code-based, and isogeny-based cryptographic components. Its primary goal is to achieve two critical properties: `statelessness` and `post-quantum` security.
+
+In the advent of quantum computers, which have the potential to render traditional cryptographic algorithms vulnerable, the elimination or reduction of reliance on state becomes imperative. Quantum computers, with their ability to exist in multiple states simultaneously, pose significant risks to storing sensitive content in state. The concept of `statelessness` in SPHINCS+ aims to mitigate these risks by eliminating the reliance on state, providing resilience against attacks by powerful quantum computers.
+
+Unlike alternative post-quantum digital signature algorithms such as [Crystals-dilithium](https://pq-crystals.org/dilithium/) which offer high levels of security but are susceptible to "side-channel attacks", side channel atttack means attack on devices, the bad actors can attack on devices to found the "Sign" then it can to used to sign any message that their want, our decision to employ SPHINCS+ as the foundation for our Merkle tree scheme and digital signature scheme ensures both the robustness against quantum adversaries and resistance to side-channel attacks.
+
+With the `SPHINXMerkleBlock` namespace, we empower developers to harness the advanced capabilities of SPHINCS+ and build secure, future-proof applications that can withstand the challenges posed by the dawn of the quantum era.
+
+We know that Hash-Based digital signature scheme is not lattice-based and relly on the strengthness of the hash-function, thats why our default [SPHINXHash](https://github.com/ChyKusuma/SPHINXHash) hash function is based on SWIFFTX which is rely on "Lattice-based", here our purposed is try to achieve both `Statelessness` and `Lattice-based` together at once.
+
+Digital signature scheme like [Gottesman-chuang](https://www.researchgate.net/publication/2186040_Quantum_Digital_Signatures) its trully guarantee by Quantum-Laws, we aware about that, but it's still too expensive technology, its needed new infrastructure, new hardware, a lot of money will only spent into infrastructure, so for today its not solution for us and not applicable. One day, when the world already build the quantum infrastructure i.e Quantum Key Distribution we believed our construction will more safe.
+
+
+Function
+
+1. JSON and SPHINXKey Namespace
+
+- The code starts with the use of `JSON` library with the alias json from the `nlohmann namespace`.
+- Next, a namespace called `SPHINXKey` is declared, which contains a type `SPHINXPubKey` representing a `vector of unsigned` characters. It seems to be used for public keys.
+
+2. Forward Declarations
+
+- Three functions are forward-declared, which means their actual implementation is provided later in the code.
+    - These functions are:
+    - `generateOrRetrieveSecretKeySeed`: It's expected to generate or retrieve a secret key seed.
+    - `generateOrRetrievePublicKeySeed`: It's expected to generate or retrieve a public key seed.
+    - `verifySignature`: It's expected to verify a signature using a public key.
+
+3. SPHINXMerkleBlock Namespace
+
+- A new namespace named `SPHINXMerkleBlock` is defined, encapsulating all the classes and functions related to constructed the Merkle block.
+
+4. Transaction class 
+ 
+- The Transaction class represents a transaction and contains `data, signature`, and `publicKey` as its member variables.
+It provides a member function `toJson()` to convert the transaction data into a `JSON-formatted` string.
+
+5. Constants
+
+- Several constants are declared, such as `SPHINCS_N, SPHINCS_H, SPHINCS_D, etc`., which might be used to call function from SPHINCS+ library.
+
+ 6.SignedTransaction Structure
+
+- The `SignedTransactio`n structure represents a signed transaction and includes `transaction, transactionData, data, signature`, and `publicKey` as its members.
+
+7. MerkleBlock class 
+
+- The MerkleBlock class represents a `Merkle block` and includes several helper classes for `Merkle tree` construction: `ForsConstruction, WotsConstruction, HypertreeConstruction`, and `XmssConstruction`.
+  - First the hash function used default hash function in library based on `SHAKE256 robust scheme`
+  - Then it hashing again using `SPHINXHash` to ensure long term usage.
+
+- It also contains functions for constructing the Merkle tree `(constructMerkleTree)` and verifying the Merkle root `(verifyMerkleRoot)`.
+
+8. Calculate block header
+
+- This function takes the `previous block hash, Merkle root, timestamp`, and `nonce` as inputs and returns the hash of the block's header data.
+
+9. verifyIntegrity Function
+
+This function calls `verifyBlock` and `verifyChain` functions from `Verify.hpp` and prints the results of block and chain integrity verification.
+
+10. sphinxKeyToString Function
+
+- This function converts the SPHINX public key to a string representation.
+
+11. generateHybridKeyPair Function
+
+- This function generates a hybrid key pair using functions from `Key.cpp` It returns the private key as a string and the public key as a `SPHINXKey::SPHINXPubKey`.
+
+12. MerkleTree Construction
+
+- The `constructMerkleTree` function recursively constructs the Merkle tree from a vector of signed transactions.
+verifyMerkleRoot Function
+
+13 verifyMerkleRoot Function
+
+- The verifyMerkleRoot function verifies the Merkle root against a vector of transactions, ensuring the validity of transactions using their signatures.
+
+14. hashTransactions Function
+
+- This function calculates the hash of two transactions using the `SPHINX_256` hash function.
+
+15. buildMerkleRoot Function
+
+- This function constructs the Merkle root from a vector of transactions using recursion.
+
+16. Signing and Key Generation Functions
+
+- The sign function is used for signing a message using the SPHINCS signature scheme.
+  
+- The nested classes `ForsConstruction, WotsConstruction, HypertreeConstruction`, and `XmssConstruction` handle various steps in constructing the `Merkle tree`, involving different cryptographic functions.
+
+17. Verification Function
+- The verifySignature function is used to verify the signature of a transaction using the provided public key.
+
+These components work together to provide functionality for constructing and verifying Merkle trees using the SPHINCS+ cryptographic scheme.
+
+The next roadmap is to add additional features to used [Multi-party Computation](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/MPC) in this digital signature scheme, we just needed the protocol to interact with the library to provided secure digital signature scheme to ensure long term security guarantee.
+
+NOTE: Important to review
+
+In the provided code for "sign.hpp" and "merkleblock.cpp" the SPHINCS+ implementation appears to be stateless. The functions for `signing` and `verifying` transactions do not rely on any previous state or stored information, and the signing process is done independently for each transaction.
+
+
 
 ### 14. [Miner.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Miner.cpp)
 
@@ -297,25 +404,23 @@ This might include buffers, state variables, or predefined constants used in the
 
 ### 21. [Server.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Server_http.cpp)
 
-### 22. [Sign.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Sign.hpp)
+### 22. [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp)
 
-### 23. [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp)
+### 23. [Transaction.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Transaction.cpp)
 
-### 24. [Transaction.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Transaction.cpp)
+### 24. [Utils.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Utils.cpp)
 
-### 25. [Utils.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Utils.cpp)
+### 25. [Utxo.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Utxo.cpp)
 
-### 26. [Utxo.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Utxo.cpp)
+### 26. [Verify.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Verify.hpp)
 
-### 27. [Verify.hpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Verify.hpp)
+### 27. [Wallet.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Wallet.cpp)
 
-### 28. [Wallet.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Wallet.cpp)
+### 28. [Base58.c](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/base58.c)
 
-### 29. [Base58.c](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/base58.c)
+### 29. [Base58check.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/base58check.cpp)
 
-### 30. [Base58check.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/base58check.cpp)
-
-### 31. [db.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/db.cpp)
+### 30. [db.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/db.cpp)
 
 </details>
 <br>
