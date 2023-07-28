@@ -165,9 +165,25 @@ Within "BlockManager.cpp," you will find functions that facilitate block retriev
 
 ### 4. [Chain.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Chain.cpp)
 
-The Chain module manages the chronological order of blocks, ensuring that transactions are recorded in the correct sequence. It provides functionalities for adding new blocks to the blockchain, validating their integrity, and handling chain reorganization in case of forks or conflicts.
+Supports various operations like adding blocks, transferring funds between chains and shards, performing atomic swaps, and handling bridge transactions. Let's focus on the key functions and their purposes:
 
-In "Chain.cpp," you will find code for block indexing, chain traversal, and consensus verification. The Chain module is responsible for maintaining the longest valid chain in the network, ensuring the blockchain's consistency across all nodes. It serves as the backbone of the decentralized ledger, where each block's hash is linked to the previous block, establishing an unbroken chain of transactions.
+- addBlock: This function adds a new block to the blockchain. Before adding the block, it verifies the block's validity using a public key (SPHINXPubKey). If the block is valid, it is added to the chain.
+
+- transferFromSidechain: This function transfers a block from a sidechain to the main chain. It first verifies the block's validity using a public key (SPHINXPubKey). If valid, the block is added to the main chain.
+
+- handleBridgeTransaction: This function handles a bridge transaction, which involves transferring funds from one chain to another. It validates the transaction and, if valid, adds it to the target chain.
+
+- performAtomicSwap: This function performs an atomic swap between the current chain and a target chain. Atomic swaps allow two parties to exchange assets atomically without the need for a trusted third party. The function verifies the validity of the transactions and balances before executing the swap.
+
+- toJson and fromJson: These functions are used to convert the chain data to and from JSON format for storage and communication.
+
+- getBalance and updateBalance: These functions manage the balances of addresses on the chain.
+
+- createShard, joinShard, and transferToShard: These functions are used to create and manage shards, which are separate chains connected to the main chain.
+
+- performShardAtomicSwap: This function performs an atomic swap between the current shard and a target shard.
+
+The code is designed to be interoperable, meaning it supports interactions between different chains and shards through functions like transferFromSidechain, handleBridgeTransaction, and performShardAtomicSwap. It is also scalable as it supports the creation and management of multiple shards, allowing for better resource utilization and transaction processing.
 
 
 ### 5. [Chainmanager.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/ChainManager.cpp)
