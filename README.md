@@ -104,9 +104,58 @@ These parameters define the total supply of assets, maximum supply (e.g., 50 mil
   
 - [Block.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Block.cpp)
 
-The "Block.cpp" file represents a critical component of our blockchain system. This file contains the implementation of the "Block" data structure, which serves as a fundamental unit of the SPHINX-HUB blockchain. A block encapsulates a set of transactions and acts as a link in the chain, ensuring the integrity and chronological order of transactions.
+1. Constructor:
+- There are two constructors for creating a Block object.
+- The first constructor takes the previousHash of the previous block and initializes other member variables like blockHeight, nonce, and difficulty.
+- The second constructor adds a version parameter to set the block's version.
 
-In "Block.cpp," you will find the code responsible for creating, validating, and updating blocks. It includes functionalities for calculating the block's hash, managing its transactions, and handling any changes to the block during the mining process. The proper functioning of this file ensures the robustness and security of the entire blockchain network.
+2. Function addTransaction:
+- This function is used to add a transaction to the block.
+- It takes a transaction as a string and appends it to the transactions_ vector.
+
+3. Function calculateBlockHash:
+- This function calculates the hash of the entire block's data (excluding the signature) using the SPHINXHash::SPHINX_256 function.
+- It concatenates previousHash_, timestamp_, and all the transactions in transactions_ to form the data.
+- The resulting data is then hashed using the SPHINX_256 hash function, and the hash is returned.
+
+4. Function calculateMerkleRoot:
+- This function calculates the Merkle root hash of the transactions in the block using the SPHINXMerkleBlock::constructMerkleTree function.
+- The constructMerkleTree function is called with the transactions_ vector, and the resulting Merkle root is returned.
+
+5. Function signMerkleRoot:
+- This function signs the provided Merkle root with the SPHINCS+ private key and stores the signature and Merkle root in the block.
+- The signature_ is set using the SPHINXSign::sign_data function with the provided private key.
+- The storedMerkleRoot_ is set with the input merkleRoot.
+
+6. Function verifySignature:
+- This function verifies the block's signature using the provided public key.
+- It calculates the block hash using the calculateBlockHash function and then calls the SPHINXSign::verify_data function with the block hash, signature, and public key.
+- Returns true if the signature is valid, otherwise false.
+
+7. Function verifyMerkleRoot:
+- This function verifies the stored Merkle root with the given public key.
+- It calls the merkleBlock.verifyMerkleRoot function with the storedMerkleRoot_ and transactions_.
+- Returns true if the Merkle root is valid, otherwise false.
+
+8. Function verifyBlock:
+- This function verifies the entire block with the given public key by calling verifySignature and verifyMerkleRoot.
+- Returns true if both the signature and Merkle root are valid, otherwise false.
+
+9. Function mineBlock:
+- This function is used to mine the block with the given difficulty.
+- It attempts to find a valid block hash that meets the specified difficulty level (starting with leading zeros).
+- It repeatedly increments the nonce_ value and recalculates the block hash until a valid hash is found.
+- Once a valid hash is found, the function updates the UTXO (Unspent Transaction Outputs) set based on the transactions included in the block and returns true.
+- If no valid hash is found, the function returns false.
+
+10. Serialization and Deserialization Functions:
+- Functions like toJson, fromJson, save, and load handle serialization and deserialization of the block data to/from JSON format and files.
+Functions for Database Interaction:
+- saveToDatabase and loadFromDatabase are used to save and load block data to/from a distributed database using the SPHINXDb::DistributedDb class.
+
+11. Getter Functions:
+- Various getter functions (e.g., getPreviousHash, getMerkleRoot, getSignature, etc.) are provided to access the private member variables of the Block class.
+- These functions together form the core functionality of the SPHINXBlock::Block class, which is used to represent and manage individual blocks in a blockchain.
 
 - [Blockmanager.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/BlockManager.cpp)
 
