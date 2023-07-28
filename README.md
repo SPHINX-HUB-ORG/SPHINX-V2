@@ -58,7 +58,7 @@ Join us on this transformative journey as we provide a platform that empowers in
 
 This repository contains the implementation of the SPHINX-HUB, a decentralized hub for secure and efficient data storage and transfer. The project is divided into several directories, each containing specific functionalities. Below is a brief explanation of each file and directory:
 
-### 4. Source Files
+### Source Files
 
 Explanation for each source file goes here. Click on the file names below to view the explanations:
 
@@ -380,7 +380,7 @@ verifyMerkleRoot Function
 
 These components work together to provide functionality for constructing and verifying Merkle trees using the SPHINCS+ cryptographic scheme.
 
-The next roadmap is to add additional features to used [Multi-party Computation](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/MPC) in this digital signature scheme, we just needed the protocol to interact with the library to provided secure digital signature scheme to ensure long term security guarantee.
+The next roadmap is to add additional features to used [Multi-party Computation](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/MPC) in this digital signature scheme, needed to created protocol to interact with the library to provided secure digital signature scheme to ensure long term security guarantee.
 
 NOTE: Important to review
 
