@@ -338,7 +338,7 @@ This code provides a set of functions and structures to support hybrid key gener
 The combined usage of `SPHINXKey` and `SPHINXHybridKey` allows for the generation of secure hybrid keypairs that leverage the strengths of both Kyber1024 and X448 cryptographic algorithms. The hybrid keypairs can be used for various cryptographic purposes, including encryption, decryption, and key exchange, making it a versatile and robust cryptographic solution.
 
 **NOTATION**;
-The next roadmap as consideration for long term security guarantee is to completely implement Homomorphic-Hybrid key generation scheme in the [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp) protocol the purpose is to leverage [TFHE](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/Master-Lib/tfhe-master) library to achieve homomorphic and hybrid scheme key generaion at once.
+The next roadmap as consideration for long term security guarantee is to completely implement Homomorphic-Hybrid key generation scheme in the [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp) as protocol to leverage [TFHE](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/Master-Lib/tfhe-master) library to achieve homomorphic and hybrid key generation at once.
 
 
 ### 11. [Mempool.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Mempool.hpp)
