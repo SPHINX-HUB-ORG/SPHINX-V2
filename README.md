@@ -1,3 +1,5 @@
+# SPHINX-HUB Project Overview
+
 ![Sphinx Hub Logo](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/asset/Logo2.png)
 
 ## Table of Contents
@@ -6,13 +8,12 @@
 - [Background](#background)
 - [Vision](#vision)
 - [Key Features](#key-features)
-- [Directory Files] (#Directories)
+- [Directories](#directories)
 - [NOTE](#note)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
-  
 
 ## Introduction
 
@@ -23,7 +24,6 @@ This project is dedicated to the world community as an Open-source Post-quantum 
 Together, we form a united front dedicated to creating the most sustainable and robust blockchain ecosystem. Our goal is not only to strengthen the existing web3 ecosystem but also to anticipate and navigate the disruptive challenges posed by the imminent arrival of quantum computers.
 
 In this era of quantum-computers, we envision a future that is brighter and more promising for the global community. By synergizing our efforts, knowledge, and expertise, we strive to shape an innovative landscape that transcends boundaries and unlocks boundless possibilities.
-
 
 ## Background
 
@@ -54,7 +54,7 @@ Join us on this transformative journey as we provide a platform that empowers in
 - Decentralized, scalable, interoperable network
 - Multiple smart contract program language
 
-## Directories:
+## Directories
 
 This repository contains the implementation of the SPHINX-HUB, a decentralized hub for secure and efficient data storage and transfer. The project is divided into several directories, each containing specific functionalities. Below is a brief explanation of each file and directory:
 
@@ -77,7 +77,12 @@ The main source code directory where all the project's source files reside.
 
 - **Backup:** Contains backup-related files and scripts.
 
-## Source Files:
+## Source Files
+
+Explanation for each source file goes here. Click on the file names below to view the explanations:
+
+<details>
+<summary>Click to expand</summary>
 
 ### 1. Asset.cpp
 Explanation for Asset.cpp.
