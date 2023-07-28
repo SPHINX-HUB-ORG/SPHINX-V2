@@ -339,7 +339,7 @@ The combined usage of `SPHINXKey` and `SPHINXHybridKey` allows for the generatio
 
 **NOTATION**;
 
-The next roadmap as consideration long term security is to completely implement Homomorphic-Hybrid key generation scheme in the [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp) protocol the purpose is to leverage [TFHE](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/Master-Lib/tfhe-master) library to achieve homomorphic and hybrid scheme key generaion at once.
+The next roadmap as consideration for long term security guarantee is to completely implement Homomorphic-Hybrid key generation scheme in the [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp) protocol the purpose is to leverage [TFHE](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/Master-Lib/tfhe-master) library to achieve homomorphic and hybrid scheme key generaion at once.
 
 
 ### 11. [Mempool.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Mempool.hpp)
