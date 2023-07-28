@@ -275,6 +275,8 @@ This might include buffers, state variables, or predefined constants used in the
 
 ### 10.  [Key.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Key.cpp) & [Hybrid_key.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Hybrid_Key.cpp)
 
+The `Key.cpp` and `Hybrid_Key.cpp` leverages Post-Quantum Public-key Encryption and Key-establishment Algorithms [Crystals-kyber](https://csrc.nist.gov/Projects/post-quantum-cryptography/post-quantum-cryptography-standardization/round-3-submissions) as round-3 post-quantum winners.
+
 In the thrilling era of quantum computers, where we find ourselves in a `Super Position` between classical and quantum realms, the choice of a hybrid key exchange scheme combining curve448 and Kyber1024 holds immense significance. Let's explore why this combination is the perfect fit.
 
 1. Embracing the Best of Both Worlds: `curve448`, a battle-tested and widely adopted algorithm, provides a solid foundation of proven security and efficient key generation. On the other hand, `Kyber1024` represents the cutting-edge of post-quantum cryptography, designed to resist attacks from powerful quantum computers. By combining these two exceptional algorithms, we enter a "Super Position" where we benefit from the strengths of both classical and quantum-resistant cryptography.
@@ -283,12 +285,61 @@ In the thrilling era of quantum computers, where we find ourselves in a `Super P
 
 In this era of immense technological possibilities, the combination of `curve448` and `Kyber1024` in a hybrid key exchange scheme symbolizes our readiness to face the challenges presented by quantum computing. It demonstrates our commitment to leverage the proven track record of `curve448` and the promising resilience of `Kyber1024`. Together, these algorithms empower us to navigate the quantum landscape with confidence, ensuring the security and longevity of our cryptographic systems.
 
-* Description and logic;
+**Description and logic**;
 - `Curve448` given 224-bit security level
 - `Kyber-1024` given (equal AES-256) mean 256-bit security level
 If we `merged` them it means we will achieve security level nearly `480-bytes`, this not lightweight but more secured
 
 
+**Functions**;
+
+- The code defines a function called `performX448KeyExchange` that performs the `curve448` key exchange given a private key, public key, and a buffer to store the shared key.
+
+- It defines a structure called `HybridKeypair`, which holds the merged key pair consisting of a `Kyber1024` key pair and and `curve448` key pair, as well as PKE key pair, and a random number generator.
+
+- The function `generate_hybrid_keypair` generates a hybrid key pair by generating a `Kyber1024` key pair, an `curve448` key pair, and a PKE key pair using appropriate functions. It returns the generated hybrid key pair.
+
+- The function `deriveMasterKeyAndChainCode` is used to derive a master private key and chain code from a given seed using the `HMAC-SHA512` function. It returns the `derived master private key` and `chain code` as a pair.
+
+- There are several utility functions defined, such as `deriveKeyHMAC_SHA512` to derive a key using `HMAC-SHA512`, `hashSWIFFTX512` to calculate the `SWIFFTX-512` hash of data, and `generateRandomNonce` to generate a random nonce.
+
+- The function `deriveKeyHKDF` derives a key using the `HKDF` (HMAC-based Key Derivation Function) algorithm with `SHA256` as the default hash function.
+
+- The function hash calculates the `SWIFFTX-256` hash of a given input.
+
+- The function `generateKeyPair` generates a random private key and calculates the corresponding public key by hashing the private key.
+
+- The function `generateAddress` generates an address from a given public key by hashing the public key and taking the first 20 bytes of the hash.
+
+- The function `requestDigitalSignatur`e requests a digital signature for a given data using the provided hybrid key pair.
+
+- The functions `encryptMessage` and `decryptMessage` are used to encrypt and decrypt a message, respectively, using the `Kyber1024` KEM (Key Encapsulation Mechanism).
+
+- The functions `encapsulateHybridSharedSecret` and `decapsulateHybridSharedSecret` are used to encapsulate and decapsulate a shared secret using the `hybrid KEM`, which combines `curve448` and `Kyber1024`.
+
+This code provides a set of functions and structures to support hybrid key generation, key exchange, encryption, decryption, and other cryptographic operations.
+
+
+**The interaction and collaboration between Key.cpp and Hybrid_Key.hpp**
+
+1. **SPHINXKey Namespace** interacts with the **SPHINXHybridKey Namespace** by calling the function `generate_hybrid_keypair` from the `SPHINXHybridKey` namespace. This function generates the hybrid keypair and its corresponding private and public keys.
+
+2. The function `SPHINXKey::generateAddress` uses the `SPHINXHybridKey::SPHINXHash::SPHINX_256` function to hash the public key and generate an address based on the hash. This address is used for smart contract identification.
+
+3. In `SPHINXHybridKey::generate_hybrid_keypair`, Kyber1024 and X448 keypairs are generated. The function also derives a master private key and chain code using HMAC-SHA512 from a seed value and then derives private and public keys from the master key and chain code using HMAC-SHA512.
+
+4. The `SPHINXHybridKey` namespace provides functions to encrypt and decrypt messages using Kyber1024 for KEM (Key Encapsulation Mechanism).
+
+5. The `SPHINXHybridKey::performX448KeyExchange` function performs the X448 key exchange.
+
+6. The `SPHINXHybridKey` namespace also includes functions to encapsulate and decapsulate shared secrets using the hybrid KEM, combining the results of Kyber1024 and X448.
+
+**Combined Usage**:
+The combined usage of `SPHINXKey` and `SPHINXHybridKey` allows for the generation of secure hybrid keypairs that leverage the strengths of both Kyber1024 and X448 cryptographic algorithms. The hybrid keypairs can be used for various cryptographic purposes, including encryption, decryption, and key exchange, making it a versatile and robust cryptographic solution.
+
+**NOTATION**;
+
+The next roadmap as consideration long term security is to completely implement Homomorphic-Hybrid key generation scheme in the [Tfhe.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Tfhe.cpp) protocol the purpose is to leverage [TFHE](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/Master-Lib/tfhe-master) library to achieve homomorphic and hybrid scheme key generaion at once.
 
 
 ### 11. [Mempool.cpp](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/blob/main/src/Mempool.hpp)
