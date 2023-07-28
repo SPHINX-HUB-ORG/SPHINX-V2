@@ -446,7 +446,7 @@ These components work together to provide functionality for constructing and ver
 
 *NOTATION
 
-1.  In the provided code for "sign.hpp" and "merkleblock.cpp" the SPHINCS+ implementation appears to be stateless. The functions for `signing` and `verifying` transactions do not rely on any previous state or stored information, and the signing process is done independently for each transaction.
+1.  Important to review and makesure, in the provided code for "sign.hpp" and "merkleblock.cpp" the SPHINCS+ implementation appears to be stateless. The functions for `signing` and `verifying` transactions do not rely on any previous state or stored information, and the signing process is done independently for each transaction.
 
 2. The next roadmap is to add additional features to used [Multi-party Computation](https://github.com/SPHINX-HUB-ORG/SPHINX-HUB/tree/main/src/Lib/MPC) in this digital signature scheme, we needed to created protocol to interact with the library to provided secure digital signature scheme to ensure long term security guarantee.
 
