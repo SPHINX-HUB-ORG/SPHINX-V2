@@ -64,11 +64,21 @@ namespace SPHINXMiningAlgorithm {
         std::string concatenatedMessage;
         std::string hash;
 
+        // Initialize a high-quality random number generator
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<> dis(1e-50, 1e50);
+
         // Start iterating through nonce values until a desired condition is met
         for (int i = 0;; i++) {
             nonce = std::to_string(i); // Convert the iteration count to a string nonce value
             concatenatedMessage = message + nonce;
-            hash = SPHINXHash::SPHINX_256(concatenatedMessage);
+
+            // Generate a random number using the high-quality generator
+            double randomValue = dis(gen);
+
+            // Use the randomValue as part of in the mining process
+            // For example: hash = SPHINXHash::SPHINX_256(concatenatedMessage + std::to_string(randomValue));
 
             // Check if the hash meets the difficulty target
             if (meetsDifficultyTarget(hash, requiredLeadingZeros)) {
@@ -79,6 +89,7 @@ namespace SPHINXMiningAlgorithm {
         return hash;
     }
 } // namespace SPHINXMiningAlgorithm
+
 
 namespace SPHINXPoW {
     std::string solveNonce(const std::string& data, int difficulty) {
