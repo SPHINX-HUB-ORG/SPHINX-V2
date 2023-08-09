@@ -31,7 +31,7 @@
 #include "Miner.hpp"
 #include "Consensus/Consensus.hpp"
 #include "Requests.hpp"
-#include "json.hpp"
+#include "json.hh"
 
 
 using json = nlohmann::json;
