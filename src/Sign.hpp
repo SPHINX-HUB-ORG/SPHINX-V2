@@ -3,53 +3,32 @@
 // This software is distributed under the MIT License.
 
 
-
-#ifndef SPHINX_SIGN_HPP
-#define SPHINX_SIGN_HPP
+#ifndef VERIFY_HPP
+#define VERIFY_HPP
 
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
-#include <map>
-#include <memory>
+#include "SPHINXBlock.hpp" // Include the header for SPHINXBlock if it's not already included
 
-#include <vector>
-#include <string>
-#include <iostream>
-#include "json.hpp"
-#include "Sphincs.hpp"
+namespace SPHINXVerify {
 
-using json = nlohmann::json;
+    std::string sign_data(const std::vector<uint8_t>& data, const uint8_t* SPHINXPrivKey);
 
-constexpr int SPHINCS_N = 256;
-constexpr int SPHINCS_H = 128;
-constexpr int SPHINCS_D = 64;
-constexpr int SPHINCS_A = 32;
-constexpr int SPHINCS_K = 16;
-constexpr int SPHINCS_W = 8;
-constexpr int SPHINCS_V = 4;
+    bool verify_data(const std::vector<uint8_t>& data, const std::string& signature, const std::vector<uint8_t>& verifier_SPHINXPubKey);
 
-using SPHINXPubKey = std::vector<unsigned char>;
-using SPHINXPrivKey = std::vector<unsigned char>;
+    bool verify_sphinx_protocol();
 
-namespace SPHINXSign {
+    bool verifyBlock(const SPHINXBlock& block);
 
-    std::string extractTransactionData(const std::string& signedTransaction);
+    bool verifyChain(const SPHINXChain& chain);
 
-    std::string signTransactionData(const std::string& transactionData, const SPHINXPrivKey& privateKey);
+    bool verifySPHINXBlock(const SPHINXBlock& block, const std::string& signature, const SPHINXPubKey& publickey);
 
-    SPHINXPubKey extractPublicKey(const std::string& signedTransaction);
+    bool verifySPHINXChain(const SPHINXChain& chain);
 
-    void addSignedTransactionToMerkleTree(const std::string& signedTransaction, const uint8_t* SPHINXPrivKey);
+} // namespace SPHINXVerify
 
-    bool verify_data(const std::vector<uint8_t>& data, const std::string& signature, const SPHINXPubKey& publicKey);
-
-    bool verifySPHINXBlock(const Block& block, const std::string& signature, const SPHINXPubKey& publicKey);
-
-    bool verifySPHINXChain(const Chain& chain);
-
-} // namespace SPHINXSign
-
-#endif // SPHINX_SIGN_HPP
+#endif // SPHINX_VERIFY_HPP
