@@ -2,39 +2,73 @@
 // All rights reserved.
 // This software is distributed under the MIT License.
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The provided code defines a namespace called SPHINXAsset and includes two classes: $SPX and AssetManager.
+// The system has several components: a token (SPX), an asset manager, and various reward and mining mechanisms. 
+// Let's break down the code piece by piece and explain each part:
 
-// 1. $SPX class:
-  // The constructor $SPX(const std::string& name, const std::string& owner) initializes an asset with a given name and owner.
-  // The getId() function returns the ID of the asset.
-  // The getName() function returns the name of the asset.
-  // The getOwner() function returns the current owner of the asset.
-  // The setOwner(const std::string& newOwner) function updates the owner of the asset to the given new owner.
-  // The buy(const std::string& buyer) function implements the logic for buying a crypto asset. It updates the ownership of the asset by setting the new owner to the given buyer.
+// Constants:
+    // TOTAL_SUPPLY: The total supply of tokens, set to 50 million.
+    // INITIAL_DEVELOPER_MINING_REWARD: The initial reward per block during the developer mining phase.
+    // HALVING_PERIOD: The number of blocks per halving period.
 
-// 2. AssetManager class:
-  // The constructor AssetManager() initializes the blockchain data and database.
-  // The buySPX(const std::string& assetId, const std::string& buyer, const std::string& payer) function buys a specific SPX asset. It finds the asset in the blockchain data, checks if it exists, updates the ownership by calling the buy() function of the asset, stores the transaction in the blockchain data, and pays the transaction fee.
-  // The issueSPX(const std::string& assetName, const std::string& owner, const std::string& payer) function issues a new SPX asset. It generates a unique ID for the asset, generates a key pair using the SPHINXKey namespace, checks the total supply and the developer mining phase, performs the Proof-of-Work (PoW) algorithm to mine the asset, updates the total supply and developer mined supply, checks the halving threshold, stores the transaction in the blockchain data, and pays the transaction fee.
-  // The setOwner(const std::string& assetId, const std::string& newOwner, const std::string& payer) function sets the owner of a specific asset. It finds the asset in the blockchain data, checks if it exists, updates the owner by calling the setOwner() function of the asset, stores the transaction in the blockchain data, and pays the transaction fee.
-  // The transferSPX(const std::string& assetId, const std::string& newOwner, const std::string& payer) function transfers a specific SPX asset to a new owner. It finds the asset in the blockchain data, checks if it exists, updates the owner by calling the setOwner() function of the asset, stores the transaction in the blockchain data, and pays the transaction fee.
-  // The generateUniqueId() function generates a unique ID for the asset using a hybrid key pair.
-  // The payTransactionFee(const std::string& payer) function implements the logic to deduct the transaction fee from the payer's account. It currently prints a message indicating the payer of the transaction fee.
-  // The findAsset(const std::string& assetId) function finds the asset in the blockchain data based on the given asset ID and returns a pointer to the asset. If the asset is not found, it returns a nullptr.
-  // The halveBlockReward() function implements the logic to halve the block reward. It currently halves the block reward by dividing it by 2.
-  // The generateTransactionId() function generates a unique transaction ID using a hybrid key pair.
-  // The generateTransactionData() function generates the transaction data based on the current state of the asset or any other relevant information. It returns a string representing the transaction data.
-  // The id member variable represents the ID of the asset.
-  // The totalSupply member variable represents the total supply of the asset.
-  // The maxSupply member variable represents the maximum supply of the asset.
-  // The halvingThreshold member variable represents the halving threshold for the asset.
-  // The blockReward member variable represents the current block reward for mining the asset.
-  // The assets member variable is a vector that stores the assets.
-  // The db member variable represents the database instance for storing transactions.
+// Variables:
+    // currentSupply: The current total supply of tokens.
+    // currentBlockHeight: The current block height.
+    // developerMining: A flag indicating whether the system is in the developer mining phase.
 
-// Please note that the code provided is a simplified version and may require additional implementation details for the database, key generation, PoW algorithm, and other functionalities.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Namespace SPHINXAsset:
+    // This namespace contains classes and functions that define the cryptocurrency system.
+
+// Class SPX (Token):
+    // This class represents a token. It has attributes like id, name, and owner (the current owner of the token).
+    // The class has methods to get and set the owner and to simulate buying the token.
+
+// Class AssetManager:
+    // This class manages the creation, distribution, and ownership of tokens.
+
+// buySPX Method:
+    // Buys a specific amount of SPX tokens from an asset using the given buyer and payer.
+    // Updates ownership of the asset, stores the transaction in the blockchain data, and pays the transaction fee.
+
+// issueSPX Method:
+    // Simulates the issuance of new SPX tokens.
+    // Performs Proof of Work (PoW) mining during the developer mining phase.
+    // Generates a unique ID, calculates issuance amounts, and allocates rewards to developers.
+    // Halves the block reward when a halving threshold is reached.
+    // Adds the transaction to the blockchain data and pays the transaction fee.
+
+// distributeRewards Method:
+    // Distributes rewards based on the current block height and phase of the system.
+    // Rewards are distributed differently during the developer mining phase and the miner rewards phase.
+
+// mineBlock Method:
+    // Simulates mining a block by incrementing the current block height.
+    // Distributes rewards based on the current phase.
+
+// Ownership and Transfer Methods:
+    // setOwner: Sets a new owner for a token asset.
+    // transferSPX: Transfers ownership of an SPX token.
+
+// Private Helper Methods:
+    // generateUniqueId: Generates a unique ID using a public key.
+    // payTransactionFee: Implements the logic for paying transaction fees.
+    // findAsset: Searches for an asset by ID in the blockchain data.
+    // distributeDeveloperRewards: Distributes rewards during the developer mining phase.
+    // distributeMinerRewards: Distributes rewards to miners based on halving schedule.
+    // halveBlockReward: Implements the logic to halve the block reward.
+    // generateTransactionId: Generates a unique transaction ID using a public key.
+    // generateTransactionData: Simulates generating transaction data and includes signature-related steps.
+
+// Constants and Variables within AssetManager:
+    // Additional constants and variables specific to the AssetManager class.
+
+// Please note that the code provided is a simplified version and may require additional implementation details for 
+// the database, key generation, PoW algorithm, and other functionalities. It includes concepts such as token issuance,
+// ownership, mining, block rewards, and transaction processing. Some parts of the code involve placeholders or 
+// simplified logic for educational purposes, and in a real-world application, many additional details and security 
+// considerations would need to be addressed.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -52,51 +86,63 @@
 #include "Transaction.hpp"
 
 
+const int TOTAL_SUPPLY = 50000000; // 50 million tokens
+const int INITIAL_DEVELOPER_MINING_REWARD = 100; // Initial reward per block during developer mining phase
+const int HALVING_PERIOD = 210000; // Blocks per halving period
+int currentSupply = 0; // Current total supply
+int currentBlockHeight = 0; // Current block height
+
 namespace SPHINXAsset {
 
-    class $SPX {
+    class SPX {
     public:
-        $SPX(const std::string& name, const std::string& owner)
+        // Constructor to initialize SPX object with name and owner
+        SPX(const std::string& name, const std::string& owner)
             : name(name), owner(owner) {}
 
+        // Get the ID of the SPX asset
         std::string getId() const {
             return id;
         }
 
+        // Get the name of the SPX asset
         std::string getName() const {
             return name;
         }
 
+        // Get the owner of the SPX asset
         std::string getOwner() const {
             return owner;
         }
 
+        // Set the owner of the SPX asset to a new owner
         void setOwner(const std::string& newOwner) {
             owner = newOwner;
         }
 
+        // Simulate buying the SPX asset by changing ownership
         void buy(const std::string& buyer) {
-            // Implement the logic for buying a crypto asset
-            // For example, yupdate the ownership of the asset and perform any necessary checks or operations
-            // Implement custom logic here
             setOwner(buyer);
         }
 
-    private:
-        std::string id;
-        std::string name;
-        std::string owner;
+        private:
+            std::string id;      // ID of the SPX asset
+            std::string name;    // Name of the SPX asset
+            std::string owner;   // Owner of the SPX asset
     };
 
     class AssetManager {
     public:
         AssetManager() {
             // Initialize the blockchain data and database
+            currentSupply = 0; // Set the initial total supply to 0
+            currentBlockHeight = 0; // Set the current block height to 0
+            developerMining = true; // Start in developer mining phase
         }
 
         void buySPX(const std::string& assetId, const std::string& buyer, const std::string& payer) {
             // Find the asset in the blockchain data
-            $SPX* asset = findAsset(assetId);
+            SPX* asset = findAsset(assetId);
 
             // Check if the asset exists
             if (asset == nullptr) {
@@ -115,31 +161,21 @@ namespace SPHINXAsset {
         }
 
         void issueSPX(const std::string& assetName, const std::string& owner, const std::string& payer) {
-            std::string generateUniqueId() {
-            // Generate the key pair using SPHINXKey namespace
-            SPHINXKey::HybridKeypair keyPair = SPHINXKey::generateKeyPair();
-
-            // Use the generated key pair as needed
-            std::string publicKey = keyPair.publicKey;
-
             // Generate a unique ID using the public key
-            std::string uniqueId = SPHINXKey::generateAddress(publicKey);
-
-            return uniqueId;
+            std::string uniqueId = generateUniqueId();
 
             // Generate the key pair using SPHINXKey namespace
             SPHINXKey::HybridKeypair keyPair = SPHINXKey::generateKeyPair();
 
             // Use the generated key pair as needed
             std::string publicKey = keyPair.publicKey;
-            std::string address = SPHINXKey::generateAddress(publicKey);
 
             // Check if the total supply is less than the maximum supply
             if (totalSupply < maxSupply) {
                 // Check if the system is still in the developer mining phase
                 if (developerMining) {
                     // Set the desired number of coins per block reward during the developer mining phase
-                    int issuanceAmount = 100;  // Set the desired number of coins per block reward during the developer mining phase
+                    int issuanceAmount = 100; // Set the desired number of coins per block reward during the developer mining phase
 
                     // Calculate the remaining supply for the developers to mine
                     int remainingSupplyForDevelopers = static_cast<int>(developerAllocationThreshold * maxSupply) - developersMinedSupply;
@@ -160,7 +196,7 @@ namespace SPHINXAsset {
                         // Check if the final hash meets the target criteria
                         if (SPHINXPoW::meets_target(k, target)) {
                             // Allocate the mined asset to developers
-                            $SPX newAsset(assetName, owner);
+                            SPX newAsset(assetName, owner);
                             assets.push_back(newAsset);
                             // Increase the total supply by 1
                             totalSupply++;
@@ -192,10 +228,54 @@ namespace SPHINXAsset {
             }
         }
 
+        void distributeRewards() {
+            if (currentBlockHeight <= 5 * 30 * 24 * 60 * 4) {
+                // Developer Mining Phase (first 5 months)
+                currentSupply += INITIAL_DEVELOPER_MINING_REWARD;
+            } else if (currentBlockHeight <= 210000) {
+                // Transition to Miner Rewards Phase (remaining blocks of Year 1)
+                currentSupply += INITIAL_DEVELOPER_MINING_REWARD;
+            } else {
+                // Miner Rewards Phase (Year 2 onwards)
+                int currentHalvingPeriod = (currentBlockHeight - 210000) / HALVING_PERIOD;
+
+                int reward = 100;
+
+                // Determine reward based on halving schedule
+                if (currentHalvingPeriod >= 1) {
+                    reward /= 2;
+                }
+                if (currentHalvingPeriod >= 2) {
+                    reward /= 2;
+                }
+                if (currentHalvingPeriod >= 3) {
+                    reward /= 2;
+                }
+                if (currentHalvingPeriod >= 4) {
+                    reward /= 2;
+                }
+                if (currentHalvingPeriod >= 5) {
+                    reward /= 2;
+                }
+
+                currentSupply += reward;
+            }
+        }
+
+        void mineBlock() {
+            // Simulate mining a block
+            currentBlockHeight++;
+
+            if (developerMining) {
+                distributeDeveloperRewards();
+            } else {
+                distributeMinerRewards();
+            }
+        }
 
         void setOwner(const std::string& assetId, const std::string& newOwner, const std::string& payer) {
             // Find the asset in the blockchain data
-            $SPX* asset = findAsset(assetId);
+            SPX* asset = findAsset(assetId);
 
             // Check if the asset exists
             if (asset == nullptr) {
@@ -215,7 +295,7 @@ namespace SPHINXAsset {
 
         void transferSPX(const std::string& assetId, const std::string& newOwner, const std::string& payer) {
             // Find the asset in the blockchain data
-            $SPX* asset = findAsset(assetId);
+            SPX* asset = findAsset(assetId);
 
             // Check if the asset exists
             if (asset == nullptr) {
@@ -254,7 +334,7 @@ namespace SPHINXAsset {
             std::cout << "Transaction fee paid by: " << payer << std::endl;
         }
 
-        $SPX* findAsset(const std::string& assetId) {
+        SPX* findAsset(const std::string& assetId) {
             // Find the asset in the blockchain data
             for (auto& asset : assets) {
                 if (asset.getId() == assetId) {
@@ -262,6 +342,28 @@ namespace SPHINXAsset {
                 }
             }
             return nullptr; // Asset not found
+        }
+
+        void distributeDeveloperRewards() {
+            if (currentBlockHeight <= 5 * BLOCKS_PER_MONTH) {
+                // Developer Mining Phase (first 5 months)
+                currentSupply += INITIAL_DEVELOPER_MINING_REWARD;
+            } else {
+                developerMining = false; // Transition to miner rewards phase
+                distributeMinerRewards();
+            }
+        }
+
+        void distributeMinerRewards() {
+            int currentHalvingPeriod = (currentBlockHeight - HALVING_START_BLOCK) / HALVING_PERIOD;
+
+            if (currentHalvingPeriod >= HALVING_SCHEDULE.size()) {
+                return; // Mining period ended
+            }
+
+            int reward = HALVING_SCHEDULE[currentHalvingPeriod];
+
+            currentSupply += reward;
         }
 
         void halveBlockReward() {
@@ -284,7 +386,6 @@ namespace SPHINXAsset {
 
             return transactionId;
         }
-
 
         std::string generateTransactionData() {
             SPHINXTrx::Transaction transaction; // Create an instance of the Transaction class
@@ -323,20 +424,15 @@ namespace SPHINXAsset {
             return jsonData;
         }
 
-            std::string id;
-            int totalSupply = 0; // Set the initial total supply to 0
-            const int maxSupply = 50000000; // Set the maximum supply to 50 million
-            const int halvingThreshold = 210000; // Set the halving threshold (e.g., 210,000 blocks)
-            int blockReward = 50; // Set the initial block reward to 50
-            std::vector<$SPX> assets;
-            SPHINXDb::Db db; // Database instance
-        };
-    }
+        int currentSupply = 0; // Current total supply
+        int currentBlockHeight = 0; // Current block height
+        bool developerMining = true; // Flag indicating developer mining phase
+
+        const int BLOCKS_PER_MONTH = 30 * 24 * 60 * 4; // Number of blocks per month
+        const int INITIAL_DEVELOPER_MINING_REWARD = 100; // Initial reward per block during developer mining phase
+        const int HALVING_START_BLOCK = 5 * BLOCKS_PER_MONTH; // Block height to start halving rewards
+        const int HALVING_PERIOD = 210000; // Blocks per halving period
+
+        const std::vector<int> HALVING_SCHEDULE = {100, 50, 25, 12, 6}; // Halving reward schedule
+    };
 } // namespace SPHINXAsset
-
-
-
-
-
-
-
