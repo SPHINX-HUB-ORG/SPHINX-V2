@@ -66,7 +66,7 @@
 #include "Sign.hpp"
 #include "Utils.hpp"
 #include "Transaction.hpp"
-#include "json.hpp"
+#include "json.hh"
 #include "Key.hpp"
 #include "Params.hpp"
 #include "MerkleBlock.hpp"
