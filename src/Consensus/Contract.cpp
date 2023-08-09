@@ -3,12 +3,14 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// This code defines a namespace called SPHINXContract which contains several structs and classes related to a smart contract implementation.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code defines a namespace called SPHINXContract which contains several structs and classes related to a smart contract 
+// implementation.
 
   // SPHINX_PublicKey: This struct represents a public key with two fields, publicKeyData and name.
 
-  // SPHINXVerify: This nested namespace contains functions related to verification of SPHINX blocks, chains, data, and the SPHINX protocol. Currently, the functions return a placeholder value of true.
+  // SPHINXVerify: This nested namespace contains functions related to verification of SPHINX blocks, chains, data, and the SPHINX 
+  // protocol. Currently, the functions return a placeholder value of true.
 
   // Transaction: This struct represents a transaction with its data, signature, and verification status.
 
@@ -20,7 +22,8 @@
 
   // Token: This struct represents a token with its symbol, name, decimals, and balances for different users.
 
-  // SPHINXDb: This class provides functions to connect to and disconnect from a SPHINX database, as well as store transactions in the database.
+  // SPHINXDb: This class provides functions to connect to and disconnect from a SPHINX database, as well as store transactions in the 
+  // database.
 
   // SPHINXConsensus: This class provides functions to send a consensus request to SPHINXConsensus and wait for the consensus result.
 
@@ -28,16 +31,21 @@
 
   // ReputationSystem: This class represents a reputation system and provides functions to update and retrieve reputation scores for users.
 
-  // Product: This struct represents a product in supply chain management with fields such as name, tracking ID, current location, and recipient.
+  // Product: This struct represents a product in supply chain management with fields such as name, tracking ID, current location, 
+  // and recipient.
 
-  // DigitalRightsManagement: This class represents a digital rights management system and provides functions to register assets and retrieve asset owners.
+  // DigitalRightsManagement: This class represents a digital rights management system and provides functions to register assets and 
+  // retrieve asset owners.
 
   // SmartCity: This class represents a smart city and provides functions to manage transportation, energy, and waste.
 
-  // SmartContract: This class represents a smart contract and provides functions and data members related to the contract, such as party names, balances, contract duration, token balances, event handlers, and various instances of other classes for functionality such as database connectivity, consensus, oracle, reputation system, digital rights management, and smart city management.
+  // SmartContract: This class represents a smart contract and provides functions and data members related to the contract, such as 
+  // party names, balances, contract duration, token balances, event handlers, and various instances of other classes for functionality 
+  // such as database connectivity, consensus, oracle, reputation system, digital rights management, and smart city management.
 
-// The code includes functions for transferring tokens, updating balances, handling events, executing transactions, verifying transactions, paying token fees, and retrieving token prices. It also includes constructors and a destructor for initializing and cleaning up resources.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The code includes functions for transferring tokens, updating balances, handling events, executing transactions, verifying transactions,
+// paying token fees, and retrieving token prices. It also includes constructors and a destructor for initializing and cleaning up resources.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
