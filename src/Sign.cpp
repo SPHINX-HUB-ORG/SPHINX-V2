@@ -3,45 +3,70 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The provided code defines a set of classes and functions related to a cryptographic protocol using the SPHINCS+ `merkle-trees` and `signature` scheme. This protocol is used to verify the integrity and authenticity of a chain of transactions. Let's break down the code and explain its components in detail:
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The provided code defines a set of classes and functions related to a cryptographic protocol using the SPHINCS+ `merkle-trees` and 
+// `signature` scheme. This protocol is used to verify the integrity and authenticity of a chain of transactions. Let's break down the 
+// code and explain its components in detail:
 
 // Constants:
     // The code defines several constants that affect the behavior and security of the SPHINCS+ signature scheme. These constants include:
-        // SPHINCS_N: The length of the cryptographic hash output in bytes. It determines the security strength of the SPHINCS+ signature scheme. In this case, the hash output length is 256 bytes (32 bytes x 8 bits per byte).
-        // SPHINCS_H: The height of the binary hash tree used in the Merkle tree construction. It defines the number of layers in the Merkle tree, which affects the signature size and verification cost. In this case, the height of the binary hash tree is 128.
-        // SPHINCS_D: The number of layers in the hypertree. It affects the size of the signature and the security level of the SPHINCS+ signature scheme. In this case, the number of layers in the hypertree is 64.
-        // SPHINCS_A: The number of n-byte addresses used in the hash function. It affects the number of layers in the Merkle tree and the security of the SPHINCS+ scheme. In this case, the number of n-byte addresses is 32.
-        // SPHINCS_K: The number of Winternitz iterations used in the WOTS+ (Winternitz One-Time Signature) scheme. It determines the signature size and verification cost in the SPHINCS+ scheme. In this case, there are 16 Winternitz iterations.
-        // SPHINCS_W: The Winternitz parameter for the WOTS+ scheme. It defines the number of bits that can be signed using a single WOTS+ key pair. In this case, each WOTS+ key pair can sign 8 bits.
-        // SPHINCS_V: The height of the binary hash tree used in the XMSS signature scheme. It determines the size of the XMSS signature and the security level. In this case, the height of the binary hash tree for XMSS is 4.
+        // SPHINCS_N: The length of the cryptographic hash output in bytes. It determines the security strength of the SPHINCS+ signature 
+        // scheme. In this case, the hash output length is 256 bytes (32 bytes x 8 bits per byte).
+
+        // SPHINCS_H: The height of the binary hash tree used in the Merkle tree construction. It defines the number of layers in the 
+        // Merkle tree, which affects the signature size and verification cost. In this case, the height of the binary hash tree is 128.
+
+        // SPHINCS_D: The number of layers in the hypertree. It affects the size of the signature and the security level of the SPHINCS+ 
+        // signature scheme. In this case, the number of layers in the hypertree is 64.
+
+        // SPHINCS_A: The number of n-byte addresses used in the hash function. It affects the number of layers in the Merkle tree and 
+        // the security of the SPHINCS+ scheme. In this case, the number of n-byte addresses is 32.
+
+        // SPHINCS_K: The number of Winternitz iterations used in the WOTS+ (Winternitz One-Time Signature) scheme. It determines the 
+        // signature size and verification cost in the SPHINCS+ scheme. In this case, there are 16 Winternitz iterations.
+
+        // SPHINCS_W: The Winternitz parameter for the WOTS+ scheme. It defines the number of bits that can be signed using a single 
+        // WOTS+ key pair. In this case, each WOTS+ key pair can sign 8 bits.
+
+        // SPHINCS_V: The height of the binary hash tree used in the XMSS signature scheme. It determines the size of the XMSS signature
+        // and the security level. In this case, the height of the binary hash tree for XMSS is 4.
 
 // Type Aliases:
-    // The code defines two type aliases for the SPHINX public key and private key, respectively, as SPHINXPubKey and SPHINXPrivKey. These aliases are defined as std::vector<unsigned char>, representing a sequence of bytes.
+    // The code defines two type aliases for the SPHINX public key and private key, respectively, as SPHINXPubKey and SPHINXPrivKey. 
+    // These aliases are defined as std::vector<unsigned char>, representing a sequence of bytes.
     // extractTransactionData(const std::string& signedTransaction):
-    // This function is used to extract the transaction data field from a signed transaction represented as a JSON string. It parses the JSON string, searches for the "transaction_data" field, and returns its value as a std::string.
+    // This function is used to extract the transaction data field from a signed transaction represented as a JSON string. It parses the 
+    // JSON string, searches for the "transaction_data" field, and returns its value as a std::string.
     // extractPublicKey(const std::string& signedTransaction):
-    // This function is used to extract the public key from a signed transaction represented as a JSON string. It parses the JSON string, searches for the "public_key" field, and converts the hexadecimal public key string to a SPHINXPubKey (vector of bytes) before returning it.
+    // This function is used to extract the public key from a signed transaction represented as a JSON string. It parses the JSON string,
+    // searches for the "public_key" field, and converts the hexadecimal public key string to a SPHINXPubKey (vector of bytes) before returning it.
 
 // SPHINXSign::addSignedTransactionToMerkleTree(const std::string& signedTransaction, const uint8_t* SPHINXPrivKey):
-    // This function is an interface function used to add a signed transaction to the Merkle tree. It takes the signed transaction JSON string and the SPHINCS+ private key as inputs.
+    // This function is an interface function used to add a signed transaction to the Merkle tree. It takes the signed transaction JSON 
+    // string and the SPHINCS+ private key as inputs.
     // It extracts the transaction data and public key from the signed transaction using the previously defined extraction functions.
-    // It then calls the sphincs::sign function from a library (not shown in this code snippet) to sign the transaction data using the private key and generate a SPHINCS+ signature.
-    // After verifying the validity of the signature, it constructs a SPHINXMerkleBlock::SignedTransaction object and adds it to the Merkle tree using the SPHINXMerkleBlock::MerkleBlock::getInstance().addTransaction() function (assumed to be defined elsewhere).
+    // It then calls the sphincs::sign function from a library (not shown in this code snippet) to sign the transaction data using the 
+    // private key and generate a SPHINCS+ signature.
+    // After verifying the validity of the signature, it constructs a SPHINXMerkleBlock::SignedTransaction object and adds it to the 
+    // Merkle tree using the SPHINXMerkleBlock::MerkleBlock::getInstance().addTransaction() function (assumed to be defined elsewhere).
 
 // SPHINXSign::verify_data(const std::vector<uint8_t>& data, const std::string& signature, const SPHINXPubKey& publicKey):
-    // This function is used to verify the SPHINCS+ signature for a given data using the provided signature and publicKey. It calls the sphincs::verify function (not shown in this code snippet) to perform the actual verification.
+    // This function is used to verify the SPHINCS+ signature for a given data using the provided signature and publicKey. It calls the
+    // sphincs::verify function (not shown in this code snippet) to perform the actual verification.
 
 // SPHINXSign::verifySPHINXBlock(const Block& block, const std::string& signature, const SPHINXPubKey& publicKey):
-    // This function is used to verify the integrity of a SPHINX block. It takes a Block object, the signature string, and the public key as inputs.
+    // This function is used to verify the integrity of a SPHINX block. It takes a Block object, the signature string, and the public 
+    // key as inputs.
     // It first verifies the signature of the block using the provided signature and publicKey by calling SPHINXVerify::verifySPHINXBlock.
     // Next, it verifies the Merkle root of the block by calling SPHINXMerkleBlock::verifyMerkleRoot.
 
 // SPHINXSign::verifySPHINXChain(const Chain& chain):
-    // This function is used to verify the integrity and consistency of a SPHINX chain. It takes a Chain object as input and calls verifyChainIntegrity(chain) (assumed to be defined elsewhere) to perform the chain verification.
+    // This function is used to verify the integrity and consistency of a SPHINX chain. It takes a Chain object as input and calls 
+    // verifyChainIntegrity(chain) (assumed to be defined elsewhere) to perform the chain verification.
 
-// The code provides an interface for adding signed transactions to a Merkle tree and verifies the authenticity of the data using the SPHINCS+ digital signature scheme. It also includes functions to verify individual blocks and the entire chain in the SPHINX blockchain. The integration with the Merkle tree scheme allows for efficient verification and tamper detection of transactions in the blockchain.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The code provides an interface for adding signed transactions to a Merkle tree and verifies the authenticity of the data using the 
+// SPHINCS+ digital signature scheme. It also includes functions to verify individual blocks and the entire chain in the SPHINX blockchain. The integration with the Merkle tree scheme allows for efficient verification and tamper detection of transactions in the blockchain.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
