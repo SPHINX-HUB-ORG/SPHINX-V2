@@ -3,8 +3,11 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The provided code defines a set of classes and functions related to a cryptographic protocol using the SPHINCS+ `merkle-trees` and `signature` scheme. This protocol is used to verify the integrity and authenticity of a chain of transactions. It defines various classes and functions for constructing and verifying Merkle trees, signing and verifying transactions, and generating hybrid key pairs. The SPHINX Merkle Block protocol is used for creating efficient, secure, and compact Merkle trees for blockchain applications.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The provided code defines a set of classes and functions related to a cryptographic protocol using the SPHINCS+ `merkle-trees` and
+// `signature` scheme. This protocol is used to verify the integrity and authenticity of a chain of transactions. It defines various 
+// classes and functions for constructing and verifying Merkle trees, signing and verifying transactions, and generating hybrid key pairs.
+// The SPHINX Merkle Block protocol is used for creating efficient, secure, and compact Merkle trees for blockchain applications.
 
 // SPHINXMerkleBlock::Transaction class:
     // Represents a transaction in the Merkle block.
@@ -33,15 +36,20 @@
     // Generates a hybrid key pair using the functions from "Key.cpp."
     // Converts the private and public keys to string representations and returns them as a pair.
     // Various private nested classes within SPHINXMerkleBlock::MerkleBlock:
-    // ForsConstruction, WotsConstruction, HypertreeConstruction, and XmssConstruction classes are used for constructing specific components of the Merkle tree.
+    // ForsConstruction, WotsConstruction, HypertreeConstruction, and XmssConstruction classes are used for constructing specific 
+    // components of the Merkle tree.
 
 // Interactions:
-    // The "MerkleBlock" class is used to construct and verify the Merkle tree for the transactions included in a block. It is called from the "Block" class to calculate and set the Merkle root of the block.
-    // The "Block" class interacts with the "MerkleBlock" class to obtain the Merkle root, which is then used to sign the block with SPHINCS+ private key. The signed block is then stored, and the Merkle root and signature are added to the block's header.
-    // When verifying the block's integrity, the "Block" class calls functions from the "MerkleBlock" class to verify the signature and Merkle root against the transactions.
+    // The "MerkleBlock" class is used to construct and verify the Merkle tree for the transactions included in a block. It is called 
+    // from the "Block" class to calculate and set the Merkle root of the block.
+    // The "Block" class interacts with the "MerkleBlock" class to obtain the Merkle root, which is then used to sign the block with 
+    // SPHINCS+ private key. The signed block is then stored, and the Merkle root and signature are added to the block's header.
+    // When verifying the block's integrity, the "Block" class calls functions from the "MerkleBlock" class to verify the signature 
+    // and Merkle root against the transactions.
 
-// By adhering to these principles, the code achieves a stateless characteristic, where each invocation of the code produces consistent and predictable results without relying on or modifying any shared or persistent state.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// By adhering to these principles, the code achieves a stateless characteristic, where each invocation of the code produces consistent 
+// and predictable results without relying on or modifying any shared or persistent state.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 #include <array>
