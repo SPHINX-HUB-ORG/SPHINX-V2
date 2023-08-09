@@ -2,13 +2,15 @@
 // All rights reserved.
 // This software is distributed under the MIT License.
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// This code defines the Block class, which represents a block in a blockchain. The Block class contains various member variables and member functions to handle block data, mining, signature verification, and serialization to JSON format.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code defines the Block class, which represents a block in a blockchain. The Block class contains various member variables 
+// and member functions to handle block data, mining, signature verification, and serialization to JSON format.
 
 // Namespace Definitions:
     // The code introduces three namespaces: SPHINXHash, SPHINXMerkleBlock, and SPHINXBlock.
     // Namespaces are used to group related functionality, and they help prevent naming conflicts.
-    // The SPHINXHash namespace contains the SPHINX_256 function, which is used to calculate the hash of data using the SPHINX_256 algorithm.
+    // The SPHINXHash namespace contains the SPHINX_256 function, which is used to calculate the hash of data using the SPHINX_256 
+    // algorithm.
     // The SPHINXMerkleBlock namespace provides the constructMerkleTree function, which is used to construct the Merkle tree for the block.
 
 // Private Member Variables:
@@ -28,13 +30,15 @@
 
 // Constructors:
     // The class has two constructors to create Block objects.
-    // The first constructor takes the hash of the previous block and initializes other member variables with default values. It sets the timestamp to the current time.
+    // The first constructor takes the hash of the previous block and initializes other member variables with default values. 
+    // It sets the timestamp to the current time.
     // The second constructor additionally takes a vector of checkpoint blocks as input.
 
 // Member Functions:
     // addTransaction: Adds a transaction to the block by appending it to the transactions_ vector.
     // calculateBlockHash: Calculates the block hash by concatenating relevant data and computing the SPHINX_256 hash of the block data.
-    // calculateMerkleRoot: Calculates the Merkle root of the transactions in the block using the constructMerkleTree function from the SPHINXMerkleBlock namespace.
+    // calculateMerkleRoot: Calculates the Merkle root of the transactions in the block using the constructMerkleTree function from the 
+    // SPHINXMerkleBlock namespace.
     // signMerkleRoot: Signs the Merkle root with SPHINCS+ private key and stores the signature and Merkle root for later verification.
     // verifySignature: Verifies the block's signature using the SPHINCS+ verification function available in the library.
     // verifyMerkleRoot: Verifies the block's Merkle root using the verifyMerkleRoot function from the SPHINXMerkleBlock namespace.
@@ -48,10 +52,12 @@
     // loadFromDatabase: Loads a block from the distributed database and initializes a new Block object from the JSON data.
     // getStoredMerkleRoot and getStoredSignature: Getter functions to retrieve the stored Merkle root and signature.
 
-// The Block class provides functionalities to handle block data, calculate block hashes, construct Merkle trees, mine blocks, sign and verify block signatures, serialize block data to JSON format, and store and retrieve blocks from a distributed database.
+// The Block class provides functionalities to handle block data, calculate block hashes, construct Merkle trees, mine blocks, sign and 
+// verify block signatures, serialize block data to JSON format, and store and retrieve blocks from a distributed database.
     
-// The code represents a simplified implementation of a blockchain system with functionality related to block creation, verification, mining, Merkle tree construction, and database interaction.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The code represents a simplified implementation of a blockchain system with functionality related to block creation, verification, 
+// mining, Merkle tree construction, and database interaction.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
