@@ -16,7 +16,7 @@
 #include <memory>
 #include <stdexcept>
 
-#include "json.hpp"
+#include "json.hh"
 #include "Node.hpp"
 #include "Utils.hpp"
 #include "Consensus/Consensus.hpp"
