@@ -3,18 +3,29 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The given code represents a Node class in the SPHINXNode namespace, which is responsible for handling transactions and verifying them within a network. Here's an explanation of the code:
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The given code represents a Node class in the SPHINXNode namespace, which is responsible for handling transactions and verifying them 
+// within a network. Here's an explanation of the code:
 
   // The constructor initializes a Node object. The specific implementation details are not provided in the given code snippet.
-  // The handleTransactionRequest function handles incoming transaction requests. It takes a Transaction object as input and broadcasts the transaction using the broadcastTransaction function from the common namespace. The specific implementation details of the broadcastTransaction function are not provided in the given code snippet.
-  // The receiveTransaction function is responsible for receiving a transaction and adding it to the mempool container. The transactions are stored as strings in the mempool vector.
-  // The verifyTransactions function iterates over the transactions in the mempool vector and verifies each transaction using various utility functions from the Utils namespace. The provided utility functions verifySignature, checkFundsAvailability, and adhereToNetworkRules are called to perform signature verification, check fund availability, and ensure adherence to network rules, respectively.
-  // If a transaction passes all the verification checks, it is added to the consensus object using the addVerifiedTransaction function. The specific implementation details of the addVerifiedTransaction function and the consensus algorithm are not provided in the given code snippet.
-  // Other node-related functions are expected to be implemented within the Node class, but their specific details are not given in the provided code snippet.
+  // The handleTransactionRequest function handles incoming transaction requests. It takes a Transaction object as input and broadcasts 
+  // the transaction using the broadcastTransaction function from the common namespace. The specific implementation details of the 
+  // broadcastTransaction function are not provided in the given code snippet.
+  // The receiveTransaction function is responsible for receiving a transaction and adding it to the mempool container. The transactions 
+  // are stored as strings in the mempool vector.
+  // The verifyTransactions function iterates over the transactions in the mempool vector and verifies each transaction using various 
+  // utility functions from the Utils namespace. The provided utility functions verifySignature, checkFundsAvailability, and 
+  // adhereToNetworkRules are called to perform signature verification, check fund availability, and ensure adherence to network rules, 
+  // respectively.
+  // If a transaction passes all the verification checks, it is added to the consensus object using the addVerifiedTransaction function. 
+  // The specific implementation details of the addVerifiedTransaction function and the consensus algorithm are not provided in the 
+  // given code snippet.
+  // Other node-related functions are expected to be implemented within the Node class, but their specific details are not given in the 
+  // provided code snippet.
 
-// In summary, the Node class handles transaction requests, receives transactions, verifies them using utility functions, and performs additional verification and consensus algorithm operations. It acts as a node within a network to process and validate transactions.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// In summary, the Node class handles transaction requests, receives transactions, verifies them using utility functions, and performs 
+// additional verification and consensus algorithm operations. It acts as a node within a network to process and validate transactions.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
