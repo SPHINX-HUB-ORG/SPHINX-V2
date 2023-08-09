@@ -4,25 +4,39 @@
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The code defines an interface for a smart contract with three functions: mint, burn, and transfer. This interface is designed to be compatible with multiple target languages, which are determined using preprocessor directives (#ifdef, #elif, #else, #endif).
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The code defines an interface for a smart contract with three functions: mint, burn, and transfer. This interface is designed to be 
+// compatible with multiple target languages, which are determined using preprocessor directives (#ifdef, #elif, #else, #endif).
 
-  // 1. The #include <iostream> directive is used to include the necessary header for using std::cout. This allows printing messages to the console.
+  // 1. The #include <iostream> directive is used to include the necessary header for using std::cout. This allows printing messages 
+  // to the console.
 
-  // 2. The SMARTCONTRACT_INTERFACE_H macro is used for conditional inclusion, ensuring that the contents of the header file are only included once.
+  // 2. The SMARTCONTRACT_INTERFACE_H macro is used for conditional inclusion, ensuring that the contents of the header file are only 
+  // included once.
 
-  // 3. The #ifdef __cplusplus directive checks if the code is being compiled as C++ code. The subsequent extern "C" block is used to declare the functions with C linkage. This ensures that the functions can be called from C code without name mangling.
+  // 3. The #ifdef __cplusplus directive checks if the code is being compiled as C++ code. The subsequent extern "C" block is used to 
+  // declare the functions with C linkage. This ensures that the functions can be called from C code without name mangling.
 
-  // 4. The mint function is defined with three parameters: address, name, and amount. Inside the function, there are multiple preprocessor directives (#ifdef, #elif, #else, #endif) that determine the appropriate implementation based on the target language. If one of the target languages (__RUST__, __SOLIDITY__, __GOLANG__, __PYTHON__, __JAVASCRIPT__) is defined, the corresponding function for minting tokens is called. Otherwise, the default behavior is executed, which includes printing a message using std::cout and leaving a placeholder comment for adding custom minting logic.
+  // 4. The mint function is defined with three parameters: address, name, and amount. Inside the function, there are multiple 
+  // preprocessor directives (#ifdef, #elif, #else, #endif) that determine the appropriate implementation based on the target language. 
+  // If one of the target languages (__RUST__, __SOLIDITY__, __GOLANG__, __PYTHON__, __JAVASCRIPT__) is defined, the corresponding 
+  // function for minting tokens is called. Otherwise, the default behavior is executed, which includes printing a message using 
+  // std::cout and leaving a placeholder comment for adding custom minting logic.
 
-  // 5. The burn function is defined in a similar manner as the mint function. It takes three parameters: address, name, and amount. It follows the same logic of selecting the appropriate implementation based on the target language or executing the default behavior.
+  // 5. The burn function is defined in a similar manner as the mint function. It takes three parameters: address, name, and amount. 
+  // It follows the same logic of selecting the appropriate implementation based on the target language or executing the default behavior.
 
-  // 6. The transfer function is defined with four parameters: from, to, name, and amount. Like the previous functions, it selects the appropriate implementation or executes the default behavior based on the target language.
+  // 6. The transfer function is defined with four parameters: from, to, name, and amount. Like the previous functions, it selects the 
+  // appropriate implementation or executes the default behavior based on the target language.
 
-  // 7. The #ifdef __cplusplus directive checks if the code is being compiled as C++ code. The closing #endif ensures that the functions are declared with C linkage only when compiling as C++.
+  // 7. The #ifdef __cplusplus directive checks if the code is being compiled as C++ code. The closing #endif ensures that the functions 
+  // are declared with C linkage only when compiling as C++.
 
-// This code provides an interface for interacting with a smart contract. It allows different implementations to be provided based on the target language, and provides a default behavior for situations where the target language is not explicitly specified. The interface can be used to define the contract's behavior for minting tokens, burning tokens, and transferring tokens, depending on the target language or custom logic.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code provides an interface for interacting with a smart contract. It allows different implementations to be provided based on the
+// target language, and provides a default behavior for situations where the target language is not explicitly specified. The interface 
+// can be used to define the contract's behavior for minting tokens, burning tokens, and transferring tokens, depending on the target 
+// language or custom logic.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
