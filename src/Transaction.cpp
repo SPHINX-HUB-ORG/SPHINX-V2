@@ -3,25 +3,43 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The code provided defines a namespace SPHINXTrx that contains the implementation of a Transaction class related to the SPHINX protocol. Let's go through the code:
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The code provided defines a namespace SPHINXTrx that contains the implementation of a Transaction class related to the SPHINX protocol.
+// Let's go through the code:
 
-  // The line using json = nlohmann::json; introduces an alias json for the nlohmann::json class from the Nlohmann JSON library. This allows to use json instead of the full class name.
+  // The line using json = nlohmann::json; introduces an alias json for the nlohmann::json class from the Nlohmann JSON library. 
+  // This allows to use json instead of the full class name.
 
-  // The Transaction class has a default constructor, Transaction::Transaction(), which is not implemented in the provided code. This can assume that it contains the necessary logic to initialize a transaction object.
+  // The Transaction class has a default constructor, Transaction::Transaction(), which is not implemented in the provided code. 
+  // This can assume that it contains the necessary logic to initialize a transaction object.
 
-  // The addInput function, Transaction::addInput(const std::string& input), is not implemented in the provided code. This function is responsible for adding an input to the transaction.
+  // The addInput function, Transaction::addInput(const std::string& input), is not implemented in the provided code. This function is 
+  // responsible for adding an input to the transaction.
 
-  // The addOutput function, Transaction::addOutput(const std::string& output), is not implemented in the provided code. This function is responsible for adding an output to the transaction.
+  // The addOutput function, Transaction::addOutput(const std::string& output), is not implemented in the provided code. This function is
+  // responsible for adding an output to the transaction.
 
-  // The serializeToJson function, Transaction::serializeToJson() const, serializes the transaction object into a JSON string representation. It uses the Nlohmann JSON library to convert the transaction data to a JSON object, assigns the data to the data JSON object, and then calls data.dump() to serialize the JSON object to a string. The serialized JSON string is returned.
+  // The serializeToJson function, Transaction::serializeToJson() const, serializes the transaction object into a JSON string 
+  // representation. It uses the Nlohmann JSON library to convert the transaction data to a JSON object, assigns the data to the data 
+  // JSON object, and then calls data.dump() to serialize the JSON object to a string. The serialized JSON string is returned.
 
-  // The deserializeFromJson function, Transaction::deserializeFromJson(const std::string& jsonData), deserializes the transaction object from a JSON string representation. It uses the Nlohmann JSON library to parse the JSON string into a JSON object data using json::parse(jsonData). The function then extracts the transaction data from the data JSON object and updates the member variables of the transaction object accordingly.
+  // The deserializeFromJson function, Transaction::deserializeFromJson(const std::string& jsonData), deserializes the transaction 
+  // object from a JSON string representation. It uses the Nlohmann JSON library to parse the JSON string into a JSON object data using
+  // json::parse(jsonData). The function then extracts the transaction data from the data JSON object and updates the member variables
+  // of the transaction object accordingly.
 
-  // The signTransaction function, Transaction::signTransaction(const std::string& privateKey), performs the signing of the transaction. It first calls the serializeToBinary function (not provided in the code) to obtain the binary representation of the transaction. Then, it uses the SPHINXUtils::hash function to calculate the hash of the serialized binary transaction. It calls other functions from the SPHINXUtils namespace (such as SPHINXUtils::generateRandomNonce, SPHINXUtils::verifySignature, and SPHINXUtils::checkFundsAvailability) to perform signing-related tasks, such as generating a random nonce, verifying the signature, and checking funds availability. Finally, it prints the signing information, including the private key used, the transaction hash, the nonce, and the validity of the signature and funds availability.
+  // The signTransaction function, Transaction::signTransaction(const std::string& privateKey), performs the signing of the transaction.
+  // It first calls the serializeToBinary function (not provided in the code) to obtain the binary representation of the transaction. 
+  // Then, it uses the SPHINXUtils::hash function to calculate the hash of the serialized binary transaction. It calls other functions 
+  // from the SPHINXUtils namespace (such as SPHINXUtils::generateRandomNonce, SPHINXUtils::verifySignature, and 
+  // SPHINXUtils::checkFundsAvailability) to perform signing-related tasks, such as generating a random nonce, verifying the signature,
+  // and checking funds availability. Finally, it prints the signing information, including the private key used, the transaction hash,
+  // the nonce, and the validity of the signature and funds availability.
 
-// This provided code defines a Transaction class within the SPHINXTrx namespace. The class contains functions to add inputs and outputs to the transaction, serialize and deserialize the transaction to/from JSON, and sign the transaction using various utility functions from the SPHINXUtils namespace.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This provided code defines a Transaction class within the SPHINXTrx namespace. The class contains functions to add inputs and outputs
+// to the transaction, serialize and deserialize the transaction to/from JSON, and sign the transaction using various utility functions
+// from the SPHINXUtils namespace.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 #include <iostream>
