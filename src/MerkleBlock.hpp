@@ -17,7 +17,7 @@
 #include <iostream>
 #include <cstdint>
 
-#include "json.hpp"
+#include "json.hh"
 #include "Params.hpp"
 
 
