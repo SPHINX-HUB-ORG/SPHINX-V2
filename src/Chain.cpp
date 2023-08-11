@@ -3,10 +3,8 @@
 // This software is distributed under the MIT License.
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// This code defines a class called Chain that represents a blockchain. The Chain class has various member functions and data members that 
-// provide functionality for managing the blockchain and performing operations such as adding blocks, transferring funds, creating bridges,
-// and handling transactions.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code defines a class called Chain that represents a blockchain. The Chain class has various member functions and data members that provide functionality for managing the blockchain and performing operations such as adding blocks, transferring funds, creating bridges, and handling transactions.
 
 // Libraries and Namespaces:
     // The code includes the nlohmann/json library for working with JSON data.
@@ -14,23 +12,19 @@
 
 // SPHINXContract Class:
     // The SPHINXContract class represents a smart contract that can execute operations on the SPHINX blockchain.
-    // It has member functions such as executeChain, handleBridgeTransaction, handleTransfer, handleShardTransfer, 
-    // handleShardBridgeTransaction, and handleAtomicSwap.
+    // It has member functions such as executeChain, handleBridgeTransaction, handleTransfer, handleShardTransfer, handleShardBridgeTransaction, and handleAtomicSwap.
     // It also maintains information such as balances, bridge address and secret, and a target chain for atomic swaps.
 
 // SPHINXChain Namespace:
     // The SPHINXChain namespace contains the implementation of the SPHINX blockchain.
     // It includes the Chain class, which represents a blockchain consisting of blocks.
-    // The Chain class has member functions for adding blocks, retrieving block hashes, handling transactions, creating bridges, 
-    // transferring funds, and managing shards.
+    // The Chain class has member functions for adding blocks, retrieving block hashes, handling transactions, creating bridges, transferring funds, and managing shards.
     // It also includes a Shard struct that represents a shard in the chain.
 
 // Chain Class:
     // The Chain class represents a blockchain consisting of blocks in the SPHINXChain namespace.
-    // It has member functions for adding blocks, getting block hashes, transferring funds, handling bridge transactions, converting 
-    // to/from JSON, saving/loading from a file, and various other blockchain operations.
-    // It also includes functions for managing shards, such as creating shards, joining shards, transferring funds to shards, handling 
-    // shard transactions, and performing atomic swaps with shards.
+    // It has member functions for adding blocks, getting block hashes, transferring funds, handling bridge transactions, converting to/from JSON, saving/loading from a file, and various other blockchain operations.
+    // It also includes functions for managing shards, such as creating shards, joining shards, transferring funds to shards, handling shard transactions, and performing atomic swaps with shards.
     // The class maintains information such as blocks, balances, bridge address and secret, and a target chain for atomic swaps.
 
 // Genesis Block:
@@ -38,15 +32,12 @@
 
 // Block Operations:
     // The addBlock function adds a block to the chain after verifying its validity using the public key.
-    // The isChainValid function verifies the integrity and validity of the blockchain by checking the hashes, signatures, and blocks' 
-    // order.
+    // The isChainValid function verifies the integrity and validity of the blockchain by checking the hashes, signatures, and blocks' order.
     // The getBlockHash function retrieves the hash of a block at a given height.
 
 // Transaction and Bridge Operations:
-    // The transferFromSidechain function transfers funds from a sidechain to the main chain by adding a block with the specified block 
-    // hash from the sidechain.
-    // The handleBridgeTransaction function handles a bridge transaction on the chain, validating and adding the transaction to the 
-    // target chain.
+    // The transferFromSidechain function transfers funds from a sidechain to the main chain by adding a block with the specified block hash from the sidechain.
+    // The handleBridgeTransaction function handles a bridge transaction on the chain, validating and adding the transaction to the target chain.
     // The signTransaction function signs a transaction using the private key.
     // The broadcastTransaction function broadcasts a transaction via the bridge.
     // The handleTransfer function updates balances based on a transfer transaction.
@@ -66,9 +57,8 @@
     // The handleShardBridgeTransaction function handles a shard bridge transaction on the chain.
     // The performShardAtomicSwap function performs an atomic swap with a shard on the chain.
 
-// This code provides the basic functionality of a blockchain and supports operations such as adding blocks, transferring funds, 
-// handling transactions, creating bridges, and managing shards.
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code provides the basic functionality of a blockchain and supports operations such as adding blocks, transferring funds, handling transactions, creating bridges, and managing shards.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -94,6 +84,7 @@
 #include "Transaction.hpp"
 #include "Consensus/Contract.hpp"
 #include "Params.hpp"
+#include "server_http.hpp"
 
 
 using json = nlohmann::json;
@@ -438,10 +429,17 @@ public:
 
     // Create a blockchain bridge between the current chain and a target chain
     void Chain::createBlockchainBridge(const Chain& targetChain) {
-        std::string bridgeAddress = generateBridgeAddress();  // Generate a bridge address for the current chain
-        std::string targetBridgeAddress = targetChain.generateBridgeAddress();  // Generate a bridge address for the target chain
-        std::shared_ptr<CloudflareSecureBridgeConnection> connection = std::make_shared<CloudflareSecureBridgeConnection>(bridgeAddress, targetBridgeAddress);  // Create a connection using the bridge addresses
-        connection->createBridge();  // Create a bridge using the connection
+        std::string bridgeAddress = generateBridgeAddress();
+        std::string targetBridgeAddress = targetChain.generateBridgeAddress();
+
+        // Construct an HTTP request to create a bridge
+        std::string httpRequest = "POST /create_bridge HTTP/1.1\r\nHost: localhost\r\nContent-Length: ";
+        httpRequest += std::to_string(bridgeAddress.size()) + "\r\n\r\n" + bridgeAddress;
+
+        // Send the HTTP request to your HTTP server
+        std::string httpResponse = sendHttpRequest(httpRequest);
+
+        // Process the HTTP response from your server (if needed)
     }
 
     // Handle a bridge transaction by transferring funds to the recipient address
@@ -454,6 +452,13 @@ public:
         if (!TwoFactorAuthenticator::verifyCode(senderUsername, sender2FACode)) {
             throw std::runtime_error("Authentication failed");
         }
+
+        // Construct an HTTP request to handle a bridge transaction
+        std::string httpRequest = "POST /handle_transaction HTTP/1.1\r\nHost: localhost\r\nContent-Length: ";
+        // Construct the transaction data and add it to the httpRequest
+
+        // Send the HTTP request to your HTTP server
+        std::string httpResponse = sendHttpRequest(httpRequest);
 
         // Generate and perform a key exchange
         SPHINXHybridKey::HybridKeypair keyPair = SPHINXKey::generate_and_perform_key_exchange();
