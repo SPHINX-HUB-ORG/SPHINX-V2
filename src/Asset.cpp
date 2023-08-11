@@ -2,10 +2,9 @@
 // All rights reserved.
 // This software is distributed under the MIT License.
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The provided code defines a namespace called SPHINXAsset and includes two classes: $SPX and AssetManager.
-// The system has several components: a token (SPX), an asset manager, and various reward and mining mechanisms. 
-// Let's break down the code piece by piece and explain each part:
+// The system has several components: a token (SPX), an asset manager, and various reward and mining mechanisms. Let's break down the code piece by piece and explain each part:
 
 // Constants:
     // TOTAL_SUPPLY: The total supply of tokens, set to 50 million.
@@ -63,13 +62,8 @@
 // Constants and Variables within AssetManager:
     // Additional constants and variables specific to the AssetManager class.
 
-// Please note that the code provided is a simplified version and may require additional implementation details for 
-// the database, key generation, PoW algorithm, and other functionalities. It includes concepts such as token issuance,
-// ownership, mining, block rewards, and transaction processing. Some parts of the code involve placeholders or 
-// simplified logic for educational purposes, and in a real-world application, many additional details and security 
-// considerations would need to be addressed.
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+// Please note that the code provided is a simplified version and may require additional implementation details for the database, key generation, PoW algorithm, and other functionalities. It includes concepts such as token issuance, ownership, mining, block rewards, and transaction processing. Some parts of the code involve placeholders or simplified logic for educational purposes, and in a real-world application, many additional details and security considerations would need to be addressed.
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 #include <iostream>
@@ -154,7 +148,7 @@ namespace SPHINXAsset {
             asset->buy(buyer);
 
             // Add the transaction to the blockchain data
-            db.storeTransaction(generateTransactionId(), generateTransactionData());
+            SPHINXDb.storeTransaction(generateTransactionId(), generateTransactionData());
 
             // Pay the transaction fee
             payTransactionFee(payer);
@@ -216,7 +210,7 @@ namespace SPHINXAsset {
                             }
 
                             // Add the transaction to the blockchain data
-                            db.storeTransaction(generateTransactionId(), generateTransactionData());
+                            SPHINXDb.storeTransaction(generateTransactionId(), generateTransactionData());
 
                             // Pay the transaction fee
                             payTransactionFee(payer);
@@ -287,7 +281,7 @@ namespace SPHINXAsset {
             asset->setOwner(newOwner);
 
             // Add the transaction to the blockchain data
-            db.storeTransaction(generateTransactionId(), generateTransactionData());
+            SPHINXDb.storeTransaction(generateTransactionId(), generateTransactionData());
 
             // Pay the transaction fee
             payTransactionFee(payer);
@@ -307,7 +301,7 @@ namespace SPHINXAsset {
             asset->setOwner(newOwner);
 
             // Add the transaction to the blockchain data
-            db.storeTransaction(generateTransactionId(), generateTransactionData());
+            SPHINXDb.storeTransaction(generateTransactionId(), generateTransactionData());
 
             // Pay the transaction fee
             payTransactionFee(payer);
