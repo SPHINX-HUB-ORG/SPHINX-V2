@@ -15,17 +15,6 @@
 #include <string>
 #include <vector>
 
-#include "Params.hpp"
-#include "json.hh"
-#include "Block.hpp"
-#include "Verify.hpp"
-#include "Sign.hpp"
-#include "Key.hpp"
-#include "Verify.hpp"
-#include "Transaction.hpp"
-#include "Consensus/Contract.hpp"
-#include "PoW.hpp"
-
 using json = nlohmann::json;
 
 class MainParams {
@@ -182,6 +171,13 @@ public:
     std::unordered_map<std::string, double> balances_;  // Balances of addresses on the chain
     std::string bridgeAddress_;  // Address of the bridge
     std::string bridgeSecret_;  // Secret key for the bridge
+
+    bool verifyWrappedTransaction(const std::string& wrappedTransactionData);
+    bool verifyUnwrappedTransaction(const std::string& unwrappedTransactionData);
+    std::string generateBridgeAddress();
+    std::string constructWrappedTransactionData(const std::string& recipientAddress, double amount);
+    std::string constructUnwrappedTransactionData(const std::string& recipientAddress, double amount);
+
     // Target chain for atomic swaps
     SPHINXChain* targetChain_;  // Use a pointer to SPHINXChain.
     Chain::Chain(const SPHINXParams::MainParams& mainParams) : mainParams_(mainParams) {
