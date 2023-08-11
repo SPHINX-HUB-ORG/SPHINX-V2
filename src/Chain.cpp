@@ -4,7 +4,10 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-// This code defines a class called Chain that represents a blockchain. The Chain class has various member functions and data members that provide functionality for managing the blockchain and performing operations such as adding blocks, transferring funds, creating bridges, and handling transactions.
+// This code defines a class called Chain that represents a blockchain. The Chain class has various 
+// member functions and data members that provide functionality for managing the blockchain and 
+// performing operations such as adding blocks, transferring funds, creating bridges, and handling 
+//transactions.
 
 // Libraries and Namespaces:
     // The code includes the nlohmann/json library for working with JSON data.
@@ -442,52 +445,94 @@ public:
         // Process the HTTP response from your server (if needed)
     }
 
-    // Handle a bridge transaction by transferring funds to the recipient address
-    void Chain::handleBridgeTransaction(const std::string& bridgeAddress, const std::string& recipientAddress, double amount) {
+    // Wrap tokens from the current chain and send them to the target chain
+    void Chain::wrapTokens(const std::string& recipientAddress, double amount) {
+        // Implement token wrapping logic here
+
+        // Transfer funds from sender's address to bridge address
+        transfer(senderAddress, bridgeAddress, amount);
+
+        // Construct a wrapped token transaction data
+        std::string wrappedTransactionData = constructWrappedTransactionData(recipientAddress, amount);
+
+        // Send wrappedTransactionData to the target chain's bridge
+        targetChain.handleWrappedTransaction(wrappedTransactionData);
+
+        // Update sender's balance
+        updateBalance(senderAddress, -amount);
+    }
+
+    // Handle a wrapped token transaction from the source chain
+    void Chain::handleWrappedTransaction(const std::string& wrappedTransactionData) {
+        // Verify the wrapped transaction data
+        if (!verifyWrappedTransaction(wrappedTransactionData)) {
+            throw std::runtime_error("Invalid wrapped transaction");
+        }
+
+        // Extract necessary information from the wrappedTransactionData
+        std::string recipientAddress;
+        double amount;
+        // Extract recipientAddress and amount from wrappedTransactionData
+
+        // Mint wrapped tokens on the target chain to recipient's address
+        targetChain.mintTokens(recipientAddress, amount);
+
+        // Update recipient's balance on the target chain
+        targetChain.updateBalance(recipientAddress, amount);
+    }
+
+    // Unwrap tokens on the target chain and transfer them to the recipient on the source chain
+    void Chain::unwrapTokens(const std::string& bridgeAddress, const std::string& recipientAddress, double amount) {
+        // Verify the bridge transaction and authentication as in your existing code
         if (!bridge.verifyTransaction(bridgeAddress, amount)) {
-            // Throw an error if the bridge transaction is invalid
             throw std::runtime_error("Invalid bridge transaction");
         }
-        // Throw an error if authentication fails
+        
+        // Replace the following line with your authentication logic
         if (!TwoFactorAuthenticator::verifyCode(senderUsername, sender2FACode)) {
             throw std::runtime_error("Authentication failed");
         }
 
-        // Construct an HTTP request to handle a bridge transaction
-        std::string httpRequest = "POST /handle_transaction HTTP/1.1\r\nHost: localhost\r\nContent-Length: ";
-        // Construct the transaction data and add it to the httpRequest
+        // Burn wrapped tokens on the target chain
+        targetChain.burnTokens(bridgeAddress, amount);
 
-        // Send the HTTP request to your HTTP server
-        std::string httpResponse = sendHttpRequest(httpRequest);
-
-        // Generate and perform a key exchange
-        SPHINXHybridKey::HybridKeypair keyPair = SPHINXKey::generate_and_perform_key_exchange();
-
-        // Calculate the public key
-        SPHINXKey::SPHINXPubKey publicKey = SPHINXKey::calculatePublicKey(keyPair.merged_key.kyber_private_key);
-
-        // Get the transaction data from the bridge
+        // Calculate the transaction hash and signature as in your existing code
         std::string transactionData = bridge.getTransactionData(bridgeAddress);
-
-        // Sent request to Sign the transaction data to "sign.hpp"
-        SPHINXKey::SPHINXPrivKey privateKey;  // Replace this with the actual private key
+        SPHINXKey::SPHINXPrivKey privateKey;  // Replace with actual private key
         std::string signature = SPHINXSign::signTransactionData(transactionData, privateKey);
 
-        // Throw an error if the signature verification fails
+        // Verify the transaction signature as in your existing code
         if (!SPHINXVerify::verifySignature(transactionData, signature, PUBLIC_KEY)) {
-            throw std::runtime_error("Authentication failed");
+            throw std::runtime_error("Signature verification failed");
         }
-        // Calculate the transaction hash
-        std::string transactionHash = SPHINXHash::SPHINX_256(transactionData);
 
-        // Transfer funds to the recipient address in the target chain
-        targetChain.transfer(recipientAddress, amount);
+        // Construct unwrapped transaction data
+        std::string unwrappedTransactionData = constructUnwrappedTransactionData(recipientAddress, amount);
 
-        // Update the balance of the recipient address
-        updateBalance(recipientAddress, amount);
+        // Send unwrappedTransactionData to the source chain's bridge
+        sourceChain.handleUnwrappedTransaction(unwrappedTransactionData);
 
-        // Update the balance of the sender address
+        // Update sender's balance
         updateBalance(senderAddress, -amount);
+    }
+
+    // Handle an unwrapped token transaction from the target chain
+    void Chain::handleUnwrappedTransaction(const std::string& unwrappedTransactionData) {
+        // Verify the unwrapped transaction data
+        if (!verifyUnwrappedTransaction(unwrappedTransactionData)) {
+            throw std::runtime_error("Invalid unwrapped transaction");
+        }
+
+        // Extract necessary information from the unwrappedTransactionData
+        std::string recipientAddress;
+        double amount;
+        // Extract recipientAddress and amount from unwrappedTransactionData
+
+        // Transfer funds to recipient's address on the source chain
+        transfer(bridgeAddress, recipientAddress, amount);
+
+        // Update recipient's balance on the source chain
+        updateBalance(recipientAddress, amount);
     }
 
     // Perform an atomic swap between the current chain and a target chain
