@@ -172,6 +172,7 @@ public:
     std::string bridgeAddress_;  // Address of the bridge
     std::string bridgeSecret_;  // Secret key for the bridge
 
+    // Bridge constructor
     bool verifyWrappedTransaction(const std::string& wrappedTransactionData);
     bool verifyUnwrappedTransaction(const std::string& unwrappedTransactionData);
     std::string generateBridgeAddress();
