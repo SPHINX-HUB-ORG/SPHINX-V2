@@ -63,6 +63,7 @@
 #include "../json.hpp"
 #include "../db.hpp"
 #include "../Chain.hpp"
+#include "../Chainstate.hpp"
 
 #include "Contract.hpp"
 #include "Interface.hpp"
