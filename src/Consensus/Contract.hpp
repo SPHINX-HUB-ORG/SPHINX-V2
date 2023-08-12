@@ -3,24 +3,42 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The provided code defines a namespace called SPHINXContract and includes a class called SmartContract. Let's understand the class and its functions:
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The provided code defines a namespace called SPHINXContract and includes a class called SmartContract. Let's understand the class and 
+// its functions:
 
 // 1. SmartContract class:
-  // The constructor SmartContract(int minBalance) initializes a smart contract with a minimum balance requirement and generates a unique address for the contract. It also reserves space for token balances and opens a database connection.
-  // The createAsset(const std::string& name, int initialSupply) function creates a new asset with the given name and initial supply. It checks if the asset already exists and stores the asset creation transaction in the database.
-  // The mint(const std::string& address, const std::string& name, int amount) function mints (creates) new tokens of a specific asset and assigns them to the given address. It checks if the address has a sufficient balance to mint tokens and stores the minting transaction in the database.
-  // The burn(const std::string& address, const std::string& name, int amount) function burns (removes) tokens of a specific asset from the given address. It checks if the address has a sufficient balance to burn tokens and stores the burning transaction in the database.
-  // The storeAssetCreationTransaction(const std::string& name, int initialSupply) function stores an asset creation transaction in the database. It generates a unique transaction ID, calculates a checksum for the transaction data, and stores the transaction ID, data, and checksum in the database.
-  // The storeMintingTransaction(const std::string& address, const std::string& name, int amount) function stores a minting transaction in the database. It generates a unique transaction ID, calculates a checksum for the transaction data, and stores the transaction ID, data, and checksum in the database.
-  // The storeBurnTransaction(const std::string& address, const std::string& name, int amount) function stores a burning transaction in the database. It generates a unique transaction ID, calculates a checksum for the transaction data, and stores the transaction ID, data, and checksum in the database.
-  // The generateAddress() function generates a unique address for the smart contract based on the current time. The address is a combination of "SC-" and a checksum of the time string.
-  // The storeTransaction(const std::string& transactionData, const std::string& checksum) function stores a transaction in the database. It generates a unique transaction ID, prints the ID, and can be extended to store the transaction data and checksum in the database.
-  // The generateTransactionId() function generates a unique transaction ID based on the current time. The ID is a combination of "TX-" and a checksum of the time string.
-  // The openDatabaseConnection() function opens a connection to the database. It currently prints a message to indicate the opening of the connection.
+  // The constructor SmartContract(int minBalance) initializes a smart contract with a minimum balance requirement and generates a unique 
+  // address for the contract. It also reserves space for token balances and opens a database connection.
+  // The createAsset(const std::string& name, int initialSupply) function creates a new asset with the given name and initial supply. It 
+  // checks if the asset already exists and stores the asset creation transaction in the database.
+  // The mint(const std::string& address, const std::string& name, int amount) function mints (creates) new tokens of a specific asset and
+  // assigns them to the given address. It checks if the address has a sufficient balance to mint tokens and stores the minting transaction
+  // in the database.
+  // The burn(const std::string& address, const std::string& name, int amount) function burns (removes) tokens of a specific asset from 
+  // the given address. It checks if the address has a sufficient balance to burn tokens and stores the burning transaction in the 
+  // database.
+  // The storeAssetCreationTransaction(const std::string& name, int initialSupply) function stores an asset creation transaction in the 
+  // database. It generates a unique transaction ID, calculates a checksum for the transaction data, and stores the transaction ID, data, 
+  // and checksum in the database.
+  // The storeMintingTransaction(const std::string& address, const std::string& name, int amount) function stores a minting transaction in
+  // the database. It generates a unique transaction ID, calculates a checksum for the transaction data, and stores the transaction ID, 
+  // data, and checksum in the database.
+  // The storeBurnTransaction(const std::string& address, const std::string& name, int amount) function stores a burning transaction in 
+  // the database. It generates a unique transaction ID, calculates a checksum for the transaction data, and stores the transaction ID, 
+  // data, and checksum in the database.
+  // The generateAddress() function generates a unique address for the smart contract based on the current time. The address is a 
+  // combination of "SC-" and a checksum of the time string.
+  // The storeTransaction(const std::string& transactionData, const std::string& checksum) function stores a transaction in the database.
+  // It generates a unique transaction ID, prints the ID, and can be extended to store the transaction data and checksum in the database.
+  // The generateTransactionId() function generates a unique transaction ID based on the current time. The ID is a combination of "TX-" 
+  // and a checksum of the time string.
+  // The openDatabaseConnection() function opens a connection to the database. It currently prints a message to indicate the opening of 
+  // the connection.
 
-// Please note that the code provided does not include the complete implementation details of the database and checksum calculation, and it's assumed that these functionalities are implemented elsewhere in the codebase.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Please note that the code provided does not include the complete implementation details of the database and checksum calculation, and 
+// it's assumed that these functionalities are implemented elsewhere in the codebase.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
