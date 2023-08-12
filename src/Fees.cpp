@@ -17,17 +17,22 @@ namespace SPHINXFees {
         double amount;
         double gasPrice;
         double gasLimit;
+        double energyConsumed; // New field to represent energy consumption
     };
 
     // Define a function to calculate transaction fees
     double calculateTransactionFee(const Transaction& tx) {
-        // Custom fee logic: Lower fees for smaller transactions
         double baseFee = 0.005; // Base fee per gas unit
-        double transactionFee = baseFee * tx.gasLimit;
 
-        // Lower fee for smaller transactions
-        if (tx.amount <= 10) {
-            transactionFee *= 0.8; // 80% fee reduction for small transactions
+        // Adjust the base fee based on energy consumption
+        double adjustedBaseFee = baseFee * tx.energyConsumed;
+
+        // Calculate the transaction fee
+        double transactionFee = adjustedBaseFee * tx.gasLimit;
+
+        // Encourage energy-efficient transactions
+        if (tx.energyConsumed <= 1000) {
+            transactionFee *= 0.8; // 80% fee reduction for energy-efficient transactions
         }
 
         return transactionFee;
@@ -55,10 +60,10 @@ namespace SPHINXFees {
 }
 
 int main() {
-    // Create sample transactions
+    // Create sample transactions with energy consumption values
     std::vector<SPHINXFees::Transaction> transactions = {
-        {"Alice", "Bob", 10.0, 0.01, 100},
-        {"Charlie", "David", 5.0, 0.02, 150},
+        {"Alice", "Bob", 10.0, 0.01, 100, 2000}, // High energy consumption
+        {"Charlie", "David", 5.0, 0.02, 150, 800}, // Lower energy consumption
         // Add more transactions here
     };
 
