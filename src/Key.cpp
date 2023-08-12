@@ -103,7 +103,7 @@ namespace SPHINXHash {
     }
 }
 
-// Base58 characters (excluding confusing characters: 0, O, I, l) for address human readable
+// Base58 characters (excluding confusing characters: 0, O, I, l) for human readability
 static const std::string base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
 // Function to encode data using Base58
