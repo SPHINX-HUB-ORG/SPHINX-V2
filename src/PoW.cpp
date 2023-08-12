@@ -4,15 +4,14 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The code provided implements the Proof-of-Work (PoW) algorithm using the SPHINX mining algorithm. 
-// The goal of PoW is to find a nonce value that, when combined with the data, produces a hash value that meets a certain difficulty 
-// target. The difficulty is determined by the number of leading zeros required in the hash.
+// The code provided implements the Proof-of-Work (PoW) algorithm using the SPHINX mining algorithm. The goal of PoW is to find a nonce
+// value that, when combined with the data, produces a hash value that meets a certain difficulty target. The difficulty is determined by
+// the number of leading zeros required in the hash.
 
 // The code is divided into two namespaces: SPHINXMiningAlgorithm and SPHINXPoW.
 
-// The SPHINXMiningAlgorithm namespace contains functions related to the SPHINX mining algorithm. It 
-// includes the calculateHash function, which takes a message and the required number of leading zeros as
-// input and returns the hash value.
+// The SPHINXMiningAlgorithm namespace contains functions related to the SPHINX mining algorithm. It includes the calculateHash function,
+// which takes a message and the required number of leading zeros as input and returns the hash value.
 
 // The meetsDifficultyTarget function checks if a given hash value meets the required difficulty target. 
 // It iterates over the first requiredLeadingZeros characters of the hash and checks if they are all zero. If any character is not zero,
@@ -26,26 +25,22 @@
 // The SPHINXPoW namespace contains functions specific to the PoW algorithm using the SPHINX mining 
 // algorithm.
 
-// The solveNonce function takes the data and the desired difficulty as input and returns the nonce value
-// that produces a hash meeting the difficulty target. It initializes the nonce and hash variables, and 
-// then creates an instance of the Miner class from SPHINXMiner. It iterates over nonce values, appending 
-// them to the data, and uses the mineBlock function from the Miner class to mine a block. The hash of the mined block is obtained, and
-// if it meets the difficulty target, the loop is exited, and the hash is returned.
+// The solveNonce function takes the data and the desired difficulty as input and returns the nonce value that produces a hash meeting the
+// difficulty target. It initializes the nonce and hash variables, and then creates an instance of the Miner class from SPHINXMiner. It
+// iterates over nonce values, appending them to the data, and uses the mineBlock function from the Miner class to mine a block. The hash
+// of the mined block is obtained, and if it meets the difficulty target, the loop is exited, and the hash is returned.
 
-// The meetsDifficultyTarget function in the SPHINXPoW namespace is the same as the one in the 
-// SPHINXMiningAlgorithm namespace. It checks if a given hash meets the required difficulty target by 
-// comparing the first difficulty characters of the hash with the target value.
+// The meetsDifficultyTarget function in the SPHINXPoW namespace is the same as the one in the SPHINXMiningAlgorithm namespace. It checks
+// if a given hash meets the required difficulty target by comparing the first difficulty characters of the hash with the target value.
 
-// The adjustDifficulty function adjusts the difficulty target based on the network hash rate and the 
-// developer mining flag. It calculates the expected number of blocks per day based on the average block
-// time, adjusts the target blocks per day for developer mining, and calculates the network target hash 
-// rate. It then adjusts the difficulty target by reducing it by an adjustment factor, scaling it based 
-// on the ratio of the target hash rate to the network target hash rate, and increasing it back by the 
-// adjustment factor.
+// The adjustDifficulty function adjusts the difficulty target based on the network hash rate and the developer mining flag. It calculates
+// the expected number of blocks per day based on the average block time, adjusts the target blocks per day for developer mining, and
+// calculates the network target hash rate. It then adjusts the difficulty target by reducing it by an adjustment factor, scaling it based
+// on the ratio of the target hash rate to the network target hash rate, and increasing it back by the adjustment factor.
 
-// This code implements a mining algorithm that involves calculating hash values, adjusting the difficulty
-// and performing mathematical operations on random values until a valid hash meeting the target is found. 
-// It also incorporates specific scenarios related to developer mining and timeout duration.
+// This code implements a mining algorithm that involves calculating hash values, adjusting the difficulty and performing mathematical
+// operations on random values until a valid hash meeting the target is found. It also incorporates specific scenarios related to developer
+// mining and timeout duration.
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
