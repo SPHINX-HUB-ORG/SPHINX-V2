@@ -3,35 +3,50 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// This code is part of a C++ library called SPHINXHybridKey, which provides functionality for generating and using hybrid cryptographic keypairs using the Kyber1024 key exchange, X448 key exchange, and PKE (Public Key Encryption) schemes. Let's break down the code and explain each part in detail:
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code is part of a C++ library called SPHINXHybridKey, which provides functionality for generating and using hybrid cryptographic
+// keypairs using the Kyber1024 key exchange, X448 key exchange, and PKE (Public Key Encryption) schemes. Let's break down the code and
+// explain each part in detail:
 
 // Constants:
-    // The code starts with defining several constants, such as key sizes and digest sizes, which are used throughout the library to specify the length of keys, ciphertexts, shared secrets, etc.
+    // The code starts with defining several constants, such as key sizes and digest sizes, which are used throughout the library to
+    // specify the length of keys, ciphertexts, shared secrets, etc.
 
 // Namespace and Forward Declarations:
-    // The code uses the SPHINXHybridKey namespace to encapsulate all the functions and structures provided by the library. It also contains forward declarations for three namespaces: kyber1024_kem, kyber1024_pke, and SPHINXHash. These forward declarations allow the code to reference functions from those namespaces before their full implementation is provided.
+    // The code uses the SPHINXHybridKey namespace to encapsulate all the functions and structures provided by the library. It also
+    // contains forward declarations for three namespaces: kyber1024_kem, kyber1024_pke, and SPHINXHash. These forward declarations allow the code to reference functions from those namespaces before their full implementation is provided.
 
 // performX448KeyExchange Function:
-    // This function performs a key exchange using the X448 elliptic curve Diffie-Hellman (ECDH) algorithm. It takes the private and public keys as input and computes the shared secret using X448. The function is using OpenSSL EVP (Envelope) API for cryptographic operations.
+    // This function performs a key exchange using the X448 elliptic curve Diffie-Hellman (ECDH) algorithm. It takes the private and
+    // public keys as input and computes the shared secret using X448. The function is using OpenSSL EVP (Envelope) API for cryptographic operations.
 
 // HybridKeypair Structure:
-    // This structure represents a hybrid keypair containing key material from multiple cryptographic schemes. It holds Kyber1024 keypair, X448 keypair, PKE keypair, and a PRNG (pseudo-random number generator) for key generation.
+    // This structure represents a hybrid keypair containing key material from multiple cryptographic schemes. It holds Kyber1024 keypair,
+    // X448 keypair, PKE keypair, and a PRNG (pseudo-random number generator) for key generation.
 
 // generate_hybrid_keypair Function:
-    // This function generates a hybrid keypair using three cryptographic schemes: Kyber1024 for KEM (Key Encapsulation Mechanism), X448 for key exchange, and PKE for public-key encryption. It starts by generating the Kyber1024 keypair, X448 keypair, and PKE keypair using the appropriate functions from their respective namespaces. Then, it derives the master private key and chain code using HKDF (HMAC-based Key Derivation Function). Finally, it hashes the master private key and chain code using the SPHINXHash::SPHINX_256 function, and the resulting private and public keys are saved in the hybrid keypair.
+    // This function generates a hybrid keypair using three cryptographic schemes: Kyber1024 for KEM (Key Encapsulation Mechanism), X448
+    // for key exchange, and PKE for public-key encryption. It starts by generating the Kyber1024 keypair, X448 keypair, and PKE keypair
+    // using the appropriate functions from their respective namespaces. Then, it derives the master private key and chain code using
+    // HKDF (HMAC-based Key Derivation Function). Finally, it hashes the master private key and chain code using the SPHINXHash::SPHINX_256
+    // function, and the resulting private and public keys are saved in the hybrid keypair.
 
 // Other Utility Functions:
-    // The code also provides utility functions like generateRandomNonce, which generates a random nonce for encryption, deriveKeyHKDF, which derives a key using the HKDF (HMAC-based Key Derivation Function) algorithm, hash, which calculates the SWIFFTX-256 hash of a string, and generateAddress, which generates an address from a public key.
+    // The code also provides utility functions like generateRandomNonce, which generates a random nonce for encryption, deriveKeyHKDF,
+    // which derives a key using the HKDF (HMAC-based Key Derivation Function) algorithm, hash, which calculates the SWIFFTX-256 hash of a string, and generateAddress, which generates an address from a public key.
 
 // encryptMessage and decryptMessage Functions:
-    // These functions use Kyber1024 PKE to encrypt and decrypt messages, respectively. The encryption function takes a message and the recipient's public key, generates a random nonce, and encrypts the message using Kyber1024 PKE. The decryption function takes the encrypted message and the recipient's private key and decrypts the message using Kyber1024 PKE.
+    // These functions use Kyber1024 PKE to encrypt and decrypt messages, respectively. The encryption function takes a message and the
+    // recipient's public key, generates a random nonce, and encrypts the message using Kyber1024 PKE. The decryption function takes the
+    // encrypted message and the recipient's private key and decrypts the message using Kyber1024 PKE.
 
 // encapsulateHybridSharedSecret and decapsulateHybridSharedSecret Functions:
-    // These functions are responsible for encapsulating and decapsulating shared secrets using the hybrid KEM (Key Encapsulation Mechanism). They combine X448 key exchange and Kyber1024 KEM to establish a shared secret between two parties.
+    // These functions are responsible for encapsulating and decapsulating shared secrets using the hybrid KEM (Key Encapsulation
+    // Mechanism). They combine X448 key exchange and Kyber1024 KEM to establish a shared secret between two parties.
 
-// The SPHINXHybridKey library provides a flexible and secure approach to generating hybrid cryptographic keypairs and performing key exchange and encryption operations using the Kyber1024, X448, and PKE schemes.
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The SPHINXHybridKey library provides a flexible and secure approach to generating hybrid cryptographic keypairs and performing key
+// exchange and encryption operations using the Kyber1024, X448, and PKE schemes.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
