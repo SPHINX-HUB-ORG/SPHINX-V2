@@ -3,8 +3,9 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// This code represents a simplified implementation of a wallet system for managing transactions and wallet information. Let's go through each part in detail:
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code represents a simplified implementation of a wallet system for managing transactions and wallet information. Let's go through 
+// each part in detail:
 
   // The code begins with necessary #include statements to include the required header files.
 
@@ -12,42 +13,72 @@
 
   // The Wallet class is declared, which represents a wallet object with various member functions and variables.
 
-  // The Wallet constructor is defined to initialize the wallet object. However, the implementation details are not provided in the code snippet.
+  // The Wallet constructor is defined to initialize the wallet object. However, the implementation details are not provided in the code
+  // snippet.
 
-  // The initiateTransaction function is defined to initiate a transaction. It takes a recipient address and an amount as input. Within this function, a SPHINXTrx::Transaction object is created, input and output are added to the transaction, and the transaction is signed using the wallet's private key (privateKey_). Finally, the transaction is sent.
+  // The initiateTransaction function is defined to initiate a transaction. It takes a recipient address and an amount as input. Within 
+  // this function, a SPHINXTrx::Transaction object is created, input and output are added to the transaction, and the transaction is 
+  // signed using the wallet's private key (privateKey_). Finally, the transaction is sent.
 
-  // The generateRandomWord function is declared and defined. It takes a vector of words as input (wordList) and returns a randomly selected word from the list. It uses a random number generator (std::random_device and std::mt19937) to generate a random index and selects the corresponding word from the list.
+  // The generateRandomWord function is declared and defined. It takes a vector of words as input (wordList) and returns a randomly 
+  // selected word from the list. It uses a random number generator (std::random_device and std::mt19937) to generate a random index and 
+  // selects the corresponding word from the list.
 
-  // The createWallet function is defined to create a new wallet. It generates a new wallet address and private key using the generateWalletAddress and generatePrivateKey functions (which are not implemented in the provided code). It prompts the user to enter a passphrase, encrypts the passphrase using the encryptPassphrase function, and saves the wallet information (address, private key, and encrypted passphrase) using the saveWalletInfo function.
+  // The createWallet function is defined to create a new wallet. It generates a new wallet address and private key using the 
+  // generateWalletAddress and generatePrivateKey functions (which are not implemented in the provided code). It prompts the user to enter
+  // a passphrase, encrypts the passphrase using the encryptPassphrase function, and saves the wallet information (address, private key, 
+  // and encrypted passphrase) using the saveWalletInfo function.
 
-  // The accessWallet function is defined to access an existing wallet. It takes a wallet address and passphrase as input. It loads the wallet information using the loadWalletInfo function, decrypts the stored passphrase using the decryptPassphrase function, and validates the wallet by checking if the wallet address and decrypted passphrase match. If the wallet is valid, it sets the wallet information (address, private key, and passphrase) in the Wallet object.
+  // The accessWallet function is defined to access an existing wallet. It takes a wallet address and passphrase as input. It loads the 
+  // wallet information using the loadWalletInfo function, decrypts the stored passphrase using the decryptPassphrase function, and 
+  // validates the wallet by checking if the wallet address and decrypted passphrase match. If the wallet is valid, it sets the wallet 
+  // information (address, private key, and passphrase) in the Wallet object.
 
-  // The signOut function is defined to sign out from the wallet. It clears the wallet information by resetting the member variables and sets the walletInfo_ object to its default state.
+  // The signOut function is defined to sign out from the wallet. It clears the wallet information by resetting the member variables and 
+  // sets the walletInfo_ object to its default state.
 
   // The getWalletInfo function is defined to return the wallet information (walletInfo_).
 
-  // The sendTransaction function is defined to send a transaction from the wallet. It takes a recipient address and an amount as input. It checks if the wallet has sufficient balance to perform the transaction. If the balance is sufficient, a new transaction is created, input and output are added to the transaction, and the transaction is signed using the wallet's private key. The transaction is then sent, and if successful, it is added to the wallet's transaction history (walletInfo_.transactions). The wallet balance is updated accordingly.
+  // The sendTransaction function is defined to send a transaction from the wallet. It takes a recipient address and an amount as input. 
+  // It checks if the wallet has sufficient balance to perform the transaction. If the balance is sufficient, a new transaction is created,
+  // input and output are added to the transaction, and the transaction is signed using the wallet's private key. The transaction is then
+  // sent, and if successful, it is added to the wallet's transaction history (walletInfo_.transactions). The wallet balance is updated 
+  // accordingly.
 
-  // The generateWalletAddress and generatePrivateKey functions are declared but not implemented. These functions would be responsible for generating a random wallet address and private key, respectively.
+  // The generateWalletAddress and generatePrivateKey functions are declared but not implemented. These functions would be responsible for
+  // generating a random wallet address and private key, respectively.
 
-  // The saveWalletInfo function is defined to save the wallet information to a distributed database. It creates a connection to SPHINXDb, adds nodes, prepares the wallet data for saving, serializes the wallet data, and stores it in the distributed database using the storeTransaction function.
+  // The saveWalletInfo function is defined to save the wallet information to a distributed database. It creates a connection to SPHINXDb,
+  // adds nodes, prepares the wallet data for saving, serializes the wallet data, and stores it in the distributed database using the 
+  // storeTransaction function.
 
-  // The loadWalletInfo function is defined to load the wallet information from the distributed database. It creates a connection to SPHINXDb, adds nodes, retrieves the serialized wallet data based on the wallet address using the getTransactionData function, deserializes the wallet data, and retrieves the wallet information from the deserialized data.
+  // The loadWalletInfo function is defined to load the wallet information from the distributed database. It creates a connection to 
+  // SPHINXDb, adds nodes, retrieves the serialized wallet data based on the wallet address using the getTransactionData function, 
+  // deserializes the wallet data, and retrieves the wallet information from the deserialized data.
 
-  // The serializeData and deserializeData functions are declared but not implemented. These functions would be responsible for serializing and deserializing data, respectively, to convert between SPHINXDb::Data and a string representation.
+  // The serializeData and deserializeData functions are declared but not implemented. These functions would be responsible for serializing
+  // and deserializing data, respectively, to convert between SPHINXDb::Data and a string representation.
 
-  // The encryptPassphrase and decryptPassphrase functions are declared but not implemented. These functions would be responsible for encrypting and decrypting the passphrase, respectively.
+  // The encryptPassphrase and decryptPassphrase functions are declared but not implemented. These functions would be responsible for 
+  // encrypting and decrypting the passphrase, respectively.
 
-  // The isValidWallet function is declared but not implemented. This function would validate the integrity of a wallet address and private key.
+  // The isValidWallet function is declared but not implemented. This function would validate the integrity of a wallet address and 
+  // private key.
 
-  // The getWalletBalance function is defined to retrieve the wallet balance. However, the implementation details are not provided in the code snippet.
+  // The getWalletBalance function is defined to retrieve the wallet balance. However, the implementation details are not provided in the
+  // code snippet.
 
-  // The getTransactionHistory function is defined to retrieve the transaction history. However, the implementation details are not provided in the code snippet.
+  // The getTransactionHistory function is defined to retrieve the transaction history. However, the implementation details are not 
+  // provided in the code snippet.
 
-  // Additional wallet-related functions are declared but not implemented. These functions include updateBalance, getPublicKey, validateAddress, importWallet, exportWallet, and getTokenBalance. Each of these functions would perform specific operations related to the wallet, such as updating the balance, retrieving the public key, validating an address, importing/exporting wallet information, and fetching the balance of a specific token associated with the wallet.
+  // Additional wallet-related functions are declared but not implemented. These functions include updateBalance, getPublicKey, 
+  // validateAddress, importWallet, exportWallet, and getTokenBalance. Each of these functions would perform specific operations related 
+  // to the wallet, such as updating the balance, retrieving the public key, validating an address, importing/exporting wallet information,
+  // and fetching the balance of a specific token associated with the wallet.
 
-// Note that some parts of the code are not implemented and marked with "..." or provided as an example implementation. The missing implementations would need to be completed to have a fully functional wallet system.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Note that some parts of the code are not implemented and marked with "..." or provided as an example implementation. The missing 
+// implementations would need to be completed to have a fully functional wallet system.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 #include <string>
