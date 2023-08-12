@@ -3,26 +3,32 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The provided code defines various functions related to generating and working with hybrid key pairs using cryptographic algorithms like Curve448, Kyber1024, and SPHINXhash hash functions.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The provided code defines various functions related to generating and working with hybrid key pairs using cryptographic algorithms like
+// Curve448, Kyber1024, and SPHINXhash hash functions.
 
 // Namespaces SPHINXHybridKey and SPHINXHash:
     // The code starts with defining two namespaces: SPHINXHybridKey and SPHINXHash.
     // SPHINXHybridKey does not contain any actual functions or data; it only has a dummy struct HybridKeypair, which is currently empty.
-    // SPHINXHash contains two functions: SPHINX_256 and RIPEMD_160. These functions are currently implemented as dummy functions for demonstration purposes.
+    // SPHINXHash contains two functions: SPHINX_256 and RIPEMD_160. These functions are currently implemented as dummy functions for 
+    // demonstration purposes.
 
 // Base58 Encoding:
     // The code defines a static string base58_chars which contains the characters used in Base58 encoding.
     // The function EncodeBase58 takes a vector of unsigned characters as input and encodes it into a Base58 string.
-    // The function calculates the number of leading zeros in the input data, converts the data to a big-endian number, and then performs Base58 encoding.
+    // The function calculates the number of leading zeros in the input data, converts the data to a big-endian number, and then performs
+    // Base58 encoding.
 
 // SPHINXKey Namespace:
     // This namespace contains several functions related to the generation and manipulation of cryptographic keys.
-    // Constants CURVE448_PRIVATE_KEY_SIZE, CURVE448_PUBLIC_KEY_SIZE, and KYBER1024_PUBLIC_KEY_LENGTH define the sizes of keys for Curve448 and Kyber1024 algorithms.
-    // HYBRID_KEYPAIR_LENGTH is the total length of the hybrid key pair, which combines the public keys of both algorithms with extra HMAC sizes.
+    // Constants CURVE448_PRIVATE_KEY_SIZE, CURVE448_PUBLIC_KEY_SIZE, and KYBER1024_PUBLIC_KEY_LENGTH define the sizes of keys for 
+    // Curve448 and Kyber1024 algorithms.
+    // HYBRID_KEYPAIR_LENGTH is the total length of the hybrid key pair, which combines the public keys of both algorithms with extra 
+    // HMAC sizes.
 
 // calculatePublicKey Function:
-    // This function calculates the SPHINX public key from the private key by extracting the Kyber1024 public key from the merged private key.
+    // This function calculates the SPHINX public key from the private key by extracting the Kyber1024 public key from the merged private
+    // key.
 
 // sphinxKeyToString Function:
     // This function converts the binary representation of SPHINX key (private or public) to a string.
@@ -38,8 +44,10 @@
 
 // generate_hybrid_keypair Function:
     // This function generates the hybrid key pair by combining the keys generated from Curve448 and Kyber1024 algorithms.
-    // It uses the private and public key generation functions from an external source hybrid_key.cpp, which are not defined in the provided code snippet.
-    // The merged private and public keys are obtained by concatenating the corresponding keys from the two algorithms and then hashing the merged private key using SPHINX_256.
+    // It uses the private and public key generation functions from an external source hybrid_key.cpp, which are not defined in the 
+    // provided code snippet.
+    // The merged private and public keys are obtained by concatenating the corresponding keys from the two algorithms and then hashing 
+    // the merged private key using SPHINX_256.
     // The result is stored in a struct HybridKeypair from the SPHINXHybridKey namespace.
 
 // generate_and_perform_key_exchange Function:
@@ -54,8 +62,10 @@
     // It then generates a contract address based on the public key and a contract name and prints it.
     // Finally, it returns the private key and public key as strings.
 
-// The SPHINXKey namespace provides a set of utility functions to work with the SPHINX cryptographic scheme and interacts with other functions available in the SPHINXHybridKey namespace to generate a hybrid key pair and perform key exchange and encryption operations using the Kyber1024, X448, and PKE schemes.
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The SPHINXKey namespace provides a set of utility functions to work with the SPHINX cryptographic scheme and interacts with other 
+// functions available in the SPHINXHybridKey namespace to generate a hybrid key pair and perform key exchange and encryption operations 
+// using the Kyber1024, X448, and PKE schemes.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 #include <string>
