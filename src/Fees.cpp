@@ -3,10 +3,12 @@
 // This software is distributed under the MIT License.
 
 
-
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map> // Add this header for std::unordered_map
+
+#include "PoW.hpp"
 
 namespace SPHINXFees {
 
@@ -20,12 +22,37 @@ namespace SPHINXFees {
         double energyConsumed; // New field to represent energy consumption
     };
 
+    // Placeholder functions for blockchain state management
+    std::unordered_map<std::string, double> balances; // Map of account balances
+
+    double getBalance(const std::string& account) {
+        if (balances.find(account) != balances.end()) {
+            return balances[account];
+        }
+        return 0.0; // Default balance if account not found
+    }
+
+    void deductFee(const std::string& account, double amount) {
+        if (balances.find(account) != balances.end()) {
+            balances[account] -= amount;
+        }
+    }
+
+    void addBalance(const std::string& account, double amount) {
+        balances[account] += amount;
+    }
+
+    // Define a function to calculate adjusted base fee
+    double calculateAdjustedBaseFee(double baseFee, double energyConsumed) {
+        // Adjust the base fee based on energy consumption
+        return baseFee * energyConsumed;
+    }
+
     // Define a function to calculate transaction fees
     double calculateTransactionFee(const Transaction& tx) {
         double baseFee = 0.005; // Base fee per gas unit
 
-        // Adjust the base fee based on energy consumption
-        double adjustedBaseFee = baseFee * tx.energyConsumed;
+        double adjustedBaseFee = calculateAdjustedBaseFee(baseFee, tx.energyConsumed);
 
         // Calculate the transaction fee
         double transactionFee = adjustedBaseFee * tx.gasLimit;
@@ -38,6 +65,26 @@ namespace SPHINXFees {
         return transactionFee;
     }
 
+    bool validateSenderBalance(const std::string& sender, double amount) {
+        // Get the sender's balance from the blockchain state
+        double balance = getBalance(sender);
+
+        // Check if the sender has enough balance to send the specified amount
+        if (balance < amount) {
+            return false;
+        }
+
+        return true;
+    }
+
+    void updateBlockchainState(const Transaction& tx, double fee) {
+        // Deduct the fee from the sender's balance
+        deductFee(tx.from, fee);
+
+        // Add the amount to the recipient's balance
+        addBalance(tx.to, tx.amount);
+    }
+
     // Define a function to process transactions and validate blocks
     void processTransactions(const std::vector<Transaction>& transactions) {
         // Simulate block processing
@@ -48,16 +95,24 @@ namespace SPHINXFees {
                       << " Amount: " << tx.amount
                       << " Fee: " << transactionFee << std::endl;
 
-            // Check if sender has enough balance to cover the fee
-            // and other validation logic
+            if (!validateSenderBalance(tx.from, tx.amount + transactionFee)) {
+                std::cout << "Insufficient balance for sender: " << tx.from << std::endl;
+                continue; // Skip transaction if sender balance is insufficient
+            }
 
             // Deduct fees from sender's balance
-
-            // Update balances and blockchain state
+            double totalDeduction = tx.amount + transactionFee;
+            if (validateSenderBalance(tx.from, totalDeduction)) {
+                // Update balances and blockchain state
+                updateBlockchainState(tx, transactionFee);
+                std::cout << "Transaction successful" << std::endl;
+            } else {
+                std::cout << "Transaction failed: Unable to deduct balance" << std::endl;
+            }
         }
     }
 
-}
+} // End of namespace SPHINXFees
 
 int main() {
     // Create sample transactions with energy consumption values
