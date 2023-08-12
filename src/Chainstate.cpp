@@ -29,7 +29,7 @@ namespace ChainState {
         // Add more properties as needed
     };
 
-    struct SmartContract {
+    struct SPHINXContract {
         std::string contractName;
         // Add more properties and methods for the smart contract
         bool matchesTransaction(const SPHINXFees::Transaction& transaction) const {
