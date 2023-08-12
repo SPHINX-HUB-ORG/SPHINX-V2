@@ -2,11 +2,15 @@
 // All rights reserved.
 // This software is distributed under the MIT License.
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The blockmanager.cpp file contains the SPHINXBlockManager namespace, which will contain functions related to blockchain management and operations. In the example provided, there are two functions: createBlock and mineBlock. These functions demonstrate how to create a new block with transactions and mine the block with a given difficulty level.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The blockmanager.cpp file contains the SPHINXBlockManager namespace, which will contain functions related to blockchain management and 
+// operations. In the example provided, there are two functions: createBlock and mineBlock. These functions demonstrate how to create a new 
+// block with transactions and mine the block with a given difficulty level.
 
-// In progress implementation, you can add more functions to handle various aspects of the blockchain, such as block validation, block insertion into the blockchain, maintaining the UTXO set, handling consensus mechanisms, and more. Additionally, make sure to include the necessary header files corresponding to the classes used in these functions (e.g., block.hpp, MerkleBlock.hpp, and Sign.hpp).
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// In progress implementation, you can add more functions to handle various aspects of the blockchain, such as block validation, block 
+// insertion into the blockchain, maintaining the UTXO set, handling consensus mechanisms, and more. Additionally, make sure to include the
+// necessary header files corresponding to the classes used in these functions (e.g., block.hpp, MerkleBlock.hpp, and Sign.hpp).
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 #include <stdexcept>
