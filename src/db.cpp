@@ -2,17 +2,25 @@
 // All rights reserved.
 // This software is distributed under the MIT License.
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The code introduces a new DistributedDb class that represents a distributed database. It maintains a vector of Node objects, each representing a network node with its own Db database.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The code introduces a new DistributedDb class that represents a distributed database. It maintains a vector of Node objects, each 
+// representing a network node with its own Db database.
 
-// The DistributedDb class provides methods to add nodes to the network, store transactions in each node's database, and retrieve transaction data from any node's database.
-  // The transactionIndex is an unordered map that serves as a centralized index for fast transaction lookup across the network. It maps transaction IDs to their corresponding data.
-  // When a transaction is stored, the code iterates over all network nodes and stores the transaction in each node's database using the storeTransaction method.
-  // The isTransactionStored method checks if a transaction is stored in any node's database by performing a lookup in the transactionIndex.
+// The DistributedDb class provides methods to add nodes to the network, store transactions in each node's database, and retrieve 
+// transaction data from any node's database.
+
+  // The transactionIndex is an unordered map that serves as a centralized index for fast transaction lookup across the network. It maps 
+  // transaction IDs to their corresponding data.
+  // When a transaction is stored, the code iterates over all network nodes and stores the transaction in each node's database using the 
+  // storeTransaction method.
+  // The isTransactionStored method checks if a transaction is stored in any node's database by performing a lookup in the 
+  // transactionIndex.
   // The getTransactionData method retrieves the transaction data from any node's database by performing a lookup in the transactionIndex.
 
-//Note: This code provides a basic implementation of a decentralized database, but it does not include networking functionality, consensus mechanisms, or data replication techniques. Implementing those aspects requires additional code and infrastructure setup specific to decentralized network architecture.
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Note: This code provides a basic implementation of a decentralized database, but it does not include networking functionality, consensus
+// mechanisms, or data replication techniques. Implementing those aspects requires additional code and infrastructure setup specific to 
+// decentralized network architecture.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
