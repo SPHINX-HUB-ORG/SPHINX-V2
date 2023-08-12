@@ -152,13 +152,13 @@ namespace SPHINXHybridKey {
         std::vector<unsigned char> prng;
     };
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Function to generate a hybrid keypair and corresponding private and public keys.
     // The function first generates a Kyber1024 keypair for KEM, then generates an X448 keypair, and 
     // finally generates a PKE keypair. The private and public keys are then derived from the master 
     // private key and chain code using HMAC-SHA512. The generated hybrid keypair includes the Kyber1024
     // public and private keys, as well as the X448 keypair and PKE keypair.
-    //////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Function to generate the hybrid keypair using functions from "hybrid_key.cpp"
     SPHINXHybridKey::HybridKeypair generate_hybrid_keypair() {
         HybridKeypair hybridKeyPair;
@@ -206,14 +206,14 @@ namespace SPHINXHybridKey {
         return hybridKeyPair; // Return the hybrid_keypair object
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Function to generate and perform a hybrid key exchange
     // The function first generates a hybrid keypair consisting of a Kyber1024 keypair for KEM and an
     // X448 keypair. Then, it generates a PKE keypair. The private and public keys are derived from
     // the master private key and chain code using HMAC-SHA512. The function performs a key exchange
     // using X448 and Kyber1024 KEM to generate a shared secret. It also demonstrates encrypting and
     // decrypting a message using Kyber1024 PKE.
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     HybridKeypair generate_and_perform_key_exchange() {
         // Local function to perform the X448 key exchange
         void performX448KeyExchange(unsigned char shared_key[SPHINXHybridKey::CURVE448_SHARED_SECRET_SIZE], const unsigned char private_key[SPHINXHybridKey::CURVE448_PRIVATE_KEY_SIZE], const unsigned char public_key[SPHINXHybridKey::CURVE448_PUBLIC_KEY_SIZE]) {
