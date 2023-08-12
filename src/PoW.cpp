@@ -3,9 +3,10 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The code provided implements the Proof-of-Work (PoW) algorithm using the SPHINX mining algorithm. 
-// The goal of PoW is to find a nonce value that, when combined with the data, produces a hash value that meets a certain difficulty target. The difficulty is determined by the number of leading zeros required in the hash.
+// The goal of PoW is to find a nonce value that, when combined with the data, produces a hash value that meets a certain difficulty 
+// target. The difficulty is determined by the number of leading zeros required in the hash.
 
 // The code is divided into two namespaces: SPHINXMiningAlgorithm and SPHINXPoW.
 
@@ -14,10 +15,13 @@
 // input and returns the hash value.
 
 // The meetsDifficultyTarget function checks if a given hash value meets the required difficulty target. 
-// It iterates over the first requiredLeadingZeros characters of the hash and checks if they are all zero. If any character is not zero, it returns false, indicating that the hash does not meet the difficulty target.
+// It iterates over the first requiredLeadingZeros characters of the hash and checks if they are all zero. If any character is not zero,
+// it returns false, indicating that the hash does not meet the difficulty target.
 
 // The calculateHash function generates the hash by iterating over nonce values until a hash is found 
-// that meets the difficulty target. It starts with a nonce value of 0 and appends it to the message. It then calculates the hash using the SPHINX hash function SPHINXHash::SPHINX_256. If the generated hash meets the difficulty target, the function breaks out of the loop and returns the hash.
+// that meets the difficulty target. It starts with a nonce value of 0 and appends it to the message. It then calculates the hash using
+// the SPHINX hash function SPHINXHash::SPHINX_256. If the generated hash meets the difficulty target, the function breaks out of the 
+// loop and returns the hash.
 
 // The SPHINXPoW namespace contains functions specific to the PoW algorithm using the SPHINX mining 
 // algorithm.
@@ -25,7 +29,8 @@
 // The solveNonce function takes the data and the desired difficulty as input and returns the nonce value
 // that produces a hash meeting the difficulty target. It initializes the nonce and hash variables, and 
 // then creates an instance of the Miner class from SPHINXMiner. It iterates over nonce values, appending 
-// them to the data, and uses the mineBlock function from the Miner class to mine a block. The hash of the mined block is obtained, and if it meets the difficulty target, the loop is exited, and the hash is returned.
+// them to the data, and uses the mineBlock function from the Miner class to mine a block. The hash of the mined block is obtained, and
+// if it meets the difficulty target, the loop is exited, and the hash is returned.
 
 // The meetsDifficultyTarget function in the SPHINXPoW namespace is the same as the one in the 
 // SPHINXMiningAlgorithm namespace. It checks if a given hash meets the required difficulty target by 
@@ -41,7 +46,7 @@
 // This code implements a mining algorithm that involves calculating hash values, adjusting the difficulty
 // and performing mathematical operations on random values until a valid hash meeting the target is found. 
 // It also incorporates specific scenarios related to developer mining and timeout duration.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
