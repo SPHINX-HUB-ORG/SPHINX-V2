@@ -14,11 +14,13 @@
 
 // Namespace and Forward Declarations:
     // The code uses the SPHINXHybridKey namespace to encapsulate all the functions and structures provided by the library. It also
-    // contains forward declarations for three namespaces: kyber1024_kem, kyber1024_pke, and SPHINXHash. These forward declarations allow the code to reference functions from those namespaces before their full implementation is provided.
+    // contains forward declarations for three namespaces: kyber1024_kem, kyber1024_pke, and SPHINXHash. These forward declarations allow
+    // the code to reference functions from those namespaces before their full implementation is provided.
 
 // performX448KeyExchange Function:
     // This function performs a key exchange using the X448 elliptic curve Diffie-Hellman (ECDH) algorithm. It takes the private and
-    // public keys as input and computes the shared secret using X448. The function is using OpenSSL EVP (Envelope) API for cryptographic operations.
+    // public keys as input and computes the shared secret using X448. The function is using OpenSSL EVP (Envelope) API for cryptographic
+    // operations.
 
 // HybridKeypair Structure:
     // This structure represents a hybrid keypair containing key material from multiple cryptographic schemes. It holds Kyber1024 keypair,
@@ -33,7 +35,8 @@
 
 // Other Utility Functions:
     // The code also provides utility functions like generateRandomNonce, which generates a random nonce for encryption, deriveKeyHKDF,
-    // which derives a key using the HKDF (HMAC-based Key Derivation Function) algorithm, hash, which calculates the SWIFFTX-256 hash of a string, and generateAddress, which generates an address from a public key.
+    // which derives a key using the HKDF (HMAC-based Key Derivation Function) algorithm, hash, which calculates the SWIFFTX-256 hash of
+    // a string, and generateAddress, which generates an address from a public key.
 
 // encryptMessage and decryptMessage Functions:
     // These functions use Kyber1024 PKE to encrypt and decrypt messages, respectively. The encryption function takes a message and the
