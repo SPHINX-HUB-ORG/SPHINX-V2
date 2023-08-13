@@ -98,6 +98,7 @@
 #include "db.hpp"
 #include "json.hpp"
 
+
 using json = nlohmann::json;
 
 namespace SPHINXWallet {
@@ -136,10 +137,74 @@ namespace SPHINXWallet {
         balance_ = loadBalance();
     }
 
+    bool Wallet::performIdentityVerification() {
+        bool isMobile = detectMobileDevice(); // Replace with actual detection logic
+
+        if (isMobile) {
+            bool biometricSuccess = captureBiometricSample();
+            return biometricSuccess;
+        } else {
+            bool passwordSuccess = verifyPassword();
+            return passwordSuccess;
+        }
+    }
+
+    bool Wallet::verifyPassword() {
+        std::string enteredPassword;
+        std::cout << "Enter password: ";
+        std::cin >> enteredPassword;
+
+        // Replace this with actual password verification logic
+        bool isValidPassword = validatePassword(enteredPassword);
+
+        return isValidPassword;
+    }
+
+    // Example Android Fingerprint API (Android-specific)
+    bool Wallet::captureBiometricSample() {
+        // Use Android Fingerprint API to capture fingerprint data
+        // ...
+        return true;
+    }
+
+    // Example iOS Local Authentication framework (iOS-specific)
+    bool Wallet::captureBiometricSample() {
+        // Use Local Authentication framework to capture fingerprint data
+        // ...
+        return true;
+    }
+
+    bool Wallet::performBiometricVerification() {
+        // Capture biometric sample using the biometric sensor
+        std::string capturedBiometricData = captureBiometricSample();
+
+        // Retrieve the stored biometric template
+        std::string storedBiometricTemplate = loadBiometricTemplate();
+
+        // Perform template matching and threshold check
+        double matchScore = calculateMatchScore(capturedBiometricData, storedBiometricTemplate);
+        if (matchScore >= biometricThreshold) {
+            return true; // Biometric verification successful
+        } else {
+            return false; // Biometric verification failed
+        }
+    }
+
     void Wallet::generateAccount() {
+        bool isVerified = performIdentityVerification();
+        if (!isVerified) {
+            std::cout << "Identity verification failed. Account generation aborted." << std::endl;
+            return;
+        }
         // Prompt the user to enter a passphrase
         std::cout << "Enter passphrase: ";
         std::cin >> passphrase_;
+
+        // Perform biometric verification
+        if (!performBiometricVerification()) {
+            std::cout << "Biometric verification failed. Account generation aborted." << std::endl;
+            return;
+        }
 
         // Generate a new wallet address and private key
         walletAddress_ = generateWalletAddress();
@@ -173,7 +238,7 @@ namespace SPHINXWallet {
 
         // Use decryptedPassphrase to temporarily unlock the private key
         transaction.sign(decryptedPassphrase);
-        
+
         // Add the transaction to the contract for processing
         SPHINXContract::processTransaction(transaction.toJson());
 
@@ -196,11 +261,11 @@ namespace SPHINXWallet {
     }
 
     void Wallet::createToken(const std::string& tokenName, const std::string& tokenSymbol) {
-    // Create an instance of the SPHINXContract smart contract
-    SPHINXContract tokenContract(tokenContractAddress);
+        // Create an instance of the SPHINXContract smart contract
+        SPHINXContract tokenContract(tokenContractAddress);
 
-    // Call the createToken function on the smart contract
-    tokenContract.createToken(tokenName, tokenSymbol);
+        // Call the createToken function on the smart contract
+        tokenContract.createToken(tokenName, tokenSymbol);
 
         std::cout << "Token created successfully!" << std::endl;
     }
@@ -342,6 +407,12 @@ namespace SPHINXWallet {
     }
 
     void Wallet::loadWalletInfo() {
+        // Perform biometric verification
+        if (!performBiometricVerification()) {
+            std::cout << "Biometric verification failed. Wallet information loading aborted." << std::endl;
+            return;
+        }
+
         // Create a connection to SPHINXDb
         SPHINXDb::DistributedDb distributedDb;
         distributedDb.addNode("node1");
