@@ -11,7 +11,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "SPHINXBlock.hpp" // Include the header for SPHINXBlock if it's not already included
+#include "Block.hpp"
+#include "Chain.hpp"
 
 namespace SPHINXVerify {
 
