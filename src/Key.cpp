@@ -79,8 +79,8 @@
 #include "Hybrid_key.hpp"
 #include "Hash.hpp"
 #include "Key.hpp"
-#include "base58check.h"
-#include "base58.h"
+#include "base58check.hpp"
+#include "base58.hpp"
 #include "hash/Ripmed160.hpp"
 
 
