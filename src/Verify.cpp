@@ -3,10 +3,9 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The provided code defines a namespace SPHINXVerify that contains several functions for verifying the 
-// integrity and authenticity of SPHINX blocks and chains, as well as generating and verifying 
-// zero-knowledge proofs.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The provided code defines a namespace SPHINXVerify that contains several functions for verifying the integrity and authenticity of SPHINX
+// blocks and chains, as well as generating and verifying zero-knowledge proofs.
 
 // sign_data: 
     // This function takes data as input (a vector of bytes) and a private key (a pointer to a byte array).
@@ -54,9 +53,9 @@
     // If all blocks are verified and properly linked, the function returns true, indicating that the 
     // chain is valid. Otherwise, it returns false.
 
-// This code utilizes the libstark protocol library and cryptographic techniques to verify SPHINX blocks
-// and chains, verify signature and data as well as generate and verify zero-knowledge proofs.
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code utilizes the libstark protocol library and cryptographic techniques to verify SPHINX blocks and chains, verify signature and
+// data as well as generate and verify zero-knowledge proofs.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
