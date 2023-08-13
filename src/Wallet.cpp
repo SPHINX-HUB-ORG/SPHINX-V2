@@ -87,10 +87,11 @@
 #include <iostream>
 #include <random>
 #include "Wallet.hpp"
-#include "Transaction.hpp"
-#include "db.hpp"
+#include "Transaction.hpp" 
 #include "Key.hpp"
-#include "json.hh"
+#include "Consensus/Contract.hpp"
+#include "db.hpp"
+#include "json.hpp"
 
 using json = nlohmann::json;
 
@@ -131,12 +132,19 @@ namespace SPHINXWallet {
     }
 
     void Wallet::generateAccount() {
+        // Prompt the user to enter a passphrase
+        std::cout << "Enter passphrase: ";
+        std::cin >> passphrase_;
+
         // Generate a new wallet address and private key
         walletAddress_ = generateWalletAddress();
         privateKey_ = generatePrivateKey();
 
+        // Perform key exchange using the exposed function from key.cpp
+        SPHINXHybridKey::HybridKeypair hybridKeyPair = generate_and_perform_key_exchange();
+
         // Save the wallet information
-        saveWalletInfo(walletAddress_, privateKey_);
+        saveWalletInfo(walletAddress_, privateKey_, encryptedPassphrase);
 
         std::cout << "Account generated successfully!" << std::endl;
     }
@@ -157,6 +165,9 @@ namespace SPHINXWallet {
         transaction.timestamp = std::time(nullptr);
         transaction.sign(privateKey_);
         transaction.senderPublicKey = getPublicKey();
+
+        // Use decryptedPassphrase to temporarily unlock the private key
+        transaction.sign(decryptedPassphrase);
         
         // Add the transaction to the contract for processing
         SPHINXContract::processTransaction(transaction.toJson());
@@ -180,14 +191,22 @@ namespace SPHINXWallet {
     }
 
     void Wallet::createToken(const std::string& tokenName, const std::string& tokenSymbol) {
-        // Perform necessary operations to create a token in your blockchain project
-        // ...
+    // Create an instance of the SPHINXContract smart contract
+    SPHINXContract tokenContract(tokenContractAddress);
+
+    // Call the createToken function on the smart contract
+    tokenContract.createToken(tokenName, tokenSymbol);
+
         std::cout << "Token created successfully!" << std::endl;
     }
 
     void Wallet::transferToken(const std::string& recipientAddress, const std::string& tokenSymbol, double amount) {
-        // Perform necessary operations to transfer tokens to the recipient address
-        // ...
+        // Create an instance of the SPHINXContract smart contract
+        SPHINXContract tokenContract(tokenContractAddress);
+
+        // Call the transfer function on the smart contract
+        tokenContract.transfer(recipientAddress, tokenSymbol, amount);
+
         std::cout << "Tokens transferred successfully!" << std::endl;
     }
 
@@ -241,6 +260,15 @@ namespace SPHINXWallet {
         transaction.addOutput(recipientAddress, amount);
         transaction.signTransaction(privateKey_);
         transaction.sendTransaction();
+
+        // Use decryptedPassphrase to temporarily unlock the private key
+        transaction.signTransaction(decryptedPassphrase);
+    }
+
+    // New function to request decryption from key component
+    std::string Wallet::requestDecryption(const std::string& encryptedData) {
+        // Communicate with key component to decrypt the data
+        return SPHINXKey::decryptData(encryptedData);
     }
 
     // Function to generate a smart contract address
@@ -273,7 +301,7 @@ namespace SPHINXWallet {
         return word;
     }
 
-   // Function to generate wallet address
+    // Function to generate wallet address
     std::string Wallet::generateWalletAddress() {
         SPHINXKey sphinxKey; // Create an instance of the SPHINXKey class
         std::string publicKey = sphinxKey.getPublicKey(); // Get the wallet's public key
@@ -321,6 +349,9 @@ namespace SPHINXWallet {
             std::cout << "Wallet information not found." << std::endl;
             return;
         }
+        
+        // Decrypt the encrypted passphrase using the key functions from key.cpp
+        std::string decryptedPassphrase = requestDecryption(walletInfo_.encryptedPassphrase);
 
         // Deserialize the wallet data
         SPHINXDb::Data walletData = deserializeData(serializedData);
@@ -354,75 +385,65 @@ namespace SPHINXWallet {
     }
 
     std::string Wallet::encryptPassphrase(const std::string& passphrase) {
-        // Implement encryption logic to encrypt the passphrase
-        // ...
+    // Replace this with your actual encryption logic using a cryptographic library
+    std::string encryptedPassphrase = SPHINXKey::encryptData(passphrase);
 
-        return ""; // Return the encrypted passphrase
+        return encryptedPassphrase; // Return the encrypted passphrase
     }
 
     std::string Wallet::decryptPassphrase(const std::string& encryptedPassphrase) {
-        // Implement decryption logic to decrypt the encrypted passphrase
-        // ...
+        // Replace this with your actual decryption logic using a cryptographic library
+        std::string decryptedPassphrase = SPHINXKey::decryptData(encryptedPassphrase);
 
-        return ""; // Return the decrypted passphrase
+        return decryptedPassphrase; // Return the decrypted passphrase
     }
 
     double Wallet::fetchAccountBalance(const std::string& address) {
-        // Implement the logic to fetch the account balance from the blockchain
+        // Replace this with actual logic to fetch the account balance from the blockchain
         // ...
-
-        return 0.0; // Return the account balance
+        double accountBalance = 0.0; // Sample account balance for illustration
+        return accountBalance;
     }
 
     std::vector<SPHINXTrx::Transaction> Wallet::fetchTransactionHistory(const std::string& address) {
-        std::vector<SPHINXTrx::Transaction> transactions;
-        // Implement the logic to fetch the transaction history from the blockchain
+        // Replace this with actual logic to fetch the transaction history from the blockchain
         // ...
-
-        return transactions; // Return the transaction history
+        std::vector<SPHINXTrx::Transaction> transactions; // Sample transactions for illustration
+        return transactions;
     }
 
     bool Wallet::isValidPassphrase(const std::string& passphrase) {
-        // Implement the logic to validate the passphrase
+        // Replace this with actual logic to validate the passphrase
         // ...
-
-        return false; // Return true if the passphrase is valid, false otherwise
+        bool isValid = true; // Sample passphrase validation for illustration
+        return isValid;
     }
 
     bool Wallet::isWalletAddressInUse(const std::string& address) {
-        // Implement the logic to check if the wallet address is already in use
+        // Replace this with actual logic to check if the wallet address is already in use
         // ...
-
-        return false; // Return true if the address is in use, false otherwise
+        bool isInUse = false; // Sample address check for illustration
+        return isInUse;
     }
 
     double Wallet::loadBalance() {
-        // Implement the logic to load the balance from the appropriate data source
+        // Replace this with actual logic to load the balance from the appropriate data source
         // ...
-
-        return 0.0; // Return the loaded balance
+        double loadedBalance = 0.0; // Sample loaded balance for illustration
+        return loadedBalance;
     }
 
     std::vector<SPHINXTrx::Transaction> Wallet::loadTransactionHistory() {
-        std::vector<SPHINXTrx::Transaction> transactions;
-        // Implement the logic to load the transaction history from the appropriate data source
+        // Replace this with actual logic to load the transaction history from the appropriate data source
         // ...
-
-        return transactions; // Return the loaded transaction history
+        std::vector<SPHINXTrx::Transaction> transactions; // Sample transactions for illustration
+        return transactions;
     }
 
     std::string Wallet::getPublicKey() {
-        // Implement the logic to retrieve the wallet's public key
+        // Replace this with actual logic to retrieve the wallet's public key
         // ...
-
-        return ""; // Return the wallet's public key
+        std::string publicKey = "sample_public_key"; // Sample public key for illustration
+        return publicKey;
     }
-
 } // namespace SPHINXWallet
-
-
-
-
-
-
-
