@@ -78,6 +78,11 @@
 
 // Note that some parts of the code are not implemented and marked with "..." or provided as an example implementation. The missing 
 // implementations would need to be completed to have a fully functional wallet system.
+
+// In the context of "self custody," the provided code supports self custody principles by enabling users to generate their own private 
+// keys, manage their own passphrases, and perform transactions directly on the blockchain without relying on third-party intermediaries.
+// The wallet user has control over their private key and encrypted passphrase, which are crucial elements of self custody. This ensures
+// that users have direct ownership and control over their funds and transactions.
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
