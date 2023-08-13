@@ -17,8 +17,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <lib/Blake3/c/blake3.h>
-#include <base58.h>
-#include <base58check.h>
+#include <base58.hpp>
+#include <base58check.hpp>
 
 
 // Blake3-256 hash function
