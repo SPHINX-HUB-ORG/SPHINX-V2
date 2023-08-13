@@ -25,8 +25,8 @@
 #include <stdint.h>
 #include <string.h>
 
-#include <base58.h>
-#include <base58check.h>
+#include <base58.hpp>
+#include <base58check.hpp>
 
 bool (*b58_blake3_impl)(void *, const void *, size_t) = NULL;
 
