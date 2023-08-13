@@ -23,7 +23,7 @@
 
 #include <gcrypt.h>
 
-#include <base58.h>
+#include <base58.hpp>
 #include <lib/Blake3/c/blake3.h>
 
 static bool my_blake3(void *digest, const void *data, size_t datasz)
