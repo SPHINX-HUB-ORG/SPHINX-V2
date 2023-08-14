@@ -5,52 +5,36 @@
 
 #include <iostream>
 #include <string>
-#include <boost/asio.hpp>
+#include <iostream>
+#include <string>
+
 #include "Server_http.hpp"
+#include "json/src/jsonrpccpp/server/abstractserver.h"
+#include "json/src/jsonrpccpp/common/exception.h"
+#include "json/src/jsonrpccpp/server.h"
 
-namespace SPHINX {
-    using boost::asio::ip::tcp;
+namespace SPHINXServer {
 
-    std::string processHttpRequest(const std::string& request) {
-        // Process the incoming HTTP request and return an appropriate HTTP response
-        if (request.find("/create_bridge") != std::string::npos) {
-            // Extract the bridge address from the request
-            // Create the bridge and return a response
-            return "HTTP/1.1 200 OK\r\n\r\nBridge created successfully!";
-        } else if (request.find("/handle_transaction") != std::string::npos) {
-            // Extract transaction data from the request
-            // Handle the transaction and return a response
-            return "HTTP/1.1 200 OK\r\n\r\nTransaction handled successfully!";
-        }
+    JsonRpcServer::JsonRpcServer(jsonrpc::HttpServer &server)
+        : jsonrpc::AbstractServer<jsonrpc::HttpServer>(server), httpServer(server) {}
 
-        // Return a response for other requests
-        return "HTTP/1.1 404 Not Found\r\n\r\n";
+    void JsonRpcServer::exampleMethod(const Json::Value &request, Json::Value &response) {
+        // Process the JSON-RPC request and set the response
+        response = Json::Value("Success");
     }
 
-    void startHttpServer() {
+    void JsonRpcServer::startJsonRpcServer() {
         try {
-            boost::asio::io_context io_context;
-            tcp::acceptor acceptor(io_context, tcp::endpoint(tcp::v4(), 8080));
+            httpServer.SetHandler(this->handler);
+            httpServer.StartListening();
 
             while (true) {
-                tcp::socket socket(io_context);
-                acceptor.accept(socket);
-
-                // Read the request
-                boost::asio::streambuf request;
-                boost::asio::read_until(socket, request, "\r\n\r\n");
-
-                std::string http_request((std::istreambuf_iterator<char>(&request)),
-                                          std::istreambuf_iterator<char>());
-
-                // Process the request and generate the response
-                std::string http_response = processHttpRequest(http_request);
-
-                // Send the response
-                boost::asio::write(socket, boost::asio::buffer(http_response));
+                httpServer.HandleRequests();
             }
-        } catch (std::exception& e) {
-            std::cout << "Exception: " << e.what() << "\n";
+        } catch (jsonrpc::JsonRpcException &e) {
+            std::cerr << "JSON-RPC Exception: " << e.what() << std::endl;
         }
     }
+
 } // namespace SPHINX
+
