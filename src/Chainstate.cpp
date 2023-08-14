@@ -13,6 +13,7 @@
 #include "Block.cpp"
 #include "Chain.hpp"
 #include "Consensus/Contract.hpp"
+#include "Requests.hpp"
 
 
 namespace ChainState {
@@ -91,6 +92,17 @@ namespace ChainState {
                 contract.execute(transaction);
             }
         }
+    }
+
+    // Define API endpoints using cpprestsdk or another C++ web framework
+    void handleProcessBlockRequest(const http_request& request) {
+        // Process the request, call functions from "ChainState" namespace
+        // and return a response
+    }
+
+    void handleAuditBlockchainRequest(const http_request& request) {
+        // Process the request, call functions from "ChainState" namespace
+        // and return a response
     }
 
     // Audit the blockchain

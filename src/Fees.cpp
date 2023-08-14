@@ -6,8 +6,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <unordered_map> // Add this header for std::unordered_map
+#include <unordered_map>
 
+#include "Chainstate.hpp"
 #include "PoW.hpp"
 
 namespace SPHINXFees {
@@ -24,6 +25,47 @@ namespace SPHINXFees {
 
     // Placeholder functions for blockchain state management
     std::unordered_map<std::string, double> balances; // Map of account balances
+
+    async calculateTransactionFee(tx) {
+        const baseFee = 0.005; // Base fee per gas unit
+        const energyConsumed = tx.energyConsumed; // Replace this with the actual energy consumption
+
+        // Implement the adjusted base fee calculation logic (similar to "fees.cpp")
+        const adjustedBaseFee = baseFee * energyConsumed;
+
+        // Calculate the transaction fee
+        let transactionFee = adjustedBaseFee * tx.gasLimit;
+
+        // Encourage energy-efficient transactions
+        if (energyConsumed <= 1000) {
+            transactionFee *= 0.8; // 80% fee reduction for energy-efficient transactions
+        }
+
+        return transactionFee;
+    }
+
+    async processTransactions(transactions) {
+        for (const tx of transactions) {
+            const transactionFee = await this.calculateTransactionFee(tx);
+
+            // Simulate validation of sender's balance
+            const senderBalance = await this.getBalance(tx.from);
+            if (senderBalance < tx.amount + transactionFee) {
+                console.log(`Insufficient balance for sender: ${tx.from}`);
+                continue;
+            }
+
+            // Simulate updating balances and blockchain state
+            const totalDeduction = tx.amount + transactionFee;
+            if (senderBalance >= totalDeduction) {
+                await this.deductFee(tx.from, totalDeduction);
+                await this.addBalance(tx.to, tx.amount);
+                console.log("Transaction successful");
+            } else {
+                console.log("Transaction failed: Unable to deduct balance");
+            }
+        }
+    }
 
     double getBalance(const std::string& account) {
         if (balances.find(account) != balances.end()) {

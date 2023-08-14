@@ -82,15 +82,17 @@
 #include "Miner.hpp"
 #include "PoW.hpp"
 #include "Transaction.hpp"
+#include "SphinxJson/Sphinx.js"
+#include "Json/src/jsonrpccpp/client.h"
 
-
-const int TOTAL_SUPPLY = 50000000; // 50 million tokens
-const int INITIAL_DEVELOPER_MINING_REWARD = 100; // Initial reward per block during developer mining phase
-const int HALVING_PERIOD = 210000; // Blocks per halving period
-int currentSupply = 0; // Current total supply
-int currentBlockHeight = 0; // Current block height
 
 namespace SPHINXAsset {
+
+    const int TOTAL_SUPPLY = 50000000; // 50 million tokens
+    const int INITIAL_DEVELOPER_MINING_REWARD = 100; // Initial reward per block during developer mining phase
+    const int HALVING_PERIOD = 210000; // Blocks per halving period
+    int currentSupply = 0; // Current total supply
+    int currentBlockHeight = 0; // Current block height
 
     class SPX {
     public:
@@ -136,6 +138,34 @@ namespace SPHINXAsset {
             currentSupply = 0; // Set the initial total supply to 0
             currentBlockHeight = 0; // Set the current block height to 0
             developerMining = true; // Start in developer mining phase
+            
+            // Expose this method as a JSON-RPC method
+            std::string transferSPX_JSONRPC(const std::string& assetId, const std::string& newOwner, const std::string& payer) {
+                // Your existing transferSPX logic here
+                return transferSPX(assetId, newOwner, payer);
+            }
+        }
+
+        std::string transferSPX(const std::string& assetId, const std::string& newOwner, const std::string& payer) {
+            // Find the asset in the blockchain data
+            SPX* asset = findAsset(assetId);
+
+            // Check if the asset exists
+            if (asset == nullptr) {
+                // The asset does not exist
+                return "Asset not found";
+            }
+
+            // Set the new owner of the asset
+            asset->setOwner(newOwner);
+
+            // Add the transaction to the blockchain data
+            // SPHINXDb.storeTransaction(generateTransactionId(), generateTransactionData());
+
+            // Pay the transaction fee
+            payTransactionFee(payer);
+
+            return "Transfer successful";
         }
 
         void buySPX(const std::string& assetId, const std::string& buyer, const std::string& payer) {
@@ -304,6 +334,12 @@ namespace SPHINXAsset {
             // Set the new owner of the asset
             asset->setOwner(newOwner);
 
+            void payTransactionFee(const std::string& payer) {
+                // Implement the payment logic here to deduct the transaction fee from the payer's account
+                // ...
+                std::cout << "Transaction fee paid by: " << payer << std::endl;
+            }
+
             // Add the transaction to the blockchain data
             SPHINXDb.storeTransaction(generateTransactionId(), generateTransactionData());
 
@@ -432,5 +468,7 @@ namespace SPHINXAsset {
         const int HALVING_PERIOD = 210000; // Blocks per halving period
 
         const std::vector<int> HALVING_SCHEDULE = {100, 50, 25, 12, 6}; // Halving reward schedule
+
+        std::vector<SPX> assets; // Vector to store SPX assets
     };
 } // namespace SPHINXAsset

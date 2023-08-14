@@ -8,12 +8,10 @@
 
 #pragma once
 
+#include <iostream>
 #include <string>
-#include <unordered_map>
 #include <vector>
-#include <iostream> // Include the necessary header for cout
-
-#include "Chainstate.hpp"
+#include <unordered_map>
 
 namespace SPHINXFees {
 
@@ -30,22 +28,17 @@ namespace SPHINXFees {
     // Placeholder functions for blockchain state management
     extern std::unordered_map<std::string, double> balances; // Map of account balances
 
-    double getBalance(const std::string& account);
-
-    void deductFee(const std::string& account, double amount);
-
-    void addBalance(const std::string& account, double amount);
-
-    double calculateAdjustedBaseFee(double baseFee, double energyConsumed);
-
+    // Function declarations
     double calculateTransactionFee(const Transaction& tx);
-
-    bool validateSenderBalance(const std::string& sender, double amount);
-
-    void updateBlockchainState(const Transaction& tx, double fee);
-
     void processTransactions(const std::vector<Transaction>& transactions);
+
+    double getBalance(const std::string& account);
+    void deductFee(const std::string& account, double amount);
+    void addBalance(const std::string& account, double amount);
+    bool validateSenderBalance(const std::string& sender, double amount);
+    void updateBlockchainState(const Transaction& tx, double fee);
 
 } // End of namespace SPHINXFees
 
 #endif // SPHINX_FEES_HPP
+
