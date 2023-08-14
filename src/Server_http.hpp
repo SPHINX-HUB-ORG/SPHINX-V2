@@ -6,10 +6,11 @@
 #ifndef SPHINX_SERVER_HTTP_HPP
 #define SPHINX_SERVER_HTTP_HPP
 
+#pragma once
+
+#include <iostream>
 #include <string>
-#include "json/src/jsonrpccpp/server/connectors/httpserver.h"
-#include "json/src/jsonrpccpp/common/exception.h"
-#include "json/src/jsonrpccpp/server.h"
+#include <iostream>
 
 namespace SPHINXServer {
 
@@ -17,6 +18,9 @@ namespace SPHINXServer {
     public:
         JsonRpcServer(jsonrpc::HttpServer &server);
         virtual void exampleMethod(const Json::Value &request, Json::Value &response);
+
+        // Add a new function to handle incoming HTTP requests
+        void handleHttpRequest(const std::string &httpRequest);
 
         void startJsonRpcServer();
 

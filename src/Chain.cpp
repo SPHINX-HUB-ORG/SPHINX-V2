@@ -223,6 +223,12 @@ public:
         // Update the balance of an address in a shard.
         void updateShardBalance(const std::string& shardName, const std::string& address, double amount);
 
+        // Start the JSON-RPC server
+        void startJsonRpcServer();
+
+        // Define a JSON-RPC method to get the balance of an address
+        void getBalance(const Json::Value &request, Json::Value &response);
+
         // Get the balance of an address in a shard.
         double getShardBalance(const std::string& shardName, const std::string& address) const;
 
@@ -236,6 +242,7 @@ public:
         std::string bridgeAddress;
         std::string bridgeSecret;
         std::unordered_map<std::string, double> balances;
+        SPHINXServer::JsonRpcServer jsonRpcServer_;
     };
 
         std::vector<Shard> shards_;  // Shards in the chain
@@ -257,6 +264,34 @@ public:
         std::string genesisMessage = "Welcome to Post-Quantum era, The Beginning of a Secured-Trustless Network will start from here - SPHINX Network";
         SPHINXBlock::Block genesisBlock(SPHINXHash::SPHINX_256(genesisMessage));
         addBlock(genesisBlock);
+    }
+
+    void SPHINXChain::getBalance(const Json::Value& request, Json::Value& response) {
+        // Extract parameters from the request
+        std::string address = request["params"]["address"].asString();
+
+        // Retrieve the balance from your blockchain logic
+        double balance = getBalance(address);
+
+        // Set the balance in the JSON-RPC response
+        response["result"] = balance;
+    }
+
+    // Start the JSON-RPC server
+    void SPHINXChain::startJsonRpcServer() {
+            try {
+        jsonrpc::HttpServer httpServer(8080); // Change the port as needed
+        jsonRpcServer_.setHttpServer(httpServer); // Set the HttpServer for the JsonRpcServer
+        jsonRpcServer_.StartListening();
+
+        while (true) {
+            std::string requestStr = httpServer.GetRequest();
+            std::string responseStr;
+            jsonrpc::HandleJsonRpcRequest(jsonRpcServer_, requestStr, responseStr);
+            httpServer.SendResponse(responseStr);
+        }
+    } catch (jsonrpc::JsonRpcException &e) {
+        std::cerr << "JSON-RPC Exception: " << e.what() << std::endl;
     }
 
     // Implementation of the addBlock function
@@ -441,14 +476,25 @@ public:
         std::string bridgeAddress = generateBridgeAddress();
         std::string targetBridgeAddress = targetChain.generateBridgeAddress();
 
-        // Construct an HTTP request to create a bridge
-        std::string httpRequest = "POST /create_bridge HTTP/1.1\r\nHost: localhost\r\nContent-Length: ";
-        httpRequest += std::to_string(bridgeAddress.size()) + "\r\n\r\n" + bridgeAddress;
+        // Construct a JSON-RPC request
+        Json::Value request;
+        request["jsonrpc"] = "2.0";
+        request["method"] = "create_bridge";
+        request["params"]["bridgeAddress"] = bridgeAddress;
+        request["id"] = 1;
 
-        // Send the HTTP request to your HTTP server
-        std::string httpResponse = sendHttpRequest(httpRequest);
+        // Convert the JSON-RPC request to a string
+        std::string jsonRequest = jsonrpc::StringifyJSON(request);
 
-        // Process the HTTP response from your server (if needed)
+        // Send the JSON-RPC request to your JSON-RPC server
+        std::string jsonResponse;
+        SPHINXServer::JsonRpcServer jsonRpcServer; // Create an instance of your JsonRpcServer
+        jsonRpcServer.handleHttpRequest(jsonRequest); // Call the handleHttpRequest function
+
+        // Process the JSON-RPC response from your server (if needed)
+        // ...
+
+        // It might want to update this function's signature to return or handle the JSON-RPC response
     }
 
     // Wrap tokens from the current chain and send them to the target chain
@@ -798,4 +844,5 @@ public:
         }
         return 0.0;  // Return 0.0 if the address balance is not found in the shard
     }
+}
 } // namespace SPHINXChain
