@@ -44,44 +44,28 @@
 #include "Requests.hpp"
 #include "json.hh"
 #include "Server_http.hpp"
+#include "P2P.hpp"
+#include "P2Pmanager.hpp"
+#include "Message.hpp"
 
 
 using json = nlohmann::json;
-using HttpClient = SPHINX::Client<SPHINX::HTTP>;
 
 namespace SPHINXNode {
 
     class SPHINXNodes {
     public:
-        SPHINXNodes();
-
-        void sendNodeMessageToServer(const Json::Value& message) {
-            // Construct a JSON-RPC request with the node message
-            // Send the request to the server using an HTTP client
+        SPHINXNodes() {
+            // Initialize node components
         }
 
         void handleTransactionRequest(const Transaction& transaction) {
-            // Your existing implementation for handling transaction requests
-            SPHINXMempool::SPHINXMempool mempool(common); // Create an instance of the mempool
-            mempool.broadcastTransaction(transaction); // Call the broadcastTransaction function in mempool
-        }
-
-        void receiveTransaction(const std::string& transaction) {
-            // Your existing implementation for receiving transactions
-            mempool.push_back(transaction);
+            mempool.addTransaction(transaction);
         }
 
         void verifyTransactions() {
-            // Your existing implementation for verifying transactions
-            for (const auto& transaction : mempool) {
-                if (SPHINXUtils::verifySignature(transaction) && SPHINXUtils::checkFundsAvailability(transaction) &&
-                    SPHINXUtils::adhereToNetworkRules(transaction)) {
-                    consensus.addVerifiedTransaction(transaction);
-                }
-            }
-
-            // Perform SPHINXConsensus algorithm
-            SPHINXConsensus::performSPHINXConsensus(consensus);
+            // Verify transactions within mempool
+            mempool.verifyTransactions();
         }
 
         void performProofOfWork() {
@@ -110,26 +94,19 @@ namespace SPHINXNode {
             CrossChainProtocol::sendMessage(message);
         }
 
-         nlohmann::json SPHINXNodes::getSPHINXChainFromNodes(const std::vector<int>& listOfNodes) {
-            // Call the function from "Requests.hpp" to get the latest SPHINXChain from the network
+        nlohmann::json SPHINXNodes::getSPHINXChainFromNodes(const std::vector<int>& listOfNodes) {
             return SPHINXHttp::getSPHINXChainFromNodes(listOfNodes);
         }
 
-        void SPHINXNodes::sendNewSPHINXChain(const std::vector<int>& listOfNodes, const std::string& json) {
+        void sendNewSPHINXChain(const std::vector<int>& listOfNodes, const std::string& json) {
             // Call the function from "Requests.hpp" to send the new SPHINX_Chain to the network
             SPHINXHttp::sendNewSPHINXChain(listOfNodes, json);
         }
 
     private:
-        std::vector<std::string> mempool;
-        SPHINXConsensus::Consensus consensus; // Add the Consensus class instance
-        SPHINXCommon::Common common; // Add the Common class instance
+        SPHINXMempool::Mempool mempool;
+        SPHINXP2P::P2PManager p2pManager;
+        SPHINXConsensus::Consensus consensus;
+        SPHINXCommon::Common common;
     };
-
 } // namespace SPHINXNode
-
-
-
-
-
-

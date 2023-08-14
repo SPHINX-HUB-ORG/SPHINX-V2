@@ -8,10 +8,11 @@
 #include <string>
 #include <vector>
 #include "json.hpp"
+#include "Server_http.hpp"
 
 namespace SPHINXHttp {
     // Function declarations
-    void sendTransaction(const Transaction& transaction);
+    json sendTransaction(const Transaction &transaction)
     nlohmann::json getSPHINXChainFromNodes(const std::vector<int>& listOfNodes);
     void sendNewSPHINXChain(const std::vector<int>& listOfNodes, const std::string& json);
     void addSelfToNetwork(const std::vector<int>& listOfNodes, int port);
