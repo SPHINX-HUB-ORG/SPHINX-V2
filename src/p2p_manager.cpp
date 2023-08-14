@@ -7,78 +7,129 @@
 #include <string>
 #include <thread>
 #include <vector>
-#include <mutex>
 
 #include "Message.hpp"
 #include "p2p.hpp"
+#include "Sync.hpp"
 
 
 namespace SPHINXP2PManager {
 
-    // Implement the member functions of the P2PManager class here
-
-    // Example implementation of the constructor
-    P2PManager::P2PManager() {
+class P2PManager {
+public:
+    P2PManager() {
         start();
     }
 
-    void P2PManager::start() {
-        // Implement the start logic, calling initializeNetworkingParameters,
-        // initializePeerManager, initializeSyncManager, and initializeNetworkingThreads
-    }
-
-    void P2PManager::initializeNetworkingParameters() {
-        // Implement initialization of port and ipAddress
-    }
-
-    void P2PManager::initializePeerManager() {
-        // Implement logic to initialize peer connections and manage active peers
+    void start() {
+        initializeNetworkingParameters();
+        initializePeerManager();
+        initializeSyncManager();
+        initializeNetworkingThreads();
     }
 
     void P2PManager::initializeSyncManager() {
         // Implement synchronization-related initialization
-    }
-
-    void P2PManager::initializeNetworkingThreads() {
-        // Implement logic to start networking threads
-    }
-
-    void P2PManager::receiveMessages() {
-        // Implement logic for receiving messages in a thread
-    }
-
-    void P2PManager::handleMessage(const NetworkMessage& message) {
-        // Implement logic to handle different message types
-    }
-
-    NetworkMessage P2PManager::createBlockMessage(const SPHINXBlock& block) {
-        // Implement logic to create a NetworkMessage containing the SPHINXBlock data
-    }
-
-    void P2PManager::broadcastMessage(const NetworkMessage& message) {
-        // Implement logic to broadcast a message to all connected peers
+        syncManager = new SPHINXSync::SyncManager();
     }
 
     void P2PManager::handleBlockMessage(const NetworkMessage& message) {
         // Implement logic to handle received SPHINXBlock messages
+        syncManager->handleReceivedBlocks(node, message.blocks); // Call SyncManager method
     }
 
-    void P2PManager::connectToPeer(const std::string& peerAddress) {
+    void initializeNetworkingParameters() {
+        // Initialize port and ipAddress
+        port = 8080;
+        ipAddress = "127.0.0.1";
+    }
+
+    void initializePeerManager() {
+        // Initialize peer connections and manage active peers
+        peerManager = new PeerManager();
+    }
+
+    void initializeSyncManager() {
+        // Implement synchronization-related initialization
+        syncManager = new SyncManager();
+    }
+
+    void initializeNetworkingThreads() {
+        // Implement logic to start networking threads
+        receiveThread = std::thread(&P2PManager::receiveMessages, this);
+    }
+
+    void receiveMessages() {
+        // Implement logic for receiving messages in a thread
+        while (true) {
+            NetworkMessage message = receiveMessage();
+            handleMessage(message);
+        }
+    }
+
+    void handleMessage(const NetworkMessage& message) {
+        // Implement logic to handle different message types
+        switch (message.type) {
+            case NetworkMessageType::Block:
+                handleBlockMessage(message);
+                break;
+            case NetworkMessageType::Connect:
+                connectToPeer(message.peerAddress);
+                break;
+            case NetworkMessageType::Disconnect:
+                disconnectFromPeer(message.peerAddress);
+                break;
+            default:
+                std::cout << "Unknown message type: " << message.type << std::endl;
+        }
+    }
+
+    NetworkMessage createBlockMessage(const SPHINXBlock& block) {
+        // Implement logic to create a NetworkMessage containing the SPHINXBlock data
+        NetworkMessage message;
+        message.type = NetworkMessageType::Block;
+        message.block = block;
+        return message;
+    }
+
+    void broadcastMessage(const NetworkMessage& message) {
+        // Implement logic to broadcast a message to all connected peers
+        for (auto peer : peerManager->getPeers()) {
+            sendNetworkMessage(peer.address, message.toJSONString());
+        }
+    }
+
+    void handleBlockMessage(const NetworkMessage& message) {
+        // Implement logic to handle received SPHINXBlock messages
+        syncManager->handleBlockMessage(message.block);
+    }
+
+    void connectToPeer(const std::string& peerAddress) {
         // Implement logic to establish a connection to the given peer
+        peerManager->connectToPeer(peerAddress);
     }
 
-    void P2PManager::disconnectFromPeer(const std::string& peerAddress) {
+    void disconnectFromPeer(const std::string& peerAddress) {
         // Implement logic to disconnect from the given peer
+        peerManager->disconnectFromPeer(peerAddress);
     }
 
-    NetworkMessage P2PManager::receiveMessage() {
+    NetworkMessage receiveMessage() {
         // Implement logic to receive a message from the network using JSON-RPC
         NetworkMessage message; // Placeholder
         return message;
     }
 
-    void P2PManager::sendNetworkMessage(const std::string& peerAddress, const std::string& jsonData) {
+    void sendNetworkMessage(const std::string& peerAddress, const std::string& jsonData) {
         // Implement JSON-RPC message sending logic here
     }
+
+    private:
+        int port;
+        std::string ipAddress;
+        PeerManager* peerManager;
+        SyncManager* syncManager;
+        std::thread receiveThread;
+    };
 
 } // namespace SPHINXP2P_MANAGER
