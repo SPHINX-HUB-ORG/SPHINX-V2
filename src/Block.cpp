@@ -84,6 +84,7 @@
 #include "Key.hpp"
 #include "Params.hpp"
 #include "Utxo.hpp"
+#include "BlockManager.hpp"
 
 
 using json = nlohmann::json;
