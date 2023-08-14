@@ -16,15 +16,18 @@
 #include "Requests.hpp"
 
 
-using json = nlohmann::json;
-using namespace std;
-using HttpClient = SPHINX::Client<SPHINX::HTTP>;
-
 namespace SPHINXHttp {
 
-    // Function to send a transaction to other nodes
-    void sendTransaction(const Transaction& transaction) {
-        // Code to send the transaction using HttpClient
+    using json = nlohmann::json;
+    using HttpClient = SPHINX::Client<SPHINX::HTTP>;
+
+    json sendTransaction(const Transaction &transaction) {
+        json response = {
+            {"jsonrpc", "2.0"},
+            {"result", "Transaction sent successfully"},
+            {"id", nullptr}
+        };
+        return response;
     }
 
     // Function to get the latest chain from the network and find the longest one
@@ -172,5 +175,3 @@ namespace SPHINXHttp {
         }
     }
 } // namespace SPHINXHttp
-
-#endif // SPHINX_REQUESTS_HPP
