@@ -7,32 +7,26 @@
 #include <string>
 #include <iostream>
 #include <string>
-#include "Server_http.hpp"
 
-#include <iostream>
-#include <string>
+#include "Server_http.hpp"
 #include "json/src/jsonrpccpp/server/abstractserver.h"
 #include "json/src/jsonrpccpp/common/exception.h"
 #include "json/src/jsonrpccpp/server.h"
 
-namespace SPHINXServerHttp {
+namespace SPHINXServer {
 
-    class JsonRpcServer : public jsonrpc::AbstractServer<jsonrpc::HttpServer> {
-    public:
-        JsonRpcServer(jsonrpc::HttpServer &server) : jsonrpc::AbstractServer<jsonrpc::HttpServer>(server) {}
+    JsonRpcServer::JsonRpcServer(jsonrpc::HttpServer &server)
+        : jsonrpc::AbstractServer<jsonrpc::HttpServer>(server), httpServer(server) {}
 
-        // Define your JSON-RPC methods here
-        virtual void exampleMethod(const Json::Value &request, Json::Value &response) {
-            // Process the JSON-RPC request and set the response
-            response = Json::Value("Success");
-        }
-    };
+    void JsonRpcServer::exampleMethod(const Json::Value &request, Json::Value &response) {
+        // Process the JSON-RPC request and set the response
+        response = Json::Value("Success");
+    }
 
-    void startJsonRpcServer() {
+    void JsonRpcServer::startJsonRpcServer() {
         try {
-            jsonrpc::HttpServer httpServer(8080); // Change the port as needed
-            JsonRpcServer server(httpServer);
-            server.StartListening();
+            httpServer.SetHandler(this->handler);
+            httpServer.StartListening();
 
             while (true) {
                 httpServer.HandleRequests();
@@ -41,4 +35,6 @@ namespace SPHINXServerHttp {
             std::cerr << "JSON-RPC Exception: " << e.what() << std::endl;
         }
     }
+
 } // namespace SPHINX
+
