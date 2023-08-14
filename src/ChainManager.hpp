@@ -10,7 +10,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "chain.hpp"  // Include the header file for the SPHINXChain class
+#include "chain.hpp"
 
 class SPHINXChainManager {
 public:
