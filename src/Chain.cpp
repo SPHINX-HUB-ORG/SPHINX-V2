@@ -94,6 +94,7 @@
 #include "Consensus/Contract.hpp"
 #include "Params.hpp"
 #include "server_http.hpp"
+#include "ChainManager.hpp"
 
 
 using json = nlohmann::json;
@@ -119,6 +120,32 @@ public:
         return params.getConsensusAlgorithm();
     }
 };
+
+class SPHINXChainManager {
+public:
+    SPHINXChainManager(const MainParams& mainParams) : mainParams_(mainParams) {
+        // Create the main chain instance
+        mainChain_ = std::make_unique<SPHINXChain>(mainParams_);
+    }
+
+    // Add methods to interact with the main chain
+    void addBlockToMainChain(const SPHINXBlock::Block& block) {
+        mainChain_->addBlock(block);
+    }
+
+    double getMainChainBalance(const std::string& address) const {
+        return mainChain_->getBalance(address);
+    }
+
+    // Add methods to interact with shards, sidechains, bridges, etc.
+    // ...
+
+private:
+    MainParams mainParams_;
+    std::unique_ptr<SPHINXChain> mainChain_;
+    // Add other private members as needed
+};
+
 
 class SPHINXChain {
 public:
