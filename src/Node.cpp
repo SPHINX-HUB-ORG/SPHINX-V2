@@ -43,6 +43,7 @@
 #include "Consensus/Consensus.hpp"
 #include "Requests.hpp"
 #include "json.hh"
+#include "Server_http.hpp"
 
 
 using json = nlohmann::json;
@@ -53,6 +54,11 @@ namespace SPHINXNode {
     class SPHINXNodes {
     public:
         SPHINXNodes();
+
+        void sendNodeMessageToServer(const Json::Value& message) {
+            // Construct a JSON-RPC request with the node message
+            // Send the request to the server using an HTTP client
+        }
 
         void handleTransactionRequest(const Transaction& transaction) {
             // Your existing implementation for handling transaction requests
