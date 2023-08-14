@@ -2,31 +2,23 @@
 // All rights reserved.
 // This software is distributed under the MIT License.
 
+
+
 #include "Message.hpp"
+#include "Sync.hpp"
 
-struct NetworkMessage {
-    enum MessageType {
-        BlockRequest,
-        Blocks,
-        // Add more message types as needed
-    };
+namespace SPHINXP2P {
 
-    MessageType type;
-    std::string senderAddress;
-    std::string receiverAddress;
-    std::string payload; // Actual message content
-
-    // Serialize and deserialize functions
-    std::string serialize() const {
+    std::string NetworkMessage::serialize() const {
         // Serialize the message fields into a string format
-        std::string serializedMessage = std::to_string(type) + ","
+        std::string serializedMessage = std::to_string(static_cast<int>(type)) + ","
                                       + senderAddress + ","
                                       + receiverAddress + ","
                                       + payload;
         return serializedMessage;
     }
 
-    static NetworkMessage deserialize(const std::string& serialized) {
+    NetworkMessage NetworkMessage::deserialize(const std::string& serialized) {
         NetworkMessage message;
         // Deserialize the string into message fields
         size_t pos = 0;
@@ -52,4 +44,5 @@ struct NetworkMessage {
         
         return message;
     }
-};
+
+} // namespace SPHINXP2P
