@@ -51,6 +51,7 @@
 #include <functional>
 
 #include "Contract.hpp"
+#include "SphinxJson/Sphinx.js"
 
 namespace SPHINXContract {
 

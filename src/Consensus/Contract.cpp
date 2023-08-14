@@ -68,7 +68,6 @@
 #include "Contract.hpp"
 #include "Interface.hpp"
 
-
 using json = nlohmann::json;
 
 namespace SPHINXContract {
