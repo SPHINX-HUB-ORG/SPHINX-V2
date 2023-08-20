@@ -4,6 +4,8 @@
 
 ## Table of Contents
 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/your-username/your-repo/blob/main/LICENSE)
+
 - [Introduction](#introduction)
 - [Background](#background)
 - [Vision](#vision)
@@ -12,7 +14,6 @@
 - [NOTE](#note)
 - [Getting Started](#getting-started)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Introduction
@@ -519,9 +520,6 @@ We welcome contributions from the developer community to enhance the SPHINX bloc
 6. Push the branch to your forked repository: `git push origin your-branch-name`.
 7. Open a pull request against the main repository, describing your changes and the problem it solves.
 8. Insert your information (i.e name, email) in the authors space.
-
-## License
-Specify the license under which the project is distributed (MIT License).
 
 ## Contact
 If you have any questions, requests, suggestions, or feedback regarding the SPHINX blockchain project, feel free to reach out to us at [sphinxfounders@gmail.com](mailto:sphinxfounders@gmail.com).

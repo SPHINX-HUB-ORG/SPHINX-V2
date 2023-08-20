@@ -14,7 +14,7 @@
 #include "Block.hpp"
 #include "Chain.hpp"
 
-namespace ChainState {
+namespace SPHINXChainState {
 
     // Define data structures to represent the blockchain state
     struct Account {
@@ -52,4 +52,4 @@ namespace ChainState {
 
 } // namespace ChainState
 
-#endif // CHAINSTATE_HPP
+#endif // SPHINX_CHAINSTATE_HPP

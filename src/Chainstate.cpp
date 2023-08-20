@@ -16,7 +16,7 @@
 #include "Requests.hpp"
 
 
-namespace ChainState {
+namespace SPHINXChainState {
 
     // Define data structures to represent the blockchain state
     struct Account {
@@ -121,4 +121,4 @@ namespace ChainState {
             }
         }
     }
-} // namespace ChainState
+} // namespace SPHIINX_ChainState
