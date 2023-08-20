@@ -115,6 +115,23 @@ namespace SPHINXBlockManager {
         return block.saveToDatabase(distributedDb);
     }
 
+    // Function to validate a block before adding it to the blockchain
+    bool validateBlock(const SPHINXBlock::Block& block) {
+        // Check if the block's previous hash matches the hash of the last block in the blockchain
+        if (blockchain_->getLastBlockHash() == block.getPreviousHash()) {
+            // Verify the block's signature and Merkle root
+            if (block.verifyBlock()) {
+                return true; // Block is valid
+            } else {
+                // Invalid block
+                return false;
+            }
+        } else {
+            // Block's previous hash doesn't match
+            return false;
+        }
+    }
+
     // Function to load a block from a distributed database
     SPHINXBlock::Block loadBlockFromDatabase(const std::string& blockId, SPHINXDb::DistributedDb& distributedDb) {
         return SPHINXBlock::Block::loadFromDatabase(blockId, distributedDb);
