@@ -94,6 +94,7 @@ namespace SPHINXBlock {
 
         // Setters and getters for the remaining member variables
         void setMerkleRoot(const std::string& merkleRoot);
+        void setVersion(const std::string& version);
         void setSignature(const std::string& signature);
         void setBlockHeight(uint32_t blockHeight);
         void setNonce(uint32_t nonce);
