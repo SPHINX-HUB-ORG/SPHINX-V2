@@ -298,12 +298,18 @@ namespace SPHINXBlock {
             return transactions_;
         }
 
-        Block::Block(const std::string& prevBlockHash, const std::string& timestamp, const std::string& nonce, const std::vector<Transaction>& transactions) {
+        std::string getVersion() const {
+            return version_;
+        }
+    
+        // Constructor with version parameter
+        Block(const std::string& prevBlockHash, const std::string& timestamp, const std::string& nonce, const std::vector<Transaction>& transactions, const std::string& version) {
             this->previousHash_ = prevBlockHash;
             this->timestamp_ = timestamp;
             this->nonce_ = nonce;
             this->transactions_ = transactions;
-
+            this->version_ = version; // Set the version for this block
+    
             // Merkle tree construction function is already implemented in "MerkleBlock.cpp"
             std::string merkleRoot = SPHINXMerkleBlock::constructMerkleTree(transactions);
             this->setMerkleRoot(merkleRoot); // Set the Merkle root for this block
