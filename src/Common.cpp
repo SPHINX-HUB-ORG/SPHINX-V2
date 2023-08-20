@@ -3,19 +3,27 @@
 // This software is distributed under the MIT License.
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The code provided is a header file named "common.hpp" that belongs to the SPHINXCommon namespace. It includes a class called Common that represents a common module in a blockchain system. Let's understand the code and its functionality:
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The code provided is a header file named "common.hpp" that belongs to the SPHINXCommon namespace. It includes a class called Common that
+// represents a common module in a blockchain system. Let's understand the code and its functionality:
 
 // The Common class has the following member functions:
 
   // Common(): This is the constructor of the Common class. It initializes the class and can be used to perform any necessary setup.
 
-  // broadcastTransaction(const Transaction& transaction): This function broadcasts a transaction to network nodes and adds the transaction to the mempool.
+  // broadcastTransaction(const Transaction& transaction): This function broadcasts a transaction to network nodes and adds the transaction
+  // to the mempool.
 
-  // processMempool(): This function represents the validation and consensus module of the blockchain system. It verifies the validity of transactions in the mempool and reaches consensus on which transactions should be included in the next block. The function may perform various validation steps, such as verifying the transaction signature, checking the validity and availability of inputs (UTXOs), and ensuring adherence to network rules and protocols. It may also implement a consensus algorithm, such as sorting transactions based on priority and selecting a subset of transactions for inclusion in the next block. Once consensus is reached, the selected transactions can be passed to the Block Module for block creation.
+  // processMempool(): This function represents the validation and consensus module of the blockchain system. It verifies the validity of
+  // transactions in the mempool and reaches consensus on which transactions should be included in the next block. The function may perform
+  // various validation steps, such as verifying the transaction signature, checking the validity and availability of inputs (UTXOs), and
+  // ensuring adherence to network rules and protocols. It may also implement a consensus algorithm, such as sorting transactions based on
+  // priority and selecting a subset of transactions for inclusion in the next block. Once consensus is reached, the selected transactions
+  // can be passed to the Block Module for block creation.
 
-// Note that the code provided is a simplified version and may require additional implementation details for other member functions, handling of transaction data, and integration with other modules of the blockchain system.
-////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Note that the code provided is a simplified version and may require additional implementation details for other member functions,
+// handling of transaction data, and integration with other modules of the blockchain system.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
