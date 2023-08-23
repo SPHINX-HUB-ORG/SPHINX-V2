@@ -6,8 +6,6 @@
 #ifndef SPHINXCHAIN_HPP
 #define SPHINXCHAIN_HPP
 
-#pragma once
-
 #include <stdexcept>
 #include <fstream>
 #include <array>

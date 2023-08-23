@@ -6,8 +6,6 @@
 #ifndef SPHINXBLOCK_HPP
 #define SPHINXBLOCK_HPP
 
-#pragma once
-
 #include <cstdint>
 #include <iostream>
 #include <unordered_map>
@@ -91,6 +89,9 @@ namespace SPHINXBlock {
 
         // Verify the block's signature and Merkle root
         bool verifyBlock(const SPHINXMerkleBlock::SPHINXPubKey& publicKey) const;
+
+        // Function to store the block in the chain
+        void storeInChain(SPHINXChain::Chain& chain) const;
 
         // Setters and getters for the remaining member variables
         void setMerkleRoot(const std::string& merkleRoot);
