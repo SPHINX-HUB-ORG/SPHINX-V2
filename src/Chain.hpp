@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Block.hpp"
 
 using json = nlohmann::json;
 
@@ -55,38 +56,53 @@ public:
         blocks_.emplace_back(block, signature);
     }
 
+    // Start the JSON-RPC server.
     void startJsonRpcServer();
 
+    // Create a bridge between blockchains with the target chain.
     void createBlockchainBridge(const Chain& targetChain);
 
+    // Wrap tokens for a recipient with the given address and amount.
     void wrapTokens(const std::string& recipientAddress, double amount);
 
+    // Handle a wrapped transaction with the provided wrapped transaction data.
     void handleWrappedTransaction(const std::string& wrappedTransactionData);
 
+    // Unwrap tokens from the bridge address to the recipient address with the specified amount.
     void unwrapTokens(const std::string& bridgeAddress, const std::string& recipientAddress, double amount);
 
+    // Handle an unwrapped transaction with the provided unwrapped transaction data.
     void handleUnwrappedTransaction(const std::string& unwrappedTransactionData);
 
+    // Perform an atomic swap with the target chain, sender address, receiver address, and amount.
     void performAtomicSwap(const Chain& targetChain, const std::string& senderAddress,
                             const std::string& receiverAddress, double amount);
 
+    // Perform an atomic swap with a specific shard, target shard, sender address, receiver address, and amount.
     void performShardAtomicSwap(const std::string& shardName, const Chain& targetShard,
                                 const std::string& senderAddress, const std::string& receiverAddress, double amount);
 
+    // Create a new shard with the given name.
     void createShard(const std::string& shardName);
 
+    // Join a shard with the provided name and shard chain.
     void joinShard(const std::string& shardName, const Chain& shardChain);
 
+    // Transfer tokens to a shard with the specified sender address, recipient address, and amount.
     void transferToShard(const std::string& shardName, const std::string& senderAddress,
                             const std::string& recipientAddress, double amount);
 
+    // Handle a transfer within a shard using the specified shard name and transaction data.
     void handleShardTransfer(const std::string& shardName, const SPHINXTrx::Transaction& transaction);
 
+    // Handle a bridge transaction within a shard with the provided shard name, bridge address, recipient address, and amount.
     void handleShardBridgeTransaction(const std::string& shardName, const std::string& bridgeAddress,
                                         const std::string& recipientAddress, double amount);
 
+    // Update the balance of an address within a shard with the specified shard name, address, and amount.
     void updateShardBalance(const std::string& shardName, const std::string& address, double amount);
 
+    // Get the balance of an address within a shard with the specified shard name and address.
     double getShardBalance(const std::string& shardName, const std::string& address) const;
 
     private:

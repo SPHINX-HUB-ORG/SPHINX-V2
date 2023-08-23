@@ -21,7 +21,7 @@
 #include "json.hh"
 #include "Params.hpp"
 #include "MerkleBlock.hpp"
-
+#include "Chain.hpp"
 
 using json = nlohmann::json;
 
