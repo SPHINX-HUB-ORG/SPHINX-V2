@@ -6,8 +6,6 @@
 #ifndef SPHINXP2P_HPP
 #define SPHINXP2P_HPP
 
-#pragma once
-
 #include <iostream>
 #include <string>
 #include <vector>

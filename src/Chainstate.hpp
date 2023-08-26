@@ -6,8 +6,6 @@
 #ifndef CHAINSTATE_HPP
 #define CHAINSTATE_HPP
 
-#pragma once
-
 #include <string>
 #include <vector>
 #include "Fees.hpp"  // Include necessary headers

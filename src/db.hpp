@@ -6,8 +6,6 @@
 #ifndef DISTRIBUTED_DB_HPP
 #define DISTRIBUTED_DB_HPP
 
-#pragma once
-
 #include <fstream>
 #include <iostream>
 #include <vector>

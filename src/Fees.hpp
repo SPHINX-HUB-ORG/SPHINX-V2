@@ -6,8 +6,6 @@
 #ifndef SPHINX_FEES_HPP
 #define SPHINX_FEES_HPP
 
-#pragma once
-
 #include <iostream>
 #include <string>
 #include <vector>

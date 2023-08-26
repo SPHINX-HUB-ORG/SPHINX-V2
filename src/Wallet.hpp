@@ -6,12 +6,11 @@
 #ifndef WALLET_HPP
 #define WALLET_HPP
 
-#pragma once
-
 #include <iostream>
 #include <vector>
 #include <random>
 #include <ctime>
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
 
 using json = nlohmann::json;
 

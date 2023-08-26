@@ -6,8 +6,6 @@
 #ifndef CHAINMANAGER_HPP
 #define CHAINMANAGER_HPP
 
-#pragma once
-
 #include <string>
 #include <unordered_map>
 #include "chain.hpp"

@@ -6,8 +6,6 @@
 #ifndef SPHINX_KEY_HPP
 #define SPHINX_KEY_HPP
 
-#pragma once
-
 #include <string>
 #include <vector>
 #include <cstring>

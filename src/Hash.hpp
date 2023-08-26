@@ -6,8 +6,6 @@
 #ifndef HASH_HPP
 #define HASH_HPP
 
-#pragma once
-
 #include <string>
 #include <cstdio>
 
