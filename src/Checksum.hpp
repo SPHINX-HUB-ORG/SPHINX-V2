@@ -6,8 +6,6 @@
 #ifndef CHECKSUM_H
 #define CHECKSUM_H
 
-#pragma once
-
 #include <string>
 #include <vector>
 #include "base58check.h"

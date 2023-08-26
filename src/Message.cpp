@@ -3,7 +3,8 @@
 // This software is distributed under the MIT License.
 
 
-
+#include <string>
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
 #include "Message.hpp"
 #include "Sync.hpp"
 

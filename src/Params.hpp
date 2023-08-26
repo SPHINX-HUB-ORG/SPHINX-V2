@@ -6,8 +6,6 @@
 #ifndef PARAMS_HPP
 #define PARAMS_HPP
 
-#pragma once
-
 #include <stdexcept>
 #include <fstream>
 #include <array>

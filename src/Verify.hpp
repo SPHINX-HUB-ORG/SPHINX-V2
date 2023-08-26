@@ -29,8 +29,6 @@
 #ifndef VERIFY_HPP
 #define VERIFY_HPP
 
-#pragma once
-
 #include <iostream>
 #include <string>
 #include <vector>

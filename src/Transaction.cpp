@@ -47,7 +47,7 @@
 #include <string>
 #include <vector>
 #include "Transaction.hpp"
-#include "json.hh"
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
 #include "Asset.hpp"
 #include "db.hpp"
 #include "Sign.hpp"
@@ -55,7 +55,6 @@
 #include "MerkleBlock.hpp"
 #include "Utxo.hpp"
 
-using json = nlohmann::json;
 
 using namespace SPHINXUtxo;
 

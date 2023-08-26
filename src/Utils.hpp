@@ -6,8 +6,6 @@
 #ifndef SPHINX_UTILS_HPP
 #define SPHINX_UTILS_HPP
 
-#pragma once
-
 #include <random>
 #include <vector>
 #include <string>

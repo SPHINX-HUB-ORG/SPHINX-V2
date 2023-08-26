@@ -6,8 +6,6 @@
 #ifndef COMMON_HPP
 #define COMMON_HPP
 
-#pragma once
-
 #include <vector>
 #include <string>
 #include "Transaction.hpp"

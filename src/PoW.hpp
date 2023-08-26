@@ -6,8 +6,6 @@
 #ifndef POW_HPP
 #define POW_HPP
 
-#pragma once
-
 #include <cmath>
 #include <iostream>
 #include <vector>
