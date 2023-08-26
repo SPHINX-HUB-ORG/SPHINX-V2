@@ -84,7 +84,7 @@
 #include <vector>
 
 #include "Chain.hpp"
-#include "json.hh"
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
 #include "Block.hpp"
 #include "Verify.hpp"
 #include "Sign.hpp"

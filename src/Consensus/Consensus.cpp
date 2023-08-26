@@ -41,12 +41,30 @@
 #include "Consensus.hpp"
 #include "Utils.hpp"
 #include "Contract.hpp" // Include the Contract.hpp file
+#include <MerkleBlock.hpp>
 
 namespace SPHINXConsensus {
 
+    class Consensus {
+    public:
+        // Constructor implementation...
+        Consensus();
+
+        // Other function declarations...
+        void addVerifiedTransaction(const Transaction& transaction);
+        void validateAndAddTransaction(const Transaction& transaction);
+
+    private:
+        // Private member variables...
+        std::vector<Transaction> verifiedTransactions;
+    };
+
+    // Constructor implementation...
     Consensus::Consensus() {
         // Constructor implementation...
     }
+
+    // Other function implementations...
 
     void Consensus::addVerifiedTransaction(const Transaction& transaction) {
         // Add the verified transaction to the list of transactions

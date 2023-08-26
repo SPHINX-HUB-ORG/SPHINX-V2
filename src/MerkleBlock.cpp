@@ -73,6 +73,10 @@ namespace SPHINXMerkleblock {
             // Extract necessary transaction data and populate the transaction object
             transaction.transactionData = /* Extract and assign transaction data */;
             header.transactions.push_back(transaction);
+
+            // Call the validateAndAddTransaction function from Consensus
+            SPHINXConsensus::Consensus consensus;  // Create an instance of the Consensus class
+            consensus.validateAndAddTransaction(transaction);
         }
 
         // Construct a partial merkle tree if needed

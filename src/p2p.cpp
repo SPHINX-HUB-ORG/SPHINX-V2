@@ -13,8 +13,7 @@
 #include "sync.hpp"
 #include "p2p.hpp"
 #include "block.hpp"
-
-using json = nlohmann::json;
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
 
 namespace SPHINXP2P {
 

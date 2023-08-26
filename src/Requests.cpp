@@ -12,7 +12,8 @@
 
 #include "Node.hpp"
 #include "Chain.hpp"
-#include "json.hpp"
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
+#include "SphinxJS/Sphinx.js"
 #include "Requests.hpp"
 
 
