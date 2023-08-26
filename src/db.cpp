@@ -41,9 +41,8 @@
 #include "Verify.hpp"
 #include "Block.hpp"
 #include "checksum.hpp"
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
 
-
-using json = nlohmann::json;
 
 class Block {
 public:

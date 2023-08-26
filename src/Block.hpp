@@ -18,7 +18,7 @@
 #include <vector>
 #include <array>
 
-#include "json.hh"
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
 #include "Params.hpp"
 #include "MerkleBlock.hpp"
 #include "Chain.hpp"
@@ -58,6 +58,8 @@ namespace SPHINXBlock {
         std::vector<std::string> transactions_;
         SPHINXChain::Chain* blockchain_;
         const std::vector<std::string>& checkpointBlocks_;
+        // Add a MerkleBlock member
+        SPHINXMerkleblock::CMerkleBlock merkleBlock_;
 
     public:
         static const uint32_t MAX_BLOCK_SIZE;
@@ -117,6 +119,12 @@ namespace SPHINXBlock {
         static Block load(const std::string& filename);
         bool saveToDatabase(SPHINXDb::DistributedDb& distributedDb) const;
         static Block loadFromDatabase(const std::string& blockId, SPHINXDb::DistributedDb& distributedDb);
+
+        // Constructor with MerkleBlock parameter
+        Block(const std::string& previousHash, uint32_t version, const SPHINXMerkleblock::CMerkleBlock& merkleBlock);
+
+        // Function to access the MerkleBlock
+        const SPHINXMerkleblock::CMerkleBlock& getMerkleBlock() const;
     };
 } // namespace SPHINXBlock
 

@@ -73,7 +73,7 @@
 #include "Block.hpp"
 #include "Hash.hpp"
 #include "Sign.hpp"
-#include "json.hh"
+#include "SphinxJS/jsonrpcpp/include/json.hpp"
 #include "MerkleBlock.hpp"
 #include "Transaction.hpp"
 #include "Chain.hpp"
@@ -86,8 +86,6 @@
 #include "Utxo.hpp"
 #include "BlockManager.hpp"
 
-
-using json = nlohmann::json;
 
 namespace SPHINXHash {
     std::string SPHINX_256(const std::string& data); // Function declaration for SPHINX_256
